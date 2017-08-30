@@ -1,6 +1,6 @@
 (function (window, document) {
 	var screenChange = 'webkitfullscreenchange' || 'mozfullscreenchange' || 'fullscreenchange'
-	var isFullScreen = document.fullscreenElement || document.mozFullScreenElement||document.webkitFullscreenElement
+	var isFullScreen = document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement
 	var Dvideo = function (options) {
 		// 判断是否是new Dvideo 的  不是的话 帮他new一下
 		if (!(this instanceof Dvideo)) return new Dvideo(options)
@@ -22,7 +22,7 @@
             this.opt.ele = options.ele
         }
 
-        this.initDom()
+        this.initDom(this.opt.ele)
 	}
 
 	Dvideo.prototype = {
@@ -96,14 +96,15 @@
 		},
 
 		// 屏幕全屏模式改变事件
-		screenChangeEvent: function () {
-				alert(isFullScreen)
+		screenChangeEvent: function (element) {
+			var _this = this
 			document.addEventListener(screenChange, function () {
 				if (isFullScreen) {
-					this.launchFullScreenStyle();
+					console.log(isFullScreen)
+					_this.exitFullscreenStyle();
 				} else {
-					alert(1)
-					this.exitFullscreenStyle();
+					console.log('-----------' + isFullScreen)
+					_this.launchFullScreenStyle(element);
 				}
 			})
 		}
