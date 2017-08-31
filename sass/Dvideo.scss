@@ -4,6 +4,9 @@
 @import "compass/layout";
 @import "compass/typography/text/ellipsis";  //超出提示省略号
 
+@import "Dvideo/_global.scss";
+@import "Dvideo/_content.scss";
+@import "Dvideo/_ctrl.scss";
 
 :-webkit-full-screen {
   /* properties */

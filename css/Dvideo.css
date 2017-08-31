@@ -63,7 +63,50 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-/* line 8, ../sass/Dvideo.scss */
+/* line 1, ../sass/Dvideo/_content.scss */
+.ie-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 2147483647;
+}
+
+/* line 12, ../sass/Dvideo/_content.scss */
+.Dvideo-content {
+  position: relative;
+  background: #000;
+  width: 100%;
+  height: 100%;
+}
+/* line 18, ../sass/Dvideo/_content.scss */
+.Dvideo-content .Dvideo-ele {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+/* line 1, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl {
+  position: absolute;
+  bottom: 0;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+
+/* line 11, ../sass/Dvideo.scss */
 :-webkit-full-screen {
   /* properties */
   background-color: black;
@@ -74,42 +117,42 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   bottom: 0;
 }
 
-/* line 18, ../sass/Dvideo.scss */
+/* line 21, ../sass/Dvideo.scss */
 :-moz-full-screen {
   /* properties */
 }
 
-/* line 22, ../sass/Dvideo.scss */
+/* line 25, ../sass/Dvideo.scss */
 :-ms-fullscreen {
   /* properties */
 }
 
-/* line 26, ../sass/Dvideo.scss */
+/* line 29, ../sass/Dvideo.scss */
 :full-screen {
   /*pre-spec */
   /* properties */
 }
 
-/* line 30, ../sass/Dvideo.scss */
+/* line 33, ../sass/Dvideo.scss */
 :fullscreen {
   /* spec */
   /* properties */
 }
 
 /* deeper elements */
-/* line 35, ../sass/Dvideo.scss */
+/* line 38, ../sass/Dvideo.scss */
 :-webkit-full-screen video {
   width: 100%;
   height: 100%;
 }
 
 /* styling the backdrop*/
-/* line 41, ../sass/Dvideo.scss */
+/* line 44, ../sass/Dvideo.scss */
 ::backdrop {
   /* properties */
 }
 
-/* line 44, ../sass/Dvideo.scss */
+/* line 47, ../sass/Dvideo.scss */
 ::-ms-backdrop {
   /* properties */
 }
