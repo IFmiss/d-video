@@ -106,6 +106,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   right: 0;
 }
 
+/* line 11, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-header {
+  position: absolute;
+  top: 0;
+  height: 36px;
+  line-height: 36px;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  left: 0;
+  right: 0;
+}
+
 /* line 11, ../sass/Dvideo.scss */
 :-webkit-full-screen {
   /* properties */

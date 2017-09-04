@@ -5,6 +5,8 @@
 	// 设置全屏的状态的
 	var isFull = false
 
+	var showCtrlT  // 这是鼠标移入显示控制菜单的timeout
+
 	//  判断当前是否处于全屏状态
 	var fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled
 
@@ -14,6 +16,7 @@
 		this.localValue = {
 			ele: '',
 			src: 'http://www.daiwei.org/index/video/EnV%20-%20PneumaticTokyo.mp4',
+			title: '这是一个视频标题',
 			width: '420px',
 			height: '250px',
 			autoplay: true,
@@ -54,6 +57,12 @@
 			// this.videoEle.style.cssText = 'width: 100%; height: auto'
 			this.videoC.appendChild(this.videoEle)
 
+			// 头部的title信息
+			this.videoHeader = document.createElement('div')
+			this.videoHeader.className = 'Dvideo-header'
+			this.videoC.appendChild(this.videoHeader)
+
+			// 底部控制条
 			this.videoCtrl = document.createElement('div')
 			this.videoCtrl.className = 'Dvideo-ctrl'
 			this.videoC.appendChild(this.videoCtrl)
@@ -245,12 +254,47 @@
 			return browser + version
 		},
 
+		showHideCtrl: function (ele) {
+			var _this = this
+			var duration = 3000
+			_this.videoC.onmousemove = function () {
+				clearTimeout(showCtrlT)
+				_this.videoCtrl.style.display = 'block'
+				_this.videoHeader.style.display = 'block'
+				showCtrlT = setTimeout(function () {
+					_this.videoCtrl.style.display = 'none'
+					_this.videoHeader.style.display = 'none'
+				}, duration)
+			}
+		},
+
 		// initEvent  初始化事件
 		initEvent: function () {
 			var _this = this
 			_this.videoCtrl.onclick = function () {
 				_this.exitFullscreen()
-			}
+			},
+
+			_this.showHideCtrl()
+		}
+
+		getDomByClass: function(classInfo) {
+			var classInfo = classInfo || '';
+			if(!typeof(document.getElementsByClassName) === 'function'){
+				var result = [];
+				var aEle = document.getElementsByTagName('*');
+				/*正则模式*/
+				var re = new RegExp("\\b" + classInfo + "\\b","g");
+				for(var i = 0;i<aEle.length;i++){
+					/*字符串search方法判断是否存在匹配*/
+					if (aEle[i].className.search(re) !== -1) {
+						result.push(aEle[i]);
+					}
+				}
+				return result;
+			}else{
+				return document.getElementsByClassName(classInfo);
+				}
 		}
 	}
 
