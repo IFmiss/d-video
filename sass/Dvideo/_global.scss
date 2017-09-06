@@ -1,5 +1,8 @@
 $primary_color: red;
 
+$text_deep_color: rgba(255,255,255,0.8);
+
+$duration_time: 0.5s;
 
 // video的 容器栏
 $content_bg: #000;
@@ -10,3 +13,4 @@ $header_height: 36px;
 // ==  控制条栏
 $ctrl_height: 40px;
 $ctrl_bg: rgba(0,0,0,0.8);
+$padding_leftright: 8px;

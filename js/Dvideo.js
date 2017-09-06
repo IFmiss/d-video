@@ -5,6 +5,8 @@
 	// 设置全屏的状态的
 	var isFull = false
 
+	var isPlaying = false
+
 	var showCtrlT  // 这是鼠标移入显示控制菜单的timeout
 
 	//  判断当前是否处于全屏状态
@@ -16,11 +18,14 @@
 		this.localValue = {
 			ele: '',
 			src: 'http://www.daiwei.org/index/video/EnV%20-%20PneumaticTokyo.mp4',
-			title: '这是一个视频标题',
+			title: '这是一个视频标题这是一个视频标题这是一个视频标题这是一个视频标题',
 			width: '420px',
 			height: '250px',
-			autoplay: true,
+			showNextIcon: false,
+			autoplay: false,
 			loop: true,
+			// 可让用户自定义扩展
+			nextVideoExtend: function () {alert(1)}
 		}
 
 		this.opt = this.extend(this.localValue, options, true)
@@ -28,13 +33,13 @@
 		// 获取浏览器版本
 		this.browserV = this.browserVersion()
 
-		// 判断传进来的是DOM还是字符串  
+		// 判断传进来的是DOM还是字符串
         if ((typeof options.ele) === "string") {
             this.opt.ele = document.querySelector(options.ele)
         }else{  
             this.opt.ele = options.ele
         }
-
+        isPlaying = this.opt.autoplay
         this.initDom()
 	}
 
@@ -57,15 +62,44 @@
 			// this.videoEle.style.cssText = 'width: 100%; height: auto'
 			this.videoC.appendChild(this.videoEle)
 
-			// 头部的title信息
+			// 头部的信息
 			this.videoHeader = document.createElement('div')
 			this.videoHeader.className = 'Dvideo-header'
 			this.videoC.appendChild(this.videoHeader)
+			// 头部的title
+			this.videoHeaderTitle = document.createElement('p')
+			this.videoHeaderTitle.className = 'Dvideo-header-title'
+			this.videoHeaderTitle.innerText = this.opt.title
+			this.videoHeaderTitle.title = this.opt.title
+			this.videoHeader.appendChild(this.videoHeaderTitle)
 
 			// 底部控制条
 			this.videoCtrl = document.createElement('div')
 			this.videoCtrl.className = 'Dvideo-ctrl'
 			this.videoC.appendChild(this.videoCtrl)
+
+			// 播放暂停 下一集控制区域
+			this.videoCtrlStateC = document.createElement('div')
+			this.videoCtrlStateC.className = 'Dvideo-ctrl-state'
+			this.videoCtrl.appendChild(this.videoCtrlStateC)
+
+			// 播放按钮
+			var iconClass = isPlaying ? 'icon-pause' : 'icon-play'
+			this.videoPlayPauseI = document.createElement('i')
+			this.videoPlayPauseI.className = 'Dvideo-ctrl-playPause ' + iconClass
+			this.videoCtrlStateC.appendChild(this.videoPlayPauseI)
+
+			// 下一集控制区域
+			var displayStyle = this.opt.showNextIcon ? 'block' : 'none'
+			this.videoNextI = document.createElement('i')
+			this.videoNextI.className = 'Dvideo-ctrl-next icon-nextdetail'
+			this.videoNextI.style.display = displayStyle
+			this.videoCtrlStateC.appendChild(this.videoNextI)
+
+			// 进度条区域
+			this.videoProressC = document.createElement('div')
+			this.videoProressC.className = 'Dvideo-progress-content'
+			this.videoCtrl.appendChild(this.videoProressC)
 
 			// 初始化事件
 			this.initEvent()
@@ -259,39 +293,94 @@
 			var duration = 3000
 			_this.videoC.onmousemove = function () {
 				clearTimeout(showCtrlT)
-				_this.videoCtrl.style.display = 'block'
-				_this.videoHeader.style.display = 'block'
+				_this.videoCtrl.className = 'Dvideo-ctrl active'
+				_this.videoHeader.className = 'Dvideo-header active'
 				showCtrlT = setTimeout(function () {
-					_this.videoCtrl.style.display = 'none'
-					_this.videoHeader.style.display = 'none'
+					_this.videoCtrl.className = 'Dvideo-ctrl'
+					_this.videoHeader.className = 'Dvideo-header'
 				}, duration)
 			}
 		},
 
+		videoPlay: function () {
+			this.videoEle.play();
+			isPlaying = true
+		},
+
+		videoPause: function () {
+			this.videoEle.pause();
+			isPlaying = false
+		},
+
+		// 音乐初始化事件
+		initVideoEvent: function () {
+			var _this = this
+			_this.videoEle.onplaying = function () {
+				isPlaying = true
+				_this.videoPlayPauseI.className = 'Dvideo-ctrl-playPause icon-pause'
+			},
+			_this.videoEle.onpause = function () {
+				isPlaying = false
+				_this.videoPlayPauseI.className = 'Dvideo-ctrl-playPause icon-play'
+			}
+		},
 		// initEvent  初始化事件
 		initEvent: function () {
 			var _this = this
-			_this.videoCtrl.onclick = function () {
-				_this.exitFullscreen()
+
+			// 关闭两个菜单控制栏的冒泡事件
+			_this.videoHeader.onclick = function (e) {
+				e.stopPropagation();
+			}
+			// 关闭两个菜单控制栏的冒泡事件
+			_this.videoCtrl.onclick = function (e) {
+				e.stopPropagation();
+			}
+
+			// 界面点击播放暂停
+			_this.videoC.onclick = function () {
+				if (isPlaying) {
+					_this.videoPause()
+				} else {
+					_this.videoPlay()
+				}
 			},
 
+			// 播放下一集
+			_this.videoNextI.onclick = function () {
+				console.log('你点击了播放下一集   可使用实例化的对象调用nextVideo 方法实现播放下一集的效果')
+			}
+
+			// 播放暂停按钮
+			_this.videoPlayPauseI.onclick = function () {
+				if (isPlaying) {
+					_this.videoPause()
+				} else {
+					_this.videoPlay()
+				}
+			}
+			_this.initVideoEvent()
 			_this.showHideCtrl()
-		}
+		},
+
+		nextVideo: function () {
+			if (typeof this.opt.nextVideoExtend === 'function') this.opt.nextVideoExtend()
+		},
 
 		getDomByClass: function(classInfo) {
-			var classInfo = classInfo || '';
+			var classInfo = classInfo || ''
 			if(!typeof(document.getElementsByClassName) === 'function'){
-				var result = [];
-				var aEle = document.getElementsByTagName('*');
+				var result = []
+				var aEle = document.getElementsByTagName('*')
 				/*正则模式*/
-				var re = new RegExp("\\b" + classInfo + "\\b","g");
+				var re = new RegExp("\\b" + classInfo + "\\b","g")
 				for(var i = 0;i<aEle.length;i++){
 					/*字符串search方法判断是否存在匹配*/
 					if (aEle[i].className.search(re) !== -1) {
-						result.push(aEle[i]);
+						result.push(aEle[i])
 					}
 				}
-				return result;
+				return result
 			}else{
 				return document.getElementsByClassName(classInfo);
 				}

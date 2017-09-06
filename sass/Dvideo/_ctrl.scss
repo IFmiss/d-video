@@ -1,11 +1,56 @@
 .Dvideo-ctrl{
 	position:absolute;
-	bottom:0;
+	bottom:- $ctrl_height;
 	height:$ctrl_height;
 	background:$ctrl_bg;
 	width:100%;
 	left:0;
 	right:0;
+	@include transition(all $duration_time ease);
+	// @include opacity(0);
+	// visibility:hidden;
+	font-size: 0;
+	&.active{
+		// @include opacity(1);
+		// visibility:visible;
+		bottom:0;
+	}
+	.Dvideo-progress-content{
+		height: 1px;
+		width: 100%;
+		position:absolute;
+		bottom: $ctrl_height;
+		background:red;
+	}
+	.Dvideo-ctrl-state{
+		@include inline-block;
+		width: auto;
+		height: 100%;
+		padding:0 8px;
+		text-align: center;
+		&:after{
+			display:inline-block;
+			width:0;
+			height:100%;
+			vertical-align:middle;
+			content:'';
+		}
+		.Dvideo-ctrl-playPause{
+			@include inline-block;
+			vertical-align: middle;
+			color: #fff;
+			font-size: 24px;
+			margin-right: 16px;
+			cursor: pointer;
+		}
+		.Dvideo-ctrl-next{
+			@include inline-block;
+			vertical-align: middle;
+			color: #fff;
+			font-size: 20px;
+			cursor: pointer;
+		}
+	}
 }
 
 .Dvideo-header{
@@ -17,4 +62,20 @@
 	width:100%;
 	left:0;
 	right:0;
+	@include transition(all $duration_time ease);
+	@include opacity(0);
+	visibility:hidden;
+	&.active{
+		@include opacity(1);
+		visibility:visible;
+	}
+	// 头部文字内容
+	.Dvideo-header-title{
+		width: 80%;
+		height: 100%;
+		padding: 0 $padding_leftright;
+		font-size: 14px;
+		color: $text_deep_color;
+		@include ellipsis();
+	}
 }
