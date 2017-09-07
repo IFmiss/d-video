@@ -2,15 +2,18 @@
 	// var screenChange = 'webkitfullscreenchange' || 'mozfullscreenchange' || 'fullscreenchange' || 'msfullscreenchange'
 	var screenError = 'webkitfullscreenerror' || 'fullscreenerror' || 'mozfullscreenerror' || 'msfullscreenerror'
 
-	// 设置全屏的状态的
-	var isFull = false
+	// // 设置全屏的状态的
+	// var isFull = false
 
-	var isPlaying = false
+	// var isPlaying = false
 
-	var showCtrlT  // 这是鼠标移入显示控制菜单的timeout
+	// // 视频时长
+	// var durationT = 0
 
-	//  判断当前是否处于全屏状态
-	var fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled
+	// var showCtrlT  // 这是鼠标移入显示控制菜单的timeout
+
+	// //  判断当前是否处于全屏状态
+	// var fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled
 
 	var Dvideo = function (options) {
 		// 判断是否是new Dvideo 的  不是的话 帮他new一下
@@ -21,12 +24,25 @@
 			title: '这是一个视频标题这是一个视频标题这是一个视频标题这是一个视频标题',
 			width: '420px',
 			height: '250px',
-			showNextIcon: false,
+			showNext: true,
 			autoplay: false,
+			ctrSpeedDuration: 5000,
 			loop: true,
 			// 可让用户自定义扩展
 			nextVideoExtend: function () {alert(1)}
 		}
+
+		//================初始化部分变量
+		// 设置全屏的状态
+		this.isFull = false
+		// 设置播放的状态
+		this.isPlaying = false
+		// 设置视频时长
+		this.durationT = 0
+		// 这是鼠标移入显示控制菜单的timeout
+		this.showCtrlT = ''
+		// 进度百分比
+		this.currentP = 0
 
 		this.opt = this.extend(this.localValue, options, true)
 
@@ -39,7 +55,7 @@
         }else{  
             this.opt.ele = options.ele
         }
-        isPlaying = this.opt.autoplay
+        this.isPlaying = this.opt.autoplay
         this.initDom()
 	}
 
@@ -78,21 +94,29 @@
 			this.videoCtrl.className = 'Dvideo-ctrl'
 			this.videoC.appendChild(this.videoCtrl)
 
+			//除底部进度条信息之外  底部的所有内容
+			this.videoCtrlDetail = document.createElement('div')
+			this.videoCtrlDetail.className = 'Dvideo-detail'
+			this.videoCtrl.appendChild(this.videoCtrlDetail)
+
 			// 播放暂停 下一集控制区域
 			this.videoCtrlStateC = document.createElement('div')
 			this.videoCtrlStateC.className = 'Dvideo-ctrl-state'
-			this.videoCtrl.appendChild(this.videoCtrlStateC)
+			this.videoCtrlDetail.appendChild(this.videoCtrlStateC)
 
 			// 播放按钮
-			var iconClass = isPlaying ? 'icon-pause' : 'icon-play'
+			var iconPlayPauseClass = this.isPlaying ? 'icon-pause' : 'icon-play'
+			var iconPlayPauseITitle = this.isPlaying ? '暂停 ctrl + space' : '播放 ctrl + space'
 			this.videoPlayPauseI = document.createElement('i')
-			this.videoPlayPauseI.className = 'Dvideo-ctrl-playPause ' + iconClass
+			this.videoPlayPauseI.className = 'Dvideo-ctrl-playPause ' + iconPlayPauseClass
+			this.videoPlayPauseI.title = iconPlayPauseITitle
 			this.videoCtrlStateC.appendChild(this.videoPlayPauseI)
 
 			// 下一集控制区域
-			var displayStyle = this.opt.showNextIcon ? 'block' : 'none'
+			var displayStyle = this.opt.showNext ? 'inline-block' : 'none'
 			this.videoNextI = document.createElement('i')
 			this.videoNextI.className = 'Dvideo-ctrl-next icon-nextdetail'
+			this.videoNextI.title = '下一集 ctrl + n'
 			this.videoNextI.style.display = displayStyle
 			this.videoCtrlStateC.appendChild(this.videoNextI)
 
@@ -100,6 +124,50 @@
 			this.videoProressC = document.createElement('div')
 			this.videoProressC.className = 'Dvideo-progress-content'
 			this.videoCtrl.appendChild(this.videoProressC)
+
+			// 缓冲条
+			this.bufferedProress = document.createElement('div')
+			this.bufferedProress.className = 'Dvideo-progress-buffered'
+			this.videoProressC.appendChild(this.bufferedProress)
+
+			// 播放进度条
+			this.realProress = document.createElement('div')
+			this.realProress.className = 'Dvideo-progress-real'
+			this.videoProressC.appendChild(this.realProress)
+
+			// 播放进度条圆形按钮
+			this.circleRange = document.createElement('span')
+			this.circleRange.className = 'Dvideo-circle-range'
+			this.realProress.appendChild(this.circleRange)
+
+			// 显示当前时间和总时长  区域
+			this.textVideoTimeC = document.createElement('div')
+			this.textVideoTimeC.className = 'Dvideo-time-content'
+			this.videoCtrlDetail.appendChild(this.textVideoTimeC)
+
+			// 显示当前秒数
+			this.textCurrentT = document.createElement('span')
+			this.textCurrentT.className = 'Dvideo-text-current'
+			this.textCurrentT.innerText = '00:00 '
+			this.textVideoTimeC.appendChild(this.textCurrentT)
+
+			// 显示时长
+			this.textDurationT = document.createElement('span')
+			this.textDurationT.className = 'Dvideo-text-duration'
+			this.textDurationT.innerText = ' 00:00'
+			this.textVideoTimeC.appendChild(this.textDurationT)
+
+			// 菜单栏右侧信息
+			this.menuRightC = document.createElement('div')
+			this.menuRightC.className = 'Dvideo-menu-right-content'
+			this.videoCtrlDetail.appendChild(this.menuRightC)
+
+			// 放大缩小功能
+			var iconFullScreenITitle = this.isFull ? '全屏' : '取消全屏'
+			this.fullscreenConfig = document.createElement('i')
+			this.fullscreenConfig.className = 'Dvideo-menu-fullscreenConfig icon-fullscreen'
+			this.fullscreenConfig.title = iconFullScreenITitle
+			this.menuRightC.appendChild(this.fullscreenConfig)
 
 			// 初始化事件
 			this.initEvent()
@@ -125,7 +193,6 @@
 		launchFullScreen: function (element) {
 			if(this.browserV.indexOf('IE10') >= 0 || this.browserV.indexOf('IE9') >= 0) {
 				console.log('启用IE全屏')
-				isFull = true
 				this.launchFullScreenIE11L();
 			} else {
 				// alert(screenChange)
@@ -138,20 +205,21 @@
 				} else if (element.msRequestFullscreen) {
 					element.msRequestFullscreen()
 				}
-				console.log('启用全屏 只包括ie11')
-				isFull = true
+				console.log('启用全屏 包括ie11')
 				this.launchFullScreenStyle(element)
 			}
 		},
 
 		// 全屏下视频的样式
 		launchFullScreenStyle: function () {
+			this.updateFullScreenState(true)
 			// element.style.cssText = 'width: 100%; height: 100%;'
 			this.opt.ele.style.cssText = 'width: 100%; height: 100%;'
 			// this.videoEle.style.cssText = 'width: 100%; height: 100%;'
 		},
 
 		launchFullScreenIE11L: function () {
+			this.updateFullScreenState(true)
 			var cName = this.opt.ele.className
 			this.opt.ele.className = cName + ' ie-fullscreen'
 			var wscript = new ActiveXObject("WScript.Shell");
@@ -163,25 +231,30 @@
 		// 关闭全屏
 		exitFullscreen: function () {
 			if(this.browserV.indexOf('IE10') >= 0 || this.browserV.indexOf('IE9') >= 0) {
-				console.log('启用IE全屏')
-				isFull = true
+				console.log('启用IE9 IE10全屏')
+				// this.isFull = true
 				this.exitFullscreenIE11L();
 			} else {
-				// this.exitFullscreenStyle()
+				// this.exitFullScreenStyle()
 				if (document.exitFullscreen) {
 					document.exitFullscreen();
 				} else if (document.mozCancelFullScreen) {
 					document.mozCancelFullScreen();
 				} else if (document.webkitExitFullscreen) {
 					document.webkitExitFullscreen();
+				} else if (document.msExitFullscreen) {
+					document.msExitFullscreen();
 				}
 				console.log('关闭全屏')
-				isFull = false
+				this.exitFullScreenStyle()
+				// this.isFull = false
 			}
 		},
 
 		// 关闭全屏IE 10及以下
 		exitFullscreenIE11L: function () {
+			this.updateFullScreenState(false)
+			console.log('关闭全屏 IE 10及以下')
 			var cName = this.opt.ele.className
 			this.opt.ele.className = cName.split(' ').slice(cName.split(' ').indexOf('ie-fullscreen'), 1)
 			var wscript = new ActiveXObject("WScript.Shell");
@@ -191,9 +264,19 @@
 		},
 
 		// 关闭全屏的元素样式
-		exitFullscreenStyle: function () {
+		exitFullScreenStyle: function () {
+			this.updateFullScreenState(false)
 			this.opt.ele.style.cssText = 'width:' + this.opt.width + '; height: ' + this.opt.height
 			// this.videoEle.style.cssText = 'width:' + this.opt.width + '; height: ' + this.opt.height
+		},
+
+		// 更新全屏状态  包括显示全屏图标样式    
+		updateFullScreenState: function (bool) {
+			this.isFull = bool || false
+			var className = this.isFull ? 'icon-canclefullscreen' : 'icon-fullscreen'
+			var title = this.isFull ? '取消全屏' : '全屏'
+			this.fullscreenConfig.className = 'Dvideo-menu-fullscreenConfig ' + className
+			this.fullscreenConfig.title = title
 		},
 
 		// 屏幕全屏模式改变事件
@@ -211,7 +294,7 @@
 					_this.launchFullScreenStyle(_this.opt.ele);
 				} else {
 					console.log('不是全屏')
-					_this.exitFullscreenStyle();
+					_this.exitFullScreenStyle()
 				}
 				// alert(_this.opt.ele.requestFullscreen)
 			})
@@ -223,17 +306,17 @@
 			if(_this.browserV.indexOf('IE11') >= 0) {
 				document.onkeydown = function (e) {
 					var keyNum = window.event ? e.keyCode : e.which
-					if (keyNum === 27 && isFull) {
+					if (keyNum === 27 && _this.isFull) {
 						// ie退出全屏   这里针对的是IE11
-						_this.exitFullscreenStyle()
+						_this.exitFullScreenStyle()
 					}
 				}
 			}
 			if(this.browserV.indexOf('IE10') >= 0 || this.browserV.indexOf('IE9') >= 0) {
 				document.onkeydown = function (e) {
 					var keyNum = window.event ? e.keyCode : e.which
-					if (keyNum === 27 && isFull) {
-						// ie退出全屏   这里针对的是IE11
+					if (keyNum === 27 && _this.isFull) {
+						// ie退出全屏   这里针对的是IE10  9
 						_this.exitFullscreenIE11L()
 					}
 				}
@@ -288,42 +371,145 @@
 			return browser + version
 		},
 
-		showHideCtrl: function (ele) {
-			var _this = this
-			var duration = 3000
-			_this.videoC.onmousemove = function () {
-				clearTimeout(showCtrlT)
-				_this.videoCtrl.className = 'Dvideo-ctrl active'
-				_this.videoHeader.className = 'Dvideo-header active'
-				showCtrlT = setTimeout(function () {
-					_this.videoCtrl.className = 'Dvideo-ctrl'
-					_this.videoHeader.className = 'Dvideo-header'
-				}, duration)
-			}
+		// 显示上下菜单
+		showTopBottomCtrl: function () {
+			this.videoCtrl.className = 'Dvideo-ctrl active'
+			this.videoHeader.className = 'Dvideo-header active'
+		},
+
+		hideTopBottomCtrl: function () {
+			this.videoCtrl.className = 'Dvideo-ctrl'
+			this.videoHeader.className = 'Dvideo-header'
+		},
+
+		// 显示隐藏进度条小球
+		showProgressRange: function () {
+			this.videoProressC.className = 'Dvideo-progress-content active'
+		},
+
+		hideProgressRange: function () {
+			this.videoProressC.className = 'Dvideo-progress-content'
 		},
 
 		videoPlay: function () {
 			this.videoEle.play();
-			isPlaying = true
+			this.isPlaying = true
 		},
 
 		videoPause: function () {
 			this.videoEle.pause();
-			isPlaying = false
+			this.isPlaying = false
+		},
+
+		videoPlayPause: function () {
+			if (this.isPlaying) {
+				this.videoPause();
+			} else {
+				this.videoPlay();
+			}
 		},
 
 		// 音乐初始化事件
 		initVideoEvent: function () {
 			var _this = this
+
+			// 鼠标事件
+			_this.videoC.onmousemove = function () {
+				clearTimeout(_this.showCtrlT)
+				_this.showTopBottomCtrl()
+				_this.showCtrlT = setTimeout(function () {
+					_this.hideTopBottomCtrl()
+				}, _this.opt.ctrSpeedDuration)
+			},
+			_this.videoCtrl.onmousemove = function (e) {
+				e.stopPropagation();
+				_this.showProgressRange()
+			}
+			_this.videoCtrl.onmouseenter = function () {
+				clearTimeout(_this.showCtrlT)
+				_this.showProgressRange()
+			}
+			_this.videoCtrl.onmouseleave = function () {
+				_this.showCtrlT = setTimeout(function () {
+					_this.hideTopBottomCtrl()
+				}, _this.opt.ctrSpeedDuration)
+				_this.hideProgressRange()
+			}
+
+			// 键盘事件
+			document.onkeydown = function (e) {
+				if (e && e.ctrlKey && e.keyCode === 32) {   // 同时按下 ctrl + 空格
+					// console.log(e.ctrlKey + '------' + e.keyCode)
+					_this.videoPlayPause()
+				}
+				// if (e && e.ctrlKey && e.keyCode === 39) { 	// 同时按下 ctrl + -->
+				// 	_this.playNextPrev(that, true)
+				// }
+				// if (e && e.ctrlKey && e.keyCode === 37) { 	// 同时按下 ctrl + <--
+				// 	_this.playNextPrev(that, false)
+				// }
+  			}
+
+			// 音频事件
 			_this.videoEle.onplaying = function () {
-				isPlaying = true
+				_this.isPlaying = true
 				_this.videoPlayPauseI.className = 'Dvideo-ctrl-playPause icon-pause'
+				_this.videoPlayPauseI.title = '暂停 ctrl + space'
 			},
 			_this.videoEle.onpause = function () {
-				isPlaying = false
+				_this.isPlaying = false
 				_this.videoPlayPauseI.className = 'Dvideo-ctrl-playPause icon-play'
+				_this.videoPlayPauseI.title = '播放 ctrl + space'
+			},
+
+			// 视频元数据 （时长 尺寸 以及文本轨道）
+			_this.videoEle.onloadedmetadata = function () {
+				_this.durationT = _this.videoEle.duration
+				// 初始化视频时间
+				_this.textDurationT.innerText = _this.formartTime(_this.durationT)
+			},
+
+			// 绑定进度条
+			_this.videoEle.ontimeupdate = function () {
+				// console.log(Math.floor())
+				_this.currentP = Number(((_this.videoEle.currentTime / _this.durationT) * 100).toFixed(2))
+				_this.realProress.style.width = _this.currentP + '%'
+
+				// 更改时间进度
+				_this.textCurrentT.innerText = _this.formartTime(_this.videoEle.currentTime)
+			},
+			_this.videoEle.onprogress = function () {
+				if(_this.videoEle.buffered.length > 0) {
+					var bufferedT = 0
+					for (var i = 0; i < _this.videoEle.buffered.length; i++) {
+						bufferedT += _this.videoEle.buffered.end(i) - _this.videoEle.buffered.start(i)
+						if(bufferedT > _this.durationT) {
+							bufferedT = _this.durationT
+							console.log('缓冲完成')
+						} else {
+							console.log('缓冲中...')
+						}
+					}
+					var bufferedP = Math.floor((bufferedT / _this.durationT) * 100)
+					_this.bufferedProress.style.width = bufferedP + '%'
+				} else {
+					console.log('未缓冲')
+				}
 			}
 		},
+
+
+		// 格式化时间
+		formartTime: function (seconds) {
+			var formatNumber = function (n) {
+	            n = n.toString()
+	            return n[1] ? n : '0' + n
+	        }
+	        var m = Math.floor(seconds / 60);
+	        var s = Math.floor(seconds % 60);
+	        return formatNumber(m) + ":" + formatNumber(s);
+		},
+
 		// initEvent  初始化事件
 		initEvent: function () {
 			var _this = this
@@ -339,7 +525,7 @@
 
 			// 界面点击播放暂停
 			_this.videoC.onclick = function () {
-				if (isPlaying) {
+				if (_this.isPlaying) {
 					_this.videoPause()
 				} else {
 					_this.videoPlay()
@@ -348,22 +534,30 @@
 
 			// 播放下一集
 			_this.videoNextI.onclick = function () {
-				console.log('你点击了播放下一集   可使用实例化的对象调用nextVideo 方法实现播放下一集的效果')
+				_this.nextVideo ()
 			}
 
 			// 播放暂停按钮
 			_this.videoPlayPauseI.onclick = function () {
-				if (isPlaying) {
+				if (_this.isPlaying) {
 					_this.videoPause()
 				} else {
 					_this.videoPlay()
 				}
+			},
+			// 点击切换全屏与非全屏状态
+			_this.fullscreenConfig.onclick = function () {
+				if (_this.isFull) {
+					_this.exitFullscreen()
+				} else {
+					_this.launchFullScreen(_this.opt.ele)
+				}
 			}
 			_this.initVideoEvent()
-			_this.showHideCtrl()
 		},
 
 		nextVideo: function () {
+			console.log('你点击了播放下一集   可使用实例化的对象调用nextVideo 方法实现播放下一集的效果')
 			if (typeof this.opt.nextVideoExtend === 'function') this.opt.nextVideoExtend()
 		},
 

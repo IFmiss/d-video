@@ -116,15 +116,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   bottom: 0;
 }
 /* line 18, ../sass/Dvideo/_ctrl.scss */
-.Dvideo-ctrl .Dvideo-progress-content {
-  height: 1px;
+.Dvideo-ctrl .Dvideo-detail {
   width: 100%;
-  position: absolute;
-  bottom: 40px;
-  background: red;
+  height: 100%;
+  font-size: 0;
+  position: relative;
 }
-/* line 25, ../sass/Dvideo/_ctrl.scss */
-.Dvideo-ctrl .Dvideo-ctrl-state {
+/* line 23, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-ctrl-state {
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
@@ -135,16 +134,20 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   padding: 0 8px;
   text-align: center;
 }
-/* line 31, ../sass/Dvideo/_ctrl.scss */
-.Dvideo-ctrl .Dvideo-ctrl-state:after {
+/* line 29, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-ctrl-state:after {
+  content: '';
   display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
   width: 0;
   height: 100%;
   vertical-align: middle;
-  content: '';
 }
-/* line 38, ../sass/Dvideo/_ctrl.scss */
-.Dvideo-ctrl .Dvideo-ctrl-state .Dvideo-ctrl-playPause {
+/* line 36, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-ctrl-state .Dvideo-ctrl-playPause {
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
@@ -156,8 +159,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   margin-right: 16px;
   cursor: pointer;
 }
-/* line 46, ../sass/Dvideo/_ctrl.scss */
-.Dvideo-ctrl .Dvideo-ctrl-state .Dvideo-ctrl-next {
+/* line 44, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-ctrl-state .Dvideo-ctrl-next {
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
@@ -168,8 +171,148 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   font-size: 20px;
   cursor: pointer;
 }
+/* line 52, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-time-content {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  width: auto;
+  color: #787d82;
+  font-size: 0;
+  font-weight: 200;
+}
+/* line 58, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-time-content .Dvideo-text-current, .Dvideo-ctrl .Dvideo-detail .Dvideo-time-content .Dvideo-text-duration {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  font-size: 12px;
+  width: 50px;
+  text-align: center;
+  position: relative;
+}
+/* line 65, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-time-content .Dvideo-text-duration:before {
+  content: '/';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  color: #fff;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+/* line 74, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: auto;
+  padding-right: 10px;
+}
+/* line 81, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content:after {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+}
+/* line 89, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content i {
+  display: inline-block;
+  vertical-align: middle;
+  *vertical-align: auto;
+  *zoom: 1;
+  *display: inline;
+  font-size: 16px;
+  color: #787d82;
+  vertical-align: middle;
+  cursor: pointer;
+}
+/* line 98, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-progress-content {
+  height: 1px;
+  width: 100%;
+  cursor: pointer;
+  position: absolute;
+  bottom: 40px;
+  background: #333;
+}
+/* line 105, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-progress-content .Dvideo-progress-buffered {
+  width: 0;
+  height: 100%;
+  background: #999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -moz-transition: width 0.3s;
+  -o-transition: width 0.3s;
+  -webkit-transition: width 0.3s;
+  transition: width 0.3s;
+}
+/* line 114, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-progress-content .Dvideo-progress-real {
+  width: 0%;
+  height: 100%;
+  background: red;
+  position: relative;
+  -moz-transition: width 0.3s;
+  -o-transition: width 0.3s;
+  -webkit-transition: width 0.3s;
+  transition: width 0.3s;
+}
+/* line 121, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-progress-content .Dvideo-circle-range {
+  display: none;
+  position: absolute;
+  top: -5px;
+  right: -7px;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+/* line 130, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-progress-content .Dvideo-circle-range:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  background: red;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+/* line 142, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-progress-content.active {
+  height: 4px;
+}
+/* line 144, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-progress-content.active .Dvideo-circle-range {
+  display: block;
+}
 
-/* line 56, ../sass/Dvideo/_ctrl.scss */
+/* line 151, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-header {
   position: absolute;
   top: 0;
@@ -187,13 +330,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   opacity: 0;
   visibility: hidden;
 }
-/* line 68, ../sass/Dvideo/_ctrl.scss */
+/* line 163, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-header.active {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
   visibility: visible;
 }
-/* line 73, ../sass/Dvideo/_ctrl.scss */
+/* line 168, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-header .Dvideo-header-title {
   width: 80%;
   height: 100%;
