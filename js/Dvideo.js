@@ -28,9 +28,15 @@
 			autoplay: false,
 			ctrSpeedDuration: 5000,
 			loop: true,
+			playbackRate: {
+				activeIndex: 1,
+				rateList: [0.8,1,1.4,1.8,2]
+			},
 			// 可让用户自定义扩展
 			nextVideoExtend: function () {alert(1)}
 		}
+
+		this.opt = this.extend(this.localValue, options, true)
 
 		//================初始化部分变量
 		// 设置全屏的状态
@@ -53,8 +59,8 @@
 		this.dragProgressTo = 0
 		// 音量大小
 		this.volume = 1
-
-		this.opt = this.extend(this.localValue, options, true)
+		// 语速
+		this.playbackR = this.opt.playbackRate.rateList[this.opt.playbackRate.activeIndex]
 
 		// 获取浏览器版本
 		this.browserV = this.browserVersion()
@@ -181,6 +187,22 @@
 			this.menuRightC.className = 'Dvideo-menu-right-content'
 			this.videoCtrlDetail.appendChild(this.menuRightC)
 
+			// 设置语速
+			this.playbackRate = document.createElement('span')
+			this.playbackRate.className = 'Dvideo-playbackRate'
+			this.videoEle.playbackRate = this.playbackR
+			this.playbackRate.title = this.playbackR.toFixed(1) + ' x'
+			this.playbackRate.innerText = this.playbackR.toFixed(1) + ' x'
+			this.menuRightC.appendChild(this.playbackRate)
+
+			// 语速选项的内容
+			this.playbackRateC = document.createElement('div')
+			this.playbackRateC.className = 'Dvideo-playbackRate-content'
+			this.playbackRate.appendChild(this.playbackRateC)
+
+			// 语速选项的列表
+			this.createPlaybackRateList()
+
 			// 放大缩小功能
 			var iconFullScreenITitle = this.isFull ? '全屏' : '取消全屏'
 			this.fullscreenConfig = document.createElement('i')
@@ -196,6 +218,9 @@
 
 			// 初始化事件
 			this.initEvent()
+
+			// 初始全屏效果
+			this.updateFullScreenState(this.isFull)
 
 			// 添加监听是否改变窗口大小事件
 			this.screenChangeEvent()
@@ -296,10 +321,13 @@
 		// 更新全屏状态  包括显示全屏图标样式    
 		updateFullScreenState: function (bool) {
 			this.isFull = bool || false
-			var className = this.isFull ? 'icon-canclefullscreen' : 'icon-fullscreen'
+			var iconClassName = this.isFull ? 'Dvideo-menu-fullscreenConfig icon-canclefullscreen' : 'Dvideo-menu-fullscreenConfig icon-fullscreen'
 			var title = this.isFull ? '取消全屏' : '全屏'
-			this.fullscreenConfig.className = 'Dvideo-menu-fullscreenConfig ' + className
+			this.fullscreenConfig.className = iconClassName
 			this.fullscreenConfig.title = title
+			// 设置页面是否全屏的class
+			var videoClassName = this.isFull ? 'Dvideo-content full' : 'Dvideo-content'
+			this.videoC.className = videoClassName
 		},
 
 		// 屏幕全屏模式改变事件
@@ -448,7 +476,7 @@
 				console.log('加载中')
 			} else {
 				this.tipsInfo.style.display = 'none'
-				console.log('正常播放')
+				// console.log('正常播放')
 			}
 		},
 
@@ -541,8 +569,6 @@
 						if(bufferedT > _this.durationT) {
 							bufferedT = _this.durationT
 							console.log('缓冲完成')
-						} else {
-							console.log('缓冲中...')
 						}
 					}
 					var bufferedP = Math.floor((bufferedT / _this.durationT) * 100)
@@ -621,6 +647,7 @@
 				}
 			},
 
+			// 点击进度条跳转
 			_this.videoProressD.onclick = function (event) {
 				var e = event || window.event
 				var l = e.layerX
@@ -680,8 +707,32 @@
 					_this.hideProgressRange()
 				}
 			}
+
+			// ====================设置语速交互
+			_this.playbackRate.onmouseenter = function (event) {
+				_this.playbackRateC.style.display = 'block'
+			}
+
+			_this.playbackRate.onmouseleave = function (event) {
+				_this.playbackRateC.style.display = 'none'
+			}
+
+			_this.playbackRateC.onclick = function (event) {
+				var e = event || window.event
+				var index = e.target.getAttribute('data-index')
+				_this.setPlayBackRate(index)
+			}
 			
 			_this.initVideoEvent()
+		},
+
+		setPlayBackRate: function (index) {
+			var speed = this.opt.playbackRate.rateList[index]
+			this.playbackR = speed
+			this.videoEle.playbackRate = this.playbackR
+			this.playbackRate.title = this.playbackR.toFixed(1) + ' x'
+			this.playbackRate.innerText = this.playbackR.toFixed(1) + ' x'
+			this.playbackRateC.style.display = 'none'
 		},
 
 		// 更新进度条位置
@@ -711,6 +762,22 @@
 		// 设置音量大小
 		setVolume: function () {
 			this.videoEle.volume = this.volume
+		},
+
+		// 创建PlaybackRateList
+		createPlaybackRateList: function () {
+			for (var i = 0; i < this.opt.playbackRate.rateList.length; i++) {
+				var playbackRateL = document.createElement('span')
+				if (i === this.opt.playbackRate.activeIndex) {
+					playbackRateL.className = 'Dvideo-playbackRate-list active'
+				} else {
+					playbackRateL.className = 'Dvideo-playbackRate-list'
+				}
+				playbackRateL.title = this.opt.playbackRate.rateList[i].toFixed(1) + 'x'
+				playbackRateL.innerText = this.opt.playbackRate.rateList[i].toFixed(1) + 'x'
+				playbackRateL.setAttribute('data-index', i)
+				this.playbackRateC.appendChild(playbackRateL)
+			}
 		},
 
 		getDomByClass: function(classInfo) {
