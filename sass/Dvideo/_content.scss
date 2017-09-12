@@ -15,6 +15,7 @@
 	width: 100%;
 	height: 100%;
 	overflow:hidden;
+	@include user-select(none);
 	// @include display-flex;
 	.Dvideo-ele{
 		width: 100%;

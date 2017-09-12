@@ -24,7 +24,7 @@
 			title: '这是一个视频标题这是一个视频标题这是一个视频标题这是一个视频标题',
 			width: '420px',
 			height: '250px',
-			showNext: true,
+			showNext: false,
 			autoplay: false,
 			ctrSpeedDuration: 5000,
 			loop: true,
@@ -43,11 +43,25 @@
 		this.showCtrlT = ''
 		// 进度百分比
 		this.currentP = 0
+		// 进度条是否可拖动
+		this.isDrag = false
+		// 快进快退事件
+		this.onpress = false
+		// 进度条的宽度
+		this.maxProgressWidth = 0
+		// 进度条拖动的位置
+		this.dragProgressTo = 0
+		// 音量大小
+		this.volume = 1
 
 		this.opt = this.extend(this.localValue, options, true)
 
 		// 获取浏览器版本
 		this.browserV = this.browserVersion()
+
+		// 通过时间戳与当前时间的差值来判断是否需要加载
+		this.reduceTBefore = 0   // 时间戳与当前时间的差值 (初始化)
+		this.reduceTAfter = 0   // 时间戳与当前时间的差值 (执行中)
 
 		// 判断传进来的是DOM还是字符串
         if ((typeof options.ele) === "string") {
@@ -125,20 +139,25 @@
 			this.videoProressC.className = 'Dvideo-progress-content'
 			this.videoCtrl.appendChild(this.videoProressC)
 
+			// 进度条内容 (包涵进度条和缓冲条) videoProressDetail
+			this.videoProressD = document.createElement('div')
+			this.videoProressD.className = 'Dvideo-progress-detail'
+			this.videoProressC.appendChild(this.videoProressD)
+
 			// 缓冲条
 			this.bufferedProress = document.createElement('div')
 			this.bufferedProress.className = 'Dvideo-progress-buffered'
-			this.videoProressC.appendChild(this.bufferedProress)
+			this.videoProressD.appendChild(this.bufferedProress)
 
 			// 播放进度条
 			this.realProress = document.createElement('div')
 			this.realProress.className = 'Dvideo-progress-real'
-			this.videoProressC.appendChild(this.realProress)
+			this.videoProressD.appendChild(this.realProress)
 
 			// 播放进度条圆形按钮
 			this.circleRange = document.createElement('span')
 			this.circleRange.className = 'Dvideo-circle-range'
-			this.realProress.appendChild(this.circleRange)
+			this.videoProressC.appendChild(this.circleRange)
 
 			// 显示当前时间和总时长  区域
 			this.textVideoTimeC = document.createElement('div')
@@ -168,6 +187,12 @@
 			this.fullscreenConfig.className = 'Dvideo-menu-fullscreenConfig icon-fullscreen'
 			this.fullscreenConfig.title = iconFullScreenITitle
 			this.menuRightC.appendChild(this.fullscreenConfig)
+
+			// 视频提示信息  存在于ctrl之内 进度条上方
+			this.tipsInfo = document.createElement('div')
+			this.tipsInfo.className = 'Dvideo-tips-info'
+			this.videoCtrl.appendChild(this.tipsInfo)
+
 
 			// 初始化事件
 			this.initEvent()
@@ -208,18 +233,18 @@
 				console.log('启用全屏 包括ie11')
 				this.launchFullScreenStyle(element)
 			}
+			this.updateFullScreenState(true)
 		},
 
 		// 全屏下视频的样式
 		launchFullScreenStyle: function () {
-			this.updateFullScreenState(true)
 			// element.style.cssText = 'width: 100%; height: 100%;'
 			this.opt.ele.style.cssText = 'width: 100%; height: 100%;'
 			// this.videoEle.style.cssText = 'width: 100%; height: 100%;'
 		},
 
+		// 全屏下IE 11 以下视频的样式
 		launchFullScreenIE11L: function () {
-			this.updateFullScreenState(true)
 			var cName = this.opt.ele.className
 			this.opt.ele.className = cName + ' ie-fullscreen'
 			var wscript = new ActiveXObject("WScript.Shell");
@@ -246,14 +271,12 @@
 					document.msExitFullscreen();
 				}
 				console.log('关闭全屏')
-				this.exitFullScreenStyle()
-				// this.isFull = false
 			}
+			this.exitFullScreenStyle()
 		},
 
 		// 关闭全屏IE 10及以下
 		exitFullscreenIE11L: function () {
-			this.updateFullScreenState(false)
 			console.log('关闭全屏 IE 10及以下')
 			var cName = this.opt.ele.className
 			this.opt.ele.className = cName.split(' ').slice(cName.split(' ').indexOf('ie-fullscreen'), 1)
@@ -380,6 +403,7 @@
 		hideTopBottomCtrl: function () {
 			this.videoCtrl.className = 'Dvideo-ctrl'
 			this.videoHeader.className = 'Dvideo-header'
+			this.hideProgressRange()
 		},
 
 		// 显示隐藏进度条小球
@@ -392,13 +416,21 @@
 		},
 
 		videoPlay: function () {
-			this.videoEle.play();
-			this.isPlaying = true
+			try{
+				this.videoEle.play();
+				this.isPlaying = true
+			} catch (e) {
+				console.log(e)
+			}
 		},
 
 		videoPause: function () {
-			this.videoEle.pause();
-			this.isPlaying = false
+			try{
+				this.videoEle.pause();
+				this.isPlaying = false
+			} catch (e) {
+				console.log(e)
+			}
 		},
 
 		videoPlayPause: function () {
@@ -406,6 +438,17 @@
 				this.videoPause();
 			} else {
 				this.videoPlay();
+			}
+		},
+
+		showLoading: function (bool) {
+			if (bool) {
+				this.tipsInfo.innerText = '视频加载中,请稍等  或者切换稍低的清晰度'
+				this.tipsInfo.style.display = 'block'
+				console.log('加载中')
+			} else {
+				this.tipsInfo.style.display = 'none'
+				console.log('正常播放')
 			}
 		},
 
@@ -421,19 +464,10 @@
 					_this.hideTopBottomCtrl()
 				}, _this.opt.ctrSpeedDuration)
 			},
-			_this.videoCtrl.onmousemove = function (e) {
-				e.stopPropagation();
-				_this.showProgressRange()
-			}
+
 			_this.videoCtrl.onmouseenter = function () {
 				clearTimeout(_this.showCtrlT)
 				_this.showProgressRange()
-			}
-			_this.videoCtrl.onmouseleave = function () {
-				_this.showCtrlT = setTimeout(function () {
-					_this.hideTopBottomCtrl()
-				}, _this.opt.ctrSpeedDuration)
-				_this.hideProgressRange()
 			}
 
 			// 键盘事件
@@ -442,12 +476,30 @@
 					// console.log(e.ctrlKey + '------' + e.keyCode)
 					_this.videoPlayPause()
 				}
-				// if (e && e.ctrlKey && e.keyCode === 39) { 	// 同时按下 ctrl + -->
-				// 	_this.playNextPrev(that, true)
-				// }
-				// if (e && e.ctrlKey && e.keyCode === 37) { 	// 同时按下 ctrl + <--
-				// 	_this.playNextPrev(that, false)
-				// }
+				if (e && e.ctrlKey && e.keyCode === 39) { 	// 同时按下 ctrl + -->   快进
+					if (_this.videoEle.currentTime) {
+						_this.currentT = _this.currentT + 10 > _this.durationT ? _this.durationT : _this.currentT + 10
+						_this.videoEle.currentTime = _this.currentT
+						_this.updatePorgress()
+					}
+				}
+				if (e && e.ctrlKey && e.keyCode === 37) { 	// 同时按下 ctrl + <--
+					if (_this.videoEle.currentTime) {
+						_this.currentT = _this.currentT - 10 < 0 ? 0 : _this.currentT - 10
+						_this.videoEle.currentTime = _this.currentT
+						_this.updatePorgress()
+					}
+				}
+
+				if (e && e.ctrlKey && e.keyCode === 38) { 	// 同时按下 ctrl + down
+					_this.volume = _this.volume + 0.02 > 1 ? 1 : _this.volume + 0.02
+					_this.setVolume()
+				}
+
+				if (e && e.ctrlKey && e.keyCode === 40) { 	// 同时按下 ctrl + down
+					_this.volume = _this.volume - 0.02 < 0 ? 0 : _this.volume - 0.02
+					_this.setVolume()
+				}
   			}
 
 			// 音频事件
@@ -455,6 +507,8 @@
 				_this.isPlaying = true
 				_this.videoPlayPauseI.className = 'Dvideo-ctrl-playPause icon-pause'
 				_this.videoPlayPauseI.title = '暂停 ctrl + space'
+				var date = new Date ()
+				_this.reduceTBefore = Date.parse(date) - Math.floor(_this.videoEle.currentTime * 1000)
 			},
 			_this.videoEle.onpause = function () {
 				_this.isPlaying = false
@@ -471,12 +525,13 @@
 
 			// 绑定进度条
 			_this.videoEle.ontimeupdate = function () {
-				// console.log(Math.floor())
-				_this.currentP = Number(((_this.videoEle.currentTime / _this.durationT) * 100).toFixed(2))
-				_this.realProress.style.width = _this.currentP + '%'
-
-				// 更改时间进度
-				_this.textCurrentT.innerText = _this.formartTime(_this.videoEle.currentTime)
+				if (!_this.isDrag) {
+					_this.currentT = _this.videoEle.currentTime
+					_this.updatePorgress()
+					var date = new Date ()
+					_this.reduceTBefore = Date.parse(date) - Math.floor(_this.currentT * 1000)
+					_this.showLoading(false)
+				}
 			},
 			_this.videoEle.onprogress = function () {
 				if(_this.videoEle.buffered.length > 0) {
@@ -495,9 +550,21 @@
 				} else {
 					console.log('未缓冲')
 				}
+
+				var date = new Date ()
+				// console.log(_this.reduceTAfter + '-------------------------' + _this.reduceTBefore)
+				if(!_this.videoEle.paused) {
+					_this.reduceTAfter = Date.parse(date) - Math.floor(_this.currentT * 1000)
+					if(_this.reduceTAfter - _this.reduceTBefore > 1000) {
+						_this.showLoading(true)
+					} else {
+						_this.showLoading(false)
+					}
+				} else {
+					return
+				}
 			}
 		},
-
 
 		// 格式化时间
 		formartTime: function (seconds) {
@@ -552,13 +619,98 @@
 				} else {
 					_this.launchFullScreen(_this.opt.ele)
 				}
+			},
+
+			_this.videoProressD.onclick = function (event) {
+				var e = event || window.event
+				var l = e.layerX
+				var w = _this.videoProressD.offsetWidth
+
+				_this.videoEle.currentTime = Math.floor(l / w * _this.durationT)
+				_this.currentT = _this.videoEle.currentTime
+				_this.updatePorgress()
 			}
+			
+			// 进度条拖动 (PC)
+			_this.circleRange.onmousedown = function (event) {
+				_this.isDrag = true
+				var e = event || window.event
+				var x = e.clientX
+				var l = event.target.offsetLeft + 7
+				e.stopPropagation()
+				_this.maxProgressWidth = _this.videoProressD.offsetWidth
+				_this.videoCtrl.onmousemove = function (event) {
+					var e = event || window.event
+					if (_this.isDrag) {
+						var thisX = e.clientX
+						_this.dragProgressTo = Math.min(_this.maxProgressWidth, Math.max(0, l + (thisX - x)))
+						console.log(e.clientX + '--------')
+						console.log(_this.maxProgressWidth + '--------')
+						console.log(l + (thisX - x) + '--------')
+						// update Time
+						_this.updatePorgress(true)
+					}
+				}
+				_this.videoCtrl.onmouseup = function (event) {
+					var e = event || window.event
+					e.stopPropagation()
+					console.log(_this.dragProgressTo +' ------- '+ _this.maxProgressWidth + ' ---------- ' + _this.durationT)
+					if (_this.isDrag) {
+						_this.isDrag = false
+						_this.videoEle.currentTime = Math.floor(_this.dragProgressTo / _this.maxProgressWidth * _this.durationT)
+					} else {
+						return
+					}
+				}
+
+				_this.videoCtrl.onmouseleave = function (event) {
+					var e = event || window.event
+					e.stopPropagation()
+					if (_this.isDrag) {
+						_this.isDrag = false
+						_this.videoEle.currentTime = Math.floor(_this.dragProgressTo / _this.maxProgressWidth * _this.durationT)
+					} else {
+						return
+					}
+
+					// 隐藏控制栏
+					_this.showCtrlT = setTimeout(function () {
+						_this.hideTopBottomCtrl()
+					}, _this.opt.ctrSpeedDuration)
+					_this.hideProgressRange()
+				}
+			}
+			
 			_this.initVideoEvent()
 		},
 
+		// 更新进度条位置
+		updatePorgress: function (isDrag) {
+			var isDrag = isDrag || false
+			if (isDrag) {
+				this.circleRange.style.left = this.dragProgressTo + 'px'
+				this.realProress.style.width = this.dragProgressTo + 'px'
+				var currentTime = Math.floor(this.dragProgressTo / this.maxProgressWidth * this.durationT)
+				this.textCurrentT.innerText = this.formartTime(currentTime)
+			} else {
+				this.currentP = Number((this.currentT / this.durationT) * 100)
+				this.currentP = this.currentP > 100 ? 100 : this.currentP
+				this.realProress.style.width = this.currentP + '%'
+				this.circleRange.style.left = this.currentP + '%'
+				// 更改时间进度
+				this.textCurrentT.innerText = this.formartTime(this.videoEle.currentTime)
+			}
+		},
+
+		// 下一集的点击事件
 		nextVideo: function () {
 			console.log('你点击了播放下一集   可使用实例化的对象调用nextVideo 方法实现播放下一集的效果')
 			if (typeof this.opt.nextVideoExtend === 'function') this.opt.nextVideoExtend()
+		},
+
+		// 设置音量大小
+		setVolume: function () {
+			this.videoEle.volume = this.volume
 		},
 
 		getDomByClass: function(classInfo) {
