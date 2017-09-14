@@ -173,7 +173,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   margin-right: 16px;
   cursor: pointer;
 }
-/* line 53, ../sass/Dvideo/_ctrl.scss */
+/* line 52, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-ctrl-state .Dvideo-ctrl-playPause:hover {
+  color: #F29A4D;
+}
+/* line 56, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-detail .Dvideo-ctrl-state .Dvideo-ctrl-next {
   display: inline-block;
   vertical-align: middle;
@@ -185,7 +189,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   font-size: 20px;
   cursor: pointer;
 }
-/* line 61, ../sass/Dvideo/_ctrl.scss */
+/* line 62, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-ctrl-state .Dvideo-ctrl-next:hover {
+  color: #F29A4D;
+}
+/* line 67, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-detail .Dvideo-time-content {
   display: inline-block;
   vertical-align: middle;
@@ -197,7 +205,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   font-size: 0;
   font-weight: 200;
 }
-/* line 67, ../sass/Dvideo/_ctrl.scss */
+/* line 73, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-detail .Dvideo-time-content .Dvideo-text-current, .Dvideo-ctrl .Dvideo-detail .Dvideo-time-content .Dvideo-text-duration {
   display: inline-block;
   vertical-align: middle;
@@ -209,7 +217,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   text-align: center;
   position: relative;
 }
-/* line 74, ../sass/Dvideo/_ctrl.scss */
+/* line 80, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-detail .Dvideo-time-content .Dvideo-text-duration:before {
   content: '/';
   position: absolute;
@@ -221,7 +229,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 83, ../sass/Dvideo/_ctrl.scss */
+/* line 89, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content {
   position: absolute;
   top: 0;
@@ -229,7 +237,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   height: 100%;
   width: auto;
 }
-/* line 90, ../sass/Dvideo/_ctrl.scss */
+/* line 96, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content:after {
   content: '';
   display: inline-block;
@@ -241,7 +249,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   height: 100%;
   vertical-align: middle;
 }
-/* line 98, ../sass/Dvideo/_ctrl.scss */
+/* line 104, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content i {
   display: inline-block;
   vertical-align: middle;
@@ -254,10 +262,16 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   cursor: pointer;
   margin: 0 10px;
 }
-/* line 106, ../sass/Dvideo/_ctrl.scss */
+/* line 111, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content i:hover {
+  color: #F29A4D;
+}
+/* line 115, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate {
   color: #787d82;
   width: 35px;
+  height: 18px;
+  line-height: 13px;
   text-align: center;
   vertical-align: middle;
   display: inline-block;
@@ -268,7 +282,6 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   font-size: 12px;
   margin: 0 10px;
   padding: 2px 4px;
-  color: #070C11;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -278,8 +291,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   background: #787d82;
   cursor: pointer;
   position: relative;
+  -moz-transition: background 0.3s;
+  -o-transition: background 0.3s;
+  -webkit-transition: background 0.3s;
+  transition: background 0.3s;
 }
-/* line 121, ../sass/Dvideo/_ctrl.scss */
+/* line 132, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate .Dvideo-playbackRateText {
+  width: 100%;
+  height: 100%;
+  color: #070C11;
+}
+/* line 137, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate .Dvideo-playbackRate-content {
   display: none;
   position: absolute;
@@ -295,11 +318,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
 }
-/* line 132, ../sass/Dvideo/_ctrl.scss */
+/* line 148, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate .Dvideo-playbackRate-content.active {
   display: block;
 }
-/* line 135, ../sass/Dvideo/_ctrl.scss */
+/* line 151, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate .Dvideo-playbackRate-content .Dvideo-playbackRate-list {
   display: block;
   width: 100%;
@@ -307,17 +330,21 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   line-height: 30px;
   color: #787d82;
 }
-/* line 141, ../sass/Dvideo/_ctrl.scss */
+/* line 157, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate .Dvideo-playbackRate-content .Dvideo-playbackRate-list.active {
-  color: red;
+  color: #F29A4D;
 }
-/* line 144, ../sass/Dvideo/_ctrl.scss */
+/* line 160, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate .Dvideo-playbackRate-content .Dvideo-playbackRate-list:hover {
   background: #1F2429;
 }
-/* line 152, ../sass/Dvideo/_ctrl.scss */
+/* line 165, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate:hover {
+  background: #F29A4D;
+}
+/* line 171, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-progress-content {
-  height: 1px;
+  height: 2px;
   width: 100%;
   cursor: pointer;
   position: absolute;
@@ -325,12 +352,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   background: #333;
   z-index: 2;
 }
-/* line 160, ../sass/Dvideo/_ctrl.scss */
+/* line 179, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-progress-content .Dvideo-progress-detail {
   height: 100%;
   width: 100%;
 }
-/* line 163, ../sass/Dvideo/_ctrl.scss */
+/* line 182, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-progress-content .Dvideo-progress-detail .Dvideo-progress-buffered {
   width: 0;
   height: 100%;
@@ -343,18 +370,18 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-transition: width 0.3s;
   transition: width 0.3s;
 }
-/* line 172, ../sass/Dvideo/_ctrl.scss */
+/* line 191, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-progress-content .Dvideo-progress-detail .Dvideo-progress-real {
   width: 0%;
   height: 100%;
-  background: red;
+  background: #F29A4D;
   position: relative;
   -moz-transition: width 0.3s;
   -o-transition: width 0.3s;
   -webkit-transition: width 0.3s;
   transition: width 0.3s;
 }
-/* line 180, ../sass/Dvideo/_ctrl.scss */
+/* line 199, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-progress-content .Dvideo-circle-range {
   display: none;
   position: absolute;
@@ -368,7 +395,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
-/* line 190, ../sass/Dvideo/_ctrl.scss */
+/* line 209, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-progress-content .Dvideo-circle-range:after {
   content: '';
   position: absolute;
@@ -379,28 +406,28 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
-  background: red;
+  background: #F29A4D;
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 202, ../sass/Dvideo/_ctrl.scss */
+/* line 221, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-progress-content.active {
   height: 4px;
 }
-/* line 205, ../sass/Dvideo/_ctrl.scss */
+/* line 224, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-progress-content.active .Dvideo-progress-detail .Dvideo-progress-real {
   -moz-transition: none;
   -o-transition: none;
   -webkit-transition: none;
   transition: none;
 }
-/* line 209, ../sass/Dvideo/_ctrl.scss */
+/* line 228, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-progress-content.active .Dvideo-circle-range {
   display: block;
 }
-/* line 214, ../sass/Dvideo/_ctrl.scss */
+/* line 233, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-ctrl .Dvideo-tips-info {
   position: absolute;
   left: 0;
@@ -414,7 +441,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   font-size: 12px;
 }
 
-/* line 228, ../sass/Dvideo/_ctrl.scss */
+/* line 247, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-header {
   position: absolute;
   top: 0;
@@ -432,13 +459,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   opacity: 0;
   visibility: hidden;
 }
-/* line 240, ../sass/Dvideo/_ctrl.scss */
+/* line 259, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-header.active {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
   visibility: visible;
 }
-/* line 245, ../sass/Dvideo/_ctrl.scss */
+/* line 264, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-header .Dvideo-header-title {
   width: 80%;
   height: 100%;

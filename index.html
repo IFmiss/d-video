@@ -20,21 +20,23 @@
 </body>
 <script src="js/Dvideo.js"></script>
 <script>
-	var videoWrap = document.getElementById('testVideo')
-	var fullScreen = document.getElementById('getFullScreen')
-	var video = new Dvideo ({
-		ele: '#testVideo',
-		nextVideoExtend: function () {
-			alert('222222222222222222asdasd')
-		},
-		showNext: false,
-		width: '420px',
-		height: '240px',
-	})
+	window.onload = function () {
+		var videoWrap = document.getElementById('testVideo')
+		var fullScreen = document.getElementById('getFullScreen')
+		var video = new Dvideo ({
+			ele: '#testVideo',
+			nextVideoExtend: function () {
+				alert('222222222222222222asdasd')
+			},
+			showNext: false,
+			width: '420px',
+			height: '240px',
+		})
 
-	fullScreen.onclick=function(){
-		video.launchFullScreen(videoWrap)
-		// video.nextVideo();
+		fullScreen.onclick=function(){
+			video.launchFullScreen(videoWrap)
+			// video.nextVideo();
+		}
 	}
 
 	// video.fullscreenEnabled()
