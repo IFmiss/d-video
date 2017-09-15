@@ -31,6 +31,17 @@
 			showNext: false,
 			width: '420px',
 			height: '240px',
+			setVideoDefinition: function (type, e) {
+				if (type === '0') {
+					video.videoEle.src = 'http://qiniu.fulumbia.com/pc_商业礼仪_v5_Fundamental_S2_13.3_西餐基本礼仪.mp4'
+				}
+				if (type === '1') {
+					video.videoEle.src = 'http://qiniu.fulumbia.com/pc_商业礼仪_v5_Fundamental_S3_3.2_你的名片代表你的形象.mp4'
+				}
+				if (type === '2') {
+					video.videoEle.src = 'http://qiniu.fulumbia.com/pc_商业礼仪_v5_Fundamental_S3_3.3_对方把天聊死，你咋给捞回来.mp4'
+				}
+			}
 		})
 
 		fullScreen.onclick=function(){

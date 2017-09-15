@@ -32,8 +32,26 @@
 				activeIndex: 1,
 				rateList: [0.8,1,1.4,1.8,2]
 			},
+			videoDefinition: {
+				activeIndex: 1,
+				definitionList: [
+					{
+						type: '0',
+						name: '标清'
+					},
+					{
+						type: '1',
+						name: '高清'
+					},
+					{
+						type: '2',
+						name: '超清'
+					}
+				]
+			},
 			// 可让用户自定义扩展
-			nextVideoExtend: function () {alert(1)}
+			nextVideoExtend: function () {alert(1)},
+			setVideoDefinition: function () {}
 		}
 
 		this.opt = this.extend(this.localValue, options, true)
@@ -61,10 +79,6 @@
 		this.dragProgressTo = 0
 		// 音量大小
 		this.volume = 1
-		// 语速
-		this.playbackR =  this.hasLStorage('D-playbackRate') ? Number(JSON.parse(this.getLStorage('D-playbackRate')).speed) : this.opt.playbackRate.rateList[this.opt.playbackRate.activeIndex]
-		// 设置 opt 的playbackRate 的 activeIndex
-		if(this.hasLStorage('D-playbackRate')) this.opt.playbackRate.activeIndex = Number(JSON.parse(this.getLStorage('D-playbackRate')).index)
 
 		// 获取浏览器版本
 		this.browserV = this.browserVersion()
@@ -438,21 +452,48 @@
 			
 		// 	_this.initVideoEvent()
 		// },
+		setVideoDefinition: function (e) {
+			var index = e.target.getAttribute('data-index')
+			var type = e.target.getAttribute('data-type')
 
-		setPlayBackRate: function (index, e) {
-			var speed = this.opt.playbackRate.rateList[index]
-			this.playbackR = speed
+			this.currentT = this.videoEle.currentTime
+
+			this.opt.setVideoDefinition(type, e)
+			
+			this.videoEle.currentTime = this.currentT
+			this.videoPlay()
+
+			this.opt.videoDefinition = {
+				activeIndex: index,
+				definitionList: this.opt.videoDefinition.definitionList
+			}
+
+			// 文本显示
+			this.videoDefinitionText.title = this.opt.videoDefinition.definitionList[index].name
+			this.videoDefinitionText.innerText = this.opt.videoDefinition.definitionList[index].name
+			// 存储至本地
+			this.setLStorage('D-videoDefinition', JSON.stringify(this.opt.videoDefinition))
+
+			// 设置列表active状态
+			this.getDomByClass('Dvideo-definition-list active')[0].className = 'Dvideo-definition-list'
+			e.target.className = 'Dvideo-definition-list active'
+			this.videoDefinitionC.style.display = 'none'
+		},
+
+		setPlayBackRate: function (e) {
+			var index = e.target.getAttribute('data-index')
+			this.playbackR = this.opt.playbackRate.rateList[index]
 			this.videoEle.playbackRate = this.playbackR
 			this.playbackRateText.title = this.playbackR.toFixed(1) + ' x'
 			this.playbackRateText.innerText = this.playbackR.toFixed(1) + ' x'
 
 
-			var localBackRate = {
-				speed: speed,
-				index: index
+			this.opt.playbackRate = {
+				activeIndex: index,
+				rateList: this.opt.playbackRate.rateList
 			}
 			// 存储至本地
-			this.setLStorage('D-playbackRate', JSON.stringify(localBackRate))
+			this.setLStorage('D-playbackRate', JSON.stringify(this.opt.playbackRate))
 
 			// 设置列表active状态
 			this.getDomByClass('Dvideo-playbackRate-list active')[0].className = 'Dvideo-playbackRate-list'
@@ -491,6 +532,16 @@
 
 		// 创建PlaybackRateList
 		createPlaybackRateList: function () {
+			// 语速数据
+			var playbackrateData = this.hasLStorage('D-playbackRate') ? JSON.parse(this.getLStorage('D-playbackRate')) : JSON.parse(this.opt.playbackRate)
+
+			// 当前active索引
+			var playbackrateIndex = Number(playbackrateData.activeIndex)
+
+			// 当前语速
+			var playbackR = Number(playbackrateData.rateList[playbackrateIndex])
+
+
 			// 设置语速区域
 			this.playbackRate = document.createElement('span')
 			this.playbackRate.className = 'Dvideo-playbackRate'
@@ -499,9 +550,9 @@
 			// 显示语速文本
 			this.playbackRateText = document.createElement('span')
 			this.playbackRateText.className = 'Dvideo-playbackRateText'
-			this.videoEle.playbackRate = this.playbackR
-			this.playbackRateText.title = this.playbackR.toFixed(1) + ' x'
-			this.playbackRateText.innerText = this.playbackR.toFixed(1) + ' x'
+			this.videoEle.playbackRate = playbackR
+			this.playbackRateText.title = playbackR.toFixed(1) + ' x'
+			this.playbackRateText.innerText = playbackR.toFixed(1) + ' x'
 			this.playbackRate.appendChild(this.playbackRateText)
 
 			// 语速选项的内容
@@ -510,15 +561,15 @@
 			this.playbackRate.appendChild(this.playbackRateC)
 
 
-			for (var i = 0; i < this.opt.playbackRate.rateList.length; i++) {
+			for (var i = 0; i < playbackrateData.rateList.length; i++) {
 				var playbackRateL = document.createElement('span')
-				if (i === this.opt.playbackRate.activeIndex) {
+				if (i === playbackrateIndex) {
 					playbackRateL.className = 'Dvideo-playbackRate-list active'
 				} else {
 					playbackRateL.className = 'Dvideo-playbackRate-list'
 				}
-				playbackRateL.title = this.opt.playbackRate.rateList[i].toFixed(1) + 'x'
-				playbackRateL.innerText = this.opt.playbackRate.rateList[i].toFixed(1) + 'x'
+				playbackRateL.title = playbackrateData.rateList[i].toFixed(1) + 'x'
+				playbackRateL.innerText = playbackrateData.rateList[i].toFixed(1) + 'x'
 				playbackRateL.setAttribute('data-index', i)
 				this.playbackRateC.appendChild(playbackRateL)
 			}
@@ -536,8 +587,7 @@
 
 			_this.playbackRateC.onclick = function (event) {
 				var e = event || window.event
-				var index = e.target.getAttribute('data-index')
-				_this.setPlayBackRate(index, e)
+				_this.setPlayBackRate(e)
 			}
 		},
 
@@ -867,7 +917,62 @@
 
 		// 创建切换视频清晰度效果
 		createVideoDefinition: function () {
+			// 获取的数据  本地存储或者初始化的清晰度
+			var videoDefinitionData = this.hasLStorage('D-videoDefinition') ? JSON.parse(this.getLStorage('D-videoDefinition')) : this.opt.videoDefinition
+			// active索引
+			var videoDefinitionIndex = Number(videoDefinitionData.activeIndex)
+			// active类型  0 标清   1 高清   2 超清
+			var videoDefinitionType = videoDefinitionData.definitionList[videoDefinitionIndex].type
+			// active名字  0 标清   1 高清   2 超清
+			var videoDefinitionName = videoDefinitionData.definitionList[videoDefinitionIndex].name
 
+			// 设置清晰度区域
+			this.videoDefinition = document.createElement('span')
+			this.videoDefinition.className = 'Dvideo-definition'
+			this.menuRightC.appendChild(this.videoDefinition)
+
+			// 显示清晰度文本
+			this.videoDefinitionText = document.createElement('span')
+			this.videoDefinitionText.className = 'Dvideo-definitionText'
+			this.videoDefinitionText.title = videoDefinitionName
+			this.videoDefinitionText.innerText = videoDefinitionName
+			this.videoDefinition.appendChild(this.videoDefinitionText)
+
+			// 清晰度选项的内容
+			this.videoDefinitionC = document.createElement('div')
+			this.videoDefinitionC.className = 'Dvideo-definition-content'
+			this.videoDefinition.appendChild(this.videoDefinitionC)
+
+
+			for (var i = 0; i < videoDefinitionData.definitionList.length; i++) {
+				var videoDefinitionL = document.createElement('span')
+				if (i === videoDefinitionIndex) {
+					videoDefinitionL.className = 'Dvideo-definition-list active'
+				} else {
+					videoDefinitionL.className = 'Dvideo-definition-list'
+				}
+				videoDefinitionL.title = videoDefinitionData.definitionList[i].name
+				videoDefinitionL.innerText = videoDefinitionData.definitionList[i].name
+				videoDefinitionL.setAttribute('data-index', i)
+				videoDefinitionL.setAttribute('data-type', videoDefinitionData.definitionList[i].type)
+				this.videoDefinitionC.appendChild(videoDefinitionL)
+			}
+
+			var _this = this
+
+			// ====================设置语速交互
+			_this.videoDefinition.onmouseenter = function (event) {
+				_this.videoDefinitionC.style.display = 'block'
+			}
+
+			_this.videoDefinition.onmouseleave = function (event) {
+				_this.videoDefinitionC.style.display = 'none'
+			}
+
+			_this.videoDefinition.onclick = function (event) {
+				var e = event || window.event
+				_this.setVideoDefinition(e)
+			}
 		},
 
 		// 根据class查找元素
