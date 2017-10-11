@@ -533,7 +533,7 @@
 		// 创建PlaybackRateList
 		createPlaybackRateList: function () {
 			// 语速数据
-			var playbackrateData = this.hasLStorage('D-playbackRate') ? JSON.parse(this.getLStorage('D-playbackRate')) : JSON.parse(this.opt.playbackRate)
+			var playbackrateData = this.hasLStorage('D-playbackRate') ? JSON.parse(this.getLStorage('D-playbackRate')) : this.opt.playbackRate
 
 			// 当前active索引
 			var playbackrateIndex = Number(playbackrateData.activeIndex)
