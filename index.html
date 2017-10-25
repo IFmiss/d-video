@@ -12,48 +12,104 @@
 			right: 100px;
 			z-index: 1111;
 		}
+		.ctrl-c{
+			width: 500px;
+			height: auto;
+			margin: 20px auto;
+		}
+
+		.btn{
+			padding: 6px 10px;
+			background: #5C96D8;
+			margin: 5px;
+			color: #fff;
+			cursor: pointer;
+			border-radius: 4px;
+			display: inline-block;
+		}
 	</style>
 </head>
 <body>
-	<div id="testVideo"></div>
-	<input class="getFullScreen" id="getFullScreen" type="button" value="点击全屏">
+	<div style="display: flex;justify-content: center;">
+		<div id="testVideo"></div>
+	</div>
+	<div class="ctrl-c">
+		<span class="btn" onclick="setFullScreen()">点击全屏</span>
+		<span class="btn" onclick="play()">播放</span>
+		<span class="btn" onclick="pause()">暂停</span>
+		<span class="btn" onclick="playpause()">播放暂停</span>
+		<span class="btn" onclick="setVolume(1)">100的音量大小</span>
+		<span class="btn" onclick="setVolume(0.3)">30的音量大小</span>
+		<span class="btn" onclick="setBackRate(4)">2.0的语速</span>
+		<span class="btn" onclick="setBackRate(1)">正常的语速</span>
+	</div>
 </body>
 <script src="js/Dvideo.js"></script>
 <script>
-	window.onload = function () {
+	// window.onload = function () {
 		var videoWrap = document.getElementById('testVideo')
 		var fullScreen = document.getElementById('getFullScreen')
 		var video = new Dvideo ({
 			ele: '#testVideo',
+			title: 'Pneumatic Tokyo - EnV',
 			nextVideoExtend: function () {
-				alert('222222222222222222asdasd')
+				alert('您点击了下一页')
 			},
-			showNext: false,
-			width: '420px',
-			height: '240px',
-			setVideoDefinition: function (type, e) {
+			showNext: true,
+			showVolumeUnFull: true,
+			width: '520px',
+			height: '292px',
+			setVideoDefinition: function (type, e, current) {
 				if (type === '0') {
-					video.videoEle.src = 'http://qiniu.fulumbia.com/pc_商业礼仪_v5_Fundamental_S2_13.3_西餐基本礼仪.mp4'
+					// setTimeout(function () {
+						video.videoEle.src = 'http://qiniu.fulumbia.com/zhishidian/gsyhyyj_points.mp4'
+					// }, 3000)
 				}
 				if (type === '1') {
-					video.videoEle.src = 'http://qiniu.fulumbia.com/pc_商业礼仪_v5_Fundamental_S3_3.2_你的名片代表你的形象.mp4'
+					// setTimeout(function () {
+						video.videoEle.src = 'http://qiniu.fulumbia.com/pc_商业礼仪_v5_Fundamental_S3_3.2_你的名片代表你的形象.mp4'
+					// }, 3000)
 				}
 				if (type === '2') {
-					video.videoEle.src = 'http://qiniu.fulumbia.com/pc_商业礼仪_v5_Fundamental_S3_3.3_对方把天聊死，你咋给捞回来.mp4'
+					// setTimeout(function () {
+						video.videoEle.src = 'http://qiniu.fulumbia.com/pc_商业礼仪_v5_Fundamental_S3_3.3_对方把天聊死，你咋给捞回来.mp4'
+					// }, 3000)
 				}
+
+				setTimeout(function () {
+					video.videoEle.currentTime = current
+					video.videoPlay()
+					video.showLoading(false)
+				}, 3000)
 			}
 		})
 
-		fullScreen.onclick=function(){
+		// 全屏
+		function setFullScreen () {
 			video.launchFullScreen(videoWrap)
-			// video.nextVideo();
 		}
-	}
 
-	// video.fullscreenEnabled()
-	// function FullScreen () {
-	// 	alert(video)
-	// 	video.launchFullScreen(videoWrap)
-	// }
+		// 播放
+		function play () {
+			video.videoPlay()
+		}
+
+		// 暂停
+		function pause () {
+			video.videoPause()
+		}
+
+		// 播放暂停
+		function playpause () {
+			video.videoPlayPause()
+		}
+
+		function setVolume (v) {
+			video.updateVolume(v)
+		}
+
+		function setBackRate (index) {
+			video.setPlayBackRate(index)
+		}
 </script>
 </html>

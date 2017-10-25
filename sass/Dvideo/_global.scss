@@ -1,7 +1,9 @@
-$primary_color: #F29A4D;
+$primary_color:red;
 
+// 文字颜色
 $text_deep_color: rgba(255,255,255,0.8);
 
+// 动画时间
 $duration_time: 0.5s;
 
 // video的 容器栏
@@ -12,12 +14,19 @@ $header_height: 36px;
 
 // ==  控制条栏
 $ctrl_height: 40px;
-$ctrl_bg: #070C11;
+// 背景色
+// $ctrl_bg: #070C11;
+$ctrl_bg: rgba(6,16,26,0.8);
 $padding_leftright: 8px;
 
+// 进度条信息
 $progress_auto_bg: #333;
-$progress_real_bg: #F29A4D;
+$progress_real_bg:red;
 $progress_buffered_bg: #999;
+
+// 音乐信息
+$volume_auto_bg: #999;
+$volume_real_bg: #cacaca;
 
 // rateHoverColor
 $rate_hover_color: #1F2429;
