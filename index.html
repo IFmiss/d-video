@@ -35,13 +35,15 @@
 	</div>
 	<div class="ctrl-c">
 		<span class="btn" onclick="setFullScreen()">点击全屏</span>
-		<span class="btn" onclick="play()">播放</span>
-		<span class="btn" onclick="pause()">暂停</span>
+		<span class="btn" onclick="play()">播放 ctrl + space</span>
+		<span class="btn" onclick="pause()">暂停 ctrl + space</span>
 		<span class="btn" onclick="playpause()">播放暂停</span>
-		<span class="btn" onclick="setVolume(1)">100的音量大小</span>
-		<span class="btn" onclick="setVolume(0.3)">30的音量大小</span>
+		<span class="btn" onclick="setVolume(1)">100的音量大小 ctrl + up</span>
+		<span class="btn" onclick="setVolume(0.3)">30的音量大小 ctrl + down</span>
 		<span class="btn" onclick="setBackRate(4)">2.0的语速</span>
 		<span class="btn" onclick="setBackRate(1)">正常的语速</span>
+		<span class="btn" onclick="setVideoRewind(10)">快退 ctrl + left</span>
+		<span class="btn" onclick="setVideoForward(10)">快进 ctrl + right</span>
 	</div>
 </body>
 <script src="js/Dvideo.js"></script>
@@ -110,6 +112,14 @@
 
 		function setBackRate (index) {
 			video.setPlayBackRate(index)
+		}
+
+		function setVideoForward () {
+			video.videoForward(10)
+		}
+
+		function setVideoRewind () {
+			video.videoRewind(10)
 		}
 </script>
 </html>

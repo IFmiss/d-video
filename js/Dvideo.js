@@ -442,6 +442,25 @@
 			}
 		},
 
+		// 快退   参数 退多少秒
+		videoForward: function(seconds) {
+			if (this.videoEle.currentTime) {
+				this.currentT = this.currentT + 10 > this.durationT ? this.durationT : this.currentT + 10
+				this.videoEle.currentTime = this.currentT
+				this.updatePorgress()
+			}
+		},
+
+		videoRewind: function (seconds) {
+			if (this.videoEle.currentTime) {
+				this.currentT = this.currentT - 10 < 0 ? 0 : this.currentT - 10
+				this.videoEle.currentTime = this.currentT
+				this.updatePorgress()
+			}
+		},
+
+		// 快进   参数 进多少秒
+
 		// 音乐初始化事件
 		initEvent: function () {
 			var _this = this
@@ -456,18 +475,10 @@
 					_this.videoPlayPause()
 				}
 				if ((e && e.ctrlKey && (e.keyCode || e.which || e.charCode) === 39) || (e && e.metaKey && (e.keyCode || e.which || e.charCode) === 39)) { 	// 同时按下 ctrl + -->   快进
-					if (_this.videoEle.currentTime) {
-						_this.currentT = _this.currentT + 10 > _this.durationT ? _this.durationT : _this.currentT + 10
-						_this.videoEle.currentTime = _this.currentT
-						_this.updatePorgress()
-					}
+					_this.videoForward(10)
 				}
 				if ((e && e.ctrlKey && (e.keyCode || e.which || e.charCode) === 37) || (e && e.metaKey && (e.keyCode || e.which || e.charCode) === 37)) { 	// 同时按下 ctrl + <--
-					if (_this.videoEle.currentTime) {
-						_this.currentT = _this.currentT - 10 < 0 ? 0 : _this.currentT - 10
-						_this.videoEle.currentTime = _this.currentT
-						_this.updatePorgress()
-					}
+					_this.videoRewind(10)
 				}
 
 				if ((e && e.ctrlKey && (e.keyCode || e.which || e.charCode) === 38) || (e && e.metaKey && (e.keyCode || e.which || e.charCode) === 38)) { 	// 同时按下 ctrl + down
