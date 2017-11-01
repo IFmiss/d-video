@@ -45,6 +45,9 @@
 			// 是否自动循环
 			loop: true,
 
+			// 音量默认大小
+			volume: 0.8,
+
 			// 是否显示音量的控制效果
 			showVolume: true,
 			// 在非全屏下是否显示控制
@@ -592,7 +595,9 @@
 
 		// 设置音量大小
 		setVolume: function () {
-			this.videoEle.volume = this.volume
+			// this.videoEle.volume = this.volume
+			var persent = this.volume / 1
+			this.updateVolume(persent)
 		},
 
 		// 创建PlaybackRateList
@@ -1115,8 +1120,6 @@
 				var eW = e.offsetX
 				// console.log(videoVolumeCW)
 				_this.updateVolume(eW / videoVolumeCW);
-				// 本地存储
-				_this.setLStorage('Dvideo-volume', eW / videoVolumeCW)
 			}
 		},
 
@@ -1125,16 +1128,21 @@
 			this.videoVolumeRange.style.left = persent * 100 + '%'
 			this.videoVolumeR.style.width = persent * 100 + '%'
 			this.videoVolumeRange.setAttribute('data-volume', Math.round(persent * 100))
+			this.volume = persent
 			this.videoEle.volume = persent
+			// 本地存储
+			this.setLStorage('Dvideo-volume', persent)
 		},
 
 		// 初始化音量
 		initVolume: function () {
 			if(this.getLStorage('Dvideo-volume') === null) {
 				this.updateVolume(0.8)
+				this.volume = 0.8
 			} else {
 				var persent = this.getLStorage('Dvideo-volume')
 				this.updateVolume(persent)
+				this.volume = persent
 			}
 		},
 
