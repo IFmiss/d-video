@@ -6,6 +6,31 @@
 	<link rel="stylesheet" href="css/Dvideo.css">
 	<link rel="stylesheet" href="font-icon/style.css">
 	<style>
+		body,html{
+			margin: 0;
+			padding: 0;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			width: 100%;
+			height: 100%;
+			background: -webkit-linear-gradient(90deg,#222626,#838383);
+			background: linear-gradient(90deg,#222626,#838383);
+		}
+
+		.title{
+			font: 24px/1.5 weight;
+			color: #fff;
+			text-align: center;
+			margin: 20px 0;
+		}
+
+		.centerInfo{
+			position: absolute;
+			top: 45%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
 		.getFullScreen{
 			position: absolute;
 			bottom:100px;
@@ -27,29 +52,45 @@
 			border-radius: 4px;
 			display: inline-block;
 		}
+		#testVideo{
+			width: 520px;
+			height: auto;
+			margin: 0 auto;
+			outline:2px solid #ccc;
+		}
 		body,html{
 			font-size: 16px;
 		}
 		.btn{
 			font-size: 1rem;
+			background: rgba(0,0,0,0.3)!important;
+		}
+
+		.github{
+			display: block;
+			width: 100%;
+			text-align: center;
+			color: #eee;
 		}
 	</style>
 </head>
 <body>
-	<div style="display: flex;justify-content: center;">
+	<div class="centerInfo">
+		<h3 class="title">基于原生js的Dvideo.js组件</h3>
 		<div id="testVideo"></div>
-	</div>
-	<div class="ctrl-c">
-		<span class="btn" onclick="setFullScreen()">点击全屏</span>
-		<span class="btn" onclick="play()">播放 ctrl + space</span>
-		<span class="btn" onclick="pause()">暂停 ctrl + space</span>
-		<span class="btn" onclick="playpause()">播放暂停</span>
-		<span class="btn" onclick="setVolume(1)">100的音量大小 ctrl + up</span>
-		<span class="btn" onclick="setVolume(0.3)">30的音量大小 ctrl + down</span>
-		<span class="btn" onclick="setBackRate(4)">2.0的语速</span>
-		<span class="btn" onclick="setBackRate(1)">正常的语速</span>
-		<span class="btn" onclick="setVideoRewind(10)">快退 ctrl + left</span>
-		<span class="btn" onclick="setVideoForward(10)">快进 ctrl + right</span>
+		<div class="ctrl-c" style="user-select:none">
+			<span class="btn" style="background: #B42828" onclick="setFullScreen()">点击全屏</span>
+			<span class="btn" style="background: #95487B" onclick="play()">播放 ctrl + space</span>
+			<span class="btn" style="background: #4D5DA6" onclick="pause()">暂停 ctrl + space</span>
+			<span class="btn" style="background: #488BAD" onclick="playpause()">播放暂停</span>
+			<span class="btn" style="background: #359961" onclick="setVolume(1)">100的音量大小 ctrl + up</span>
+			<span class="btn" style="background: #547046" onclick="setVolume(0.3)">30的音量大小 ctrl + down</span>
+			<span class="btn" style="background: #767030" onclick="setBackRate(3)">2.0的语速</span>
+			<span class="btn" style="background: #B2662E" onclick="setBackRate(1)">正常的语速</span>
+			<span class="btn" style="background: #977074" onclick="setVideoRewind(10)">快退 ctrl + left</span>
+			<span class="btn" style="background: #4F1B60" onclick="setVideoForward(10)">快进 ctrl + right</span>
+		</div>
+		<a class="github" href="https://github.com/IFmiss/Dvideo.js" target="_balck">github: https://github.com/IFmiss/Dvideo.js</a>
 	</div>
 </body>
 <script src="js/Dvideo.js"></script>
@@ -70,25 +111,29 @@
 			setVideoDefinition: function (type, e, current) {
 				if (type === '0') {
 					// setTimeout(function () {
-						video.videoEle.src = 'http://qiniu.fulumbia.com/zhishidian/gsyhyyj_points.mp4'
+						// video.videoEle.src = ''
 					// }, 3000)
+					alert('你点击了标清')
 				}
 				if (type === '1') {
 					// setTimeout(function () {
-						video.videoEle.src = 'http://qiniu.fulumbia.com/pc_商业礼仪_v5_Fundamental_S3_3.2_你的名片代表你的形象.mp4'
+						// video.videoEle.src = ''
 					// }, 3000)
+					alert('你点击了高清')
 				}
 				if (type === '2') {
 					// setTimeout(function () {
-						video.videoEle.src = 'http://qiniu.fulumbia.com/pc_商业礼仪_v5_Fundamental_S3_3.3_对方把天聊死，你咋给捞回来.mp4'
+						// video.videoEle.src = ''
 					// }, 3000)
+					alert('你点击了超清')
 				}
+				video.showLoading(false)
 
-				setTimeout(function () {
-					video.videoEle.currentTime = current
-					video.videoPlay()
-					video.showLoading(false)
-				}, 3000)
+				// setTimeout(function () {
+				// 	video.videoEle.currentTime = current
+				// 	video.videoPlay()
+				// 	video.showLoading(false)
+				// }, 3000)
 			}
 		})
 
