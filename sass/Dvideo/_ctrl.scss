@@ -431,4 +431,70 @@
 			}
 		}
 	}
+
+	&.gradient{
+		.Dvideo-ctrl{
+			@include background(linear-gradient(to top, $ctrl_bg_opacity, transparent));
+			.Dvideo-detail{
+				.Dvideo-time-content{
+					color: $icon_color_opacity;
+				}
+				.Dvideo-menu-right-content{
+					i{
+						color: $icon_color_opacity;
+					}
+				}
+				.Dvideo-playbackRate{
+					background: $icon_color_opacity;
+					.Dvideo-playbackRate-content{
+						background: transparent;
+						.Dvideo-playbackRate-list{
+							color: $icon_color_opacity;
+							background: $icon_color_opacity;
+							&:active{
+								color: $primary_color_opacity;
+							}
+							&:hover{
+								background:$rate_hover_color_opacity;
+							}
+						}
+					}
+				}
+				.Dvideo-definition{
+					background:$icon_color_opacity;
+					.Dvideo-definition-content{
+						background: transparent;
+						.Dvideo-definition-list{
+							color: $icon_color_opacity;
+							background: $icon_color_opacity;
+							&.active{
+								color: $primary_color_opacity;
+							}
+							&:hover{
+								background: $rate_hover_color_opacity;
+							}
+						}
+					}
+				}
+			}
+			.Dvideo-progress-content{
+				width: calc(100% - 20px);
+				left: 50%;
+				@include border-radius(2px);
+				@include translate(-50%,0);
+				background:$progress_auto_bg_opacity;
+				.Dvideo-progress-detail{
+					.Dvideo-progress-buffered{
+						background:$progress_buffered_bg_opacity;
+					}
+					.Dvideo-progress-real{
+						@include background(linear-gradient(to right, $progress_real_bg_opacity_deep, $progress_real_bg_opacity));
+					}
+				}
+			}
+		}
+		.Dvideo-header{
+			@include background(linear-gradient(to bottom, $ctrl_bg_opacity, transparent));
+		}
+	}
 }

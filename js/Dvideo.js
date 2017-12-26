@@ -48,10 +48,16 @@
 			// 音量默认大小
 			volume: 0.8,
 
+			// 头部footer是否显示渐变效果
+			gradient: true,
+
 			// 是否显示音量的控制效果
 			showVolume: true,
 			// 在非全屏下是否显示控制
 			showVolumeUnFull: false,
+
+			// 提示信息的元素dom
+			tipsInfo: null,
 
 			// 是否显示语速的设置
 			showPlayBackRate: true,
@@ -296,7 +302,8 @@
 			this.fullscreenConfig.className = iconClassName
 			this.fullscreenConfig.title = title
 			// 设置页面是否全屏的class
-			var videoClassName = this.isFull ? 'Dvideo-content full' : 'Dvideo-content'
+			var videoClassName = this.isFull ? this.videoC.className + ' full' : this.videoC.className
+
 			this.videoC.className = videoClassName
 		},
 
@@ -714,11 +721,11 @@
 			// 点击进度条跳转
 			_this.videoProressD.onclick = function (event) {
 				var e = event || window.event
-				var l = e.layerX
+				var l = e.offsetX
 				var w = _this.videoProressD.offsetWidth
 
-				_this.videoEle.currentTime = Math.floor(l / w * _this.durationT)
-				_this.currentT = _this.videoEle.currentTime
+				_this.videoEle.currentTime = l / w * _this.durationT
+				_this.currentT = l / w * _this.durationT
 				_this.updatePorgress()
 			}
 			
@@ -735,9 +742,6 @@
 					if (_this.isDrag) {
 						var thisX = e.clientX
 						_this.dragProgressTo = Math.min(_this.maxProgressWidth, Math.max(0, l + (thisX - x)))
-						console.log(e.clientX + '--------')
-						console.log(_this.maxProgressWidth + '--------')
-						console.log(l + (thisX - x) + '--------')
 						// update Time
 						_this.updatePorgress(true)
 					}
@@ -745,7 +749,7 @@
 				_this.videoCtrl.onmouseup = function (event) {
 					var e = event || window.event
 					e.stopPropagation()
-					console.log(_this.dragProgressTo +' ------- '+ _this.maxProgressWidth + ' ---------- ' + _this.durationT)
+					// console.log(_this.dragProgressTo +' ------- '+ _this.maxProgressWidth + ' ---------- ' + _this.durationT)
 					if (_this.isDrag) {
 						_this.isDrag = false
 						_this.videoEle.currentTime = Math.floor(_this.dragProgressTo / _this.maxProgressWidth * _this.durationT)
@@ -850,7 +854,8 @@
 		createVideoC: function () {
 			// video content
 			this.videoC = document.createElement('div')
-			this.videoC.className = 'Dvideo-content'
+			var videoClassName = this.opt.gradient ? 'Dvideo-content gradient' : 'Dvideo-content'
+			this.videoC.className = videoClassName
 			this.opt.ele.appendChild(this.videoC)
 
 			var _this = this
@@ -1180,7 +1185,7 @@
 		hasLStorage: function (storage_name) {
 			var _this = this
 			if (this.lStorage) {
-				return !(localStorage.getItem(storage_name) === 'undefind' || localStorage.getItem(storage_name) === null)
+				return !(window.localStorage.getItem(storage_name) === 'undefind' || window.localStorage.getItem(storage_name) === null)
 			} else {
 				return false
 			}
@@ -1189,36 +1194,31 @@
 		// 设置本地存储
 		setLStorage: function (key, value) {
 			if (this.lStorage) {
-				localStorage.setItem(key, value)
-			} else {
-				return false
+				window.localStorage.setItem(key, value)
 			}
 		},
 
 		// 获取本地存储
 		getLStorage: function (key) {
 			if (this.lStorage) {
-				return localStorage.getItem(key)
+				var getLs = window.localStorage.getItem(key)
+				return getLs
 			} else {
-				return false
+				return ''
 			}
 		},
 
 		// 清除单个本地存储
 		rmLStorage: function (key) {
 			if (this.lStorage) {
-				localStorage.removeItem(key)
-			} else {
-				return false
+				window.localStorage.removeItem(key)
 			}
 		},
 
 		// 清除所有本地存储
 		clearLStorage: function () {
 			if (this.lStorage) {
-				localStorage.clear()
-			} else {
-				return false
+				window.localStorage.clear()
 			}
 		},
 	}
