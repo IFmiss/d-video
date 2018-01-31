@@ -48,9 +48,6 @@
 			// 音量默认大小
 			volume: 0.8,
 
-			// 头部footer是否显示渐变效果
-			gradient: true,
-
 			// 是否显示音量的控制效果
 			showVolume: true,
 			// 在非全屏下是否显示控制
@@ -292,6 +289,20 @@
 			this.opt.ele.style.height = this.opt.height
 		},
 
+		// 更新视频宽度
+		updateVideoSize: function (width, height) {
+			if (!(width && height)) {
+				throw Error ('noneeleerror','请填写信息')
+				return;
+			}
+			console.log('改变video的宽高')
+			this.updateFullScreenState(false)
+			this.opt.ele.style.width = width
+			this.opt.ele.style.height = height
+			this.opt.width = width
+			this.opt.height = height
+		},
+
 		// 更新全屏状态  包括显示全屏图标样式    
 		updateFullScreenState: function (bool) {
 			this.isFull = bool || false
@@ -302,8 +313,7 @@
 			this.fullscreenConfig.className = iconClassName
 			this.fullscreenConfig.title = title
 			// 设置页面是否全屏的class
-			var videoClassName = this.isFull ? this.videoC.className + ' full' : this.videoC.className
-
+			var videoClassName = this.isFull ? 'Dvideo-content full' : 'Dvideo-content'
 			this.videoC.className = videoClassName
 		},
 
@@ -721,11 +731,11 @@
 			// 点击进度条跳转
 			_this.videoProressD.onclick = function (event) {
 				var e = event || window.event
-				var l = e.offsetX
+				var l = e.layerX
 				var w = _this.videoProressD.offsetWidth
 
-				_this.videoEle.currentTime = l / w * _this.durationT
-				_this.currentT = l / w * _this.durationT
+				_this.videoEle.currentTime = Math.floor(l / w * _this.durationT)
+				_this.currentT = _this.videoEle.currentTime
 				_this.updatePorgress()
 			}
 			
@@ -742,6 +752,9 @@
 					if (_this.isDrag) {
 						var thisX = e.clientX
 						_this.dragProgressTo = Math.min(_this.maxProgressWidth, Math.max(0, l + (thisX - x)))
+						console.log(e.clientX + '--------')
+						console.log(_this.maxProgressWidth + '--------')
+						console.log(l + (thisX - x) + '--------')
 						// update Time
 						_this.updatePorgress(true)
 					}
@@ -749,7 +762,7 @@
 				_this.videoCtrl.onmouseup = function (event) {
 					var e = event || window.event
 					e.stopPropagation()
-					// console.log(_this.dragProgressTo +' ------- '+ _this.maxProgressWidth + ' ---------- ' + _this.durationT)
+					console.log(_this.dragProgressTo +' ------- '+ _this.maxProgressWidth + ' ---------- ' + _this.durationT)
 					if (_this.isDrag) {
 						_this.isDrag = false
 						_this.videoEle.currentTime = Math.floor(_this.dragProgressTo / _this.maxProgressWidth * _this.durationT)
@@ -854,8 +867,7 @@
 		createVideoC: function () {
 			// video content
 			this.videoC = document.createElement('div')
-			var videoClassName = this.opt.gradient ? 'Dvideo-content gradient' : 'Dvideo-content'
-			this.videoC.className = videoClassName
+			this.videoC.className = 'Dvideo-content'
 			this.opt.ele.appendChild(this.videoC)
 
 			var _this = this
