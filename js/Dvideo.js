@@ -40,7 +40,7 @@
 			autoplay: false,
 
 			// 控制栏显示隐藏动画的 时间
-			ctrSpeedDuration: 5000,
+			ctrSpeedDuration: 3000,
 			
 			// 是否自动循环
 			loop: true,
@@ -50,8 +50,9 @@
 
 			// 是否显示音量的控制效果
 			showVolume: true,
+
 			// 在非全屏下是否显示控制
-			showVolumeUnFull: false,
+			showVolumeUnFull: true,
 
 			// 提示信息的元素dom
 			tipsInfo: null,
@@ -242,10 +243,10 @@
 		launchFullScreenIE11L: function () {
 			var cName = this.opt.ele.className
 			this.opt.ele.className = cName + ' ie-fullscreen'
-			var wscript = new ActiveXObject("WScript.Shell");
-			if (wscript !== null) {
-				wscript.SendKeys("{F11}");
-			}
+			// var wscript = new ActiveXObject("WScript.Shell");
+			// if (wscript !== null) {
+			// 	wscript.SendKeys("{F11}");
+			// }
 		},
 
 		// 关闭全屏
@@ -275,10 +276,12 @@
 			this.updateFullScreenState(false)
 			var cName = this.opt.ele.className
 			this.opt.ele.className = cName.split(' ').slice(cName.split(' ').indexOf('ie-fullscreen'), 1)
-			var wscript = new ActiveXObject("WScript.Shell");
-			if (wscript !== null) {
-				wscript.SendKeys("{F11}");
-			}
+			// var wscript = new ActiveXObject("WScript.Shell");
+			// if (wscript !== null) {
+			// 	wscript.SendKeys("{F11}");
+			// }
+			this.opt.ele.style.width = this.opt.width
+			this.opt.ele.style.height = this.opt.height
 		},
 
 		// 关闭全屏的元素样式
@@ -489,25 +492,27 @@
 
 			// 键盘事件  (ie 没有ctrl键)
 			document.onkeydown = function (e) {
+				e.stopPropagation();
+				e.preventDefault();
 				var e = e || window.event
-				if ((e && e.ctrlKey && (e.keyCode || e.which || e.charCode) === 32) || (e && e.metaKey && (e.keyCode || e.which || e.charCode) === 32)) {   // 同时按下 ctrl + 空格
+				if ((e.keyCode || e.which || e.charCode) === 32) {   // 空格 暂停
 					// console.log(e.ctrlKey + '------' + (e.keyCode || e.which || e.charCode))
 					_this.videoPlayPause()
 				}
-				if ((e && e.ctrlKey && (e.keyCode || e.which || e.charCode) === 39) || (e && e.metaKey && (e.keyCode || e.which || e.charCode) === 39)) { 	// 同时按下 ctrl + -->   快进
+				if ((e.keyCode || e.which || e.charCode) === 39) { 	// -->   快进
 					_this.videoForward(10)
 				}
-				if ((e && e.ctrlKey && (e.keyCode || e.which || e.charCode) === 37) || (e && e.metaKey && (e.keyCode || e.which || e.charCode) === 37)) { 	// 同时按下 ctrl + <--
+				if ((e.keyCode || e.which || e.charCode) === 37) { 	// <--	 快退
 					_this.videoRewind(10)
 				}
 
-				if ((e && e.ctrlKey && (e.keyCode || e.which || e.charCode) === 38) || (e && e.metaKey && (e.keyCode || e.which || e.charCode) === 38)) { 	// 同时按下 ctrl + down
-					_this.volume = _this.volume + 0.02 > 1 ? 1 : _this.volume + 0.02
+				if ((e.keyCode || e.which || e.charCode) === 38) { 	// up  音量增加
+					_this.volume = _this.volume * 1 + 0.02 > 1 ? 1 : _this.volume * 1 + 0.02
 					_this.setVolume()
 				}
 
-				if ((e && e.ctrlKey && (e.keyCode || e.which || e.charCode) === 40) || (e && e.metaKey && (e.keyCode || e.which || e.charCode) === 40)) { 	// 同时按下 ctrl + down
-					_this.volume = _this.volume - 0.02 < 0 ? 0 : _this.volume - 0.02
+				if ((e.keyCode || e.which || e.charCode) === 40) { 	// down	 音量降低
+					_this.volume = _this.volume * 1 - 0.02 < 0 ? 0 : _this.volume * 1 - 0.02
 					_this.setVolume()
 				}
   			}
@@ -730,12 +735,18 @@
 
 			// 点击进度条跳转
 			_this.videoProressD.onclick = function (event) {
-				var e = event || window.event
-				var l = e.layerX
-				var w = _this.videoProressD.offsetWidth
+				// var e = event || window.event
+				// var l = e.layerX
+				// var w = _this.videoProressD.offsetWidth
 
-				_this.videoEle.currentTime = Math.floor(l / w * _this.durationT)
-				_this.currentT = _this.videoEle.currentTime
+				// _this.videoEle.currentTime = Math.floor(l / w * _this.durationT)
+				// _this.currentT = _this.videoEle.currentTime
+				// _this.updatePorgress()
+				var e = event || window.event
+				// alert(e.target.offsetLeft)
+				var videoProgressCW = _this.videoProressD.offsetWidth
+				var eW = e.offsetX
+				_this.videoEle.currentTime = _this.currentT = Math.floor(eW / videoProgressCW * _this.durationT)
 				_this.updatePorgress()
 			}
 			
@@ -752,9 +763,6 @@
 					if (_this.isDrag) {
 						var thisX = e.clientX
 						_this.dragProgressTo = Math.min(_this.maxProgressWidth, Math.max(0, l + (thisX - x)))
-						console.log(e.clientX + '--------')
-						console.log(_this.maxProgressWidth + '--------')
-						console.log(l + (thisX - x) + '--------')
 						// update Time
 						_this.updatePorgress(true)
 					}
@@ -762,7 +770,6 @@
 				_this.videoCtrl.onmouseup = function (event) {
 					var e = event || window.event
 					e.stopPropagation()
-					console.log(_this.dragProgressTo +' ------- '+ _this.maxProgressWidth + ' ---------- ' + _this.durationT)
 					if (_this.isDrag) {
 						_this.isDrag = false
 						_this.videoEle.currentTime = Math.floor(_this.dragProgressTo / _this.maxProgressWidth * _this.durationT)
@@ -881,12 +888,25 @@
 			}
 
 			// 界面点击播放暂停
+			var startTime = 0;
 			_this.videoC.onclick = function () {
-				if (_this.isPlaying) {
-					_this.videoPause()
+				var date = (new Date()).valueOf();
+				// > 1秒是播放暂停的操作
+				if (date - startTime > 500) {
+					if (_this.isPlaying) {
+						_this.videoPause()
+					} else {
+						_this.videoPlay()
+					}
 				} else {
-					_this.videoPlay()
+					// 否则就是全屏的操作
+					if (_this.isFull) {
+						_this.exitFullscreen()
+					} else {
+						_this.launchFullScreen(_this.opt.ele)
+					}
 				}
+				startTime = date
 			}
 		},
 
@@ -1106,7 +1126,6 @@
 						var thisX = e.clientX
 						_this.dragVolumeTo = Math.min(_this.maxVolumeWidth, Math.max(0, l + (thisX - x)))
 						persent = _this.dragVolumeTo / _this.maxVolumeWidth
-						console.log(persent)
 						_this.updateVolume(persent);
 					}
 				}
