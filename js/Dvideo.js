@@ -492,26 +492,34 @@
 
 			// 键盘事件  (ie 没有ctrl键)
 			document.onkeydown = function (e) {
-				e.stopPropagation();
-				e.preventDefault();
 				var e = e || window.event
 				if ((e.keyCode || e.which || e.charCode) === 32) {   // 空格 暂停
+					e.stopPropagation();
+					e.preventDefault();
 					// console.log(e.ctrlKey + '------' + (e.keyCode || e.which || e.charCode))
 					_this.videoPlayPause()
 				}
 				if ((e.keyCode || e.which || e.charCode) === 39) { 	// -->   快进
+					e.stopPropagation();
+					e.preventDefault();
 					_this.videoForward(10)
 				}
 				if ((e.keyCode || e.which || e.charCode) === 37) { 	// <--	 快退
+					e.stopPropagation();
+					e.preventDefault();
 					_this.videoRewind(10)
 				}
 
 				if ((e.keyCode || e.which || e.charCode) === 38) { 	// up  音量增加
+					e.stopPropagation();
+					e.preventDefault();
 					_this.volume = _this.volume * 1 + 0.02 > 1 ? 1 : _this.volume * 1 + 0.02
 					_this.setVolume()
 				}
 
 				if ((e.keyCode || e.which || e.charCode) === 40) { 	// down	 音量降低
+					e.stopPropagation();
+					e.preventDefault();
 					_this.volume = _this.volume * 1 - 0.02 < 0 ? 0 : _this.volume * 1 - 0.02
 					_this.setVolume()
 				}
@@ -573,7 +581,6 @@
 
 		setPlayBackRate: function (index) {
 			this.playbackR = this.opt.playbackRate.rateList[index]
-			this.videoEle.playbackRate = this.playbackR
 			this.playbackRateText.title = this.playbackR.toFixed(1) + ' x'
 			this.playbackRateText.innerText = this.playbackR.toFixed(1) + ' x'
 
@@ -589,6 +596,7 @@
 			this.getDomByClass('Dvideo-playbackRate-list active')[0].className = 'Dvideo-playbackRate-list'
 			this.getDomByClass('Dvideo-playbackRate-list')[index].className = 'Dvideo-playbackRate-list active'
 			this.playbackRateC.style.display = 'none'
+			this.videoEle.playbackRate = this.playbackR
 		},
 
 		// 更新进度条位置
@@ -1161,6 +1169,7 @@
 
 		// 更新音量界面显示以及音量调整
 		updateVolume: function (persent) {
+			console.log(persent)
 			this.videoVolumeRange.style.left = persent * 100 + '%'
 			this.videoVolumeR.style.width = persent * 100 + '%'
 			this.videoVolumeRange.setAttribute('data-volume', Math.round(persent * 100))
