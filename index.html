@@ -110,24 +110,26 @@
 			showVolumeUnFull: true,
 			width: '520px',
 			height: '292px',
+			src: 'http://www.daiwei.org/index/video/EnV%20-%20PneumaticTokyo.mp4',
+			autoplay: true,
 			setVideoDefinition: function (type, e, current) {
 				if (type === '0') {
 					// setTimeout(function () {
 						// video.videoEle.src = ''
 					// }, 3000)
-					alert('你点击了标清')
+					// alert('你点击了标清')
+					video.setVideoInfo('這是標清','http://web.hi-finance.com.cn/shark/sharksbier?episode_id=5881&clarity=1',current)
 				}
 				if (type === '1') {
 					// setTimeout(function () {
 						// video.videoEle.src = ''
 					// }, 3000)
-					alert('你点击了高清')
-				}
+					video.setVideoInfo('這是高清','http://web.hi-finance.com.cn/shark/sharksbier?episode_id=5881&clarity=2',current)				}
 				if (type === '2') {
 					// setTimeout(function () {
 						// video.videoEle.src = ''
 					// }, 3000)
-					alert('你点击了超清')
+					video.setVideoInfo('這是超清','http://web.hi-finance.com.cn/shark/sharksbier?episode_id=5881&clarity=3',current)
 				}
 				video.showLoading(false)
 
