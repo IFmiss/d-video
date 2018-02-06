@@ -23,7 +23,7 @@
 			ele: '',
 
 			// 地址
-			src: '',
+			src: 'http://www.daiwei.org/index/video/EnV%20-%20PneumaticTokyo.mp4',
 			
 			// 显示的名称
 			title: '这是一个视频标题这是一个视频标题这是一个视频标题这是一个视频标题',
@@ -98,7 +98,7 @@
 			// video事件
 			onTimeupdate: function (currentT) {},
 			onPlaying: function (currentT) {},
-			onPausee: function () {},
+			onPause: function () {},
 			onEnded: function () {},
 			onLoadedMetaData: function () {}
 		}
@@ -478,10 +478,10 @@
 			if (bool) {
 				this.tipsInfo.innerText = text
 				this.tipsInfo.style.display = 'block'
-				console.log('加载中')
+				// console.log('加载中')
 			} else {
 				this.tipsInfo.style.display = 'none'
-				console.log('正常播放')
+				// console.log('正常播放')
 			}
 		},
 
@@ -512,12 +512,17 @@
 
 			// 键盘事件  (ie 没有ctrl键)
 			document.onkeydown = function (e) {
-				e.stopPropagation();
-				e.preventDefault();
 				var e = e || window.event
 				if ((e.keyCode || e.which || e.charCode) === 32) {   // 空格 暂停
 					// console.log(e.ctrlKey + '------' + (e.keyCode || e.which || e.charCode))
-					_this.videoPlayPause()
+					console.log(document.activeElement.nodeName)
+					if ((document.activeElement.nodeName === 'TEXTAREA' || document.activeElement.nodeName === 'INPUT')) {
+						return
+					} else {
+						e.stopPropagation();
+						e.preventDefault();
+						_this.videoPlayPause()
+					}
 				}
 				if ((e.keyCode || e.which || e.charCode) === 39) { 	// -->   快进
 					_this.videoForward(10)
@@ -672,7 +677,7 @@
 			
 			// 是否有currentT
 			if (currentT) {
-				this.videoEle.currentTime = this.currentT
+				this.videoEle.currentTime = currentT
 			}
 			this.videoPlay();
 		},
@@ -889,6 +894,10 @@
 				_this.onLoadedMetaData()
 			},
 
+			// _this.videoEle.onCanPlay = function () {
+			// 	_this.onCanplay();
+			// }
+
 			// 绑定进度条
 			_this.videoEle.ontimeupdate = function () {
 				if (!_this.isDrag) {
@@ -932,6 +941,10 @@
 
 			_this.videoEle.onended = function () {
 				_this.onEnded();
+			}
+
+			_this.videoEle.onabort = function () {
+				showLoading(true, '视频加载中,请稍等...')
 			}
 		},
 
