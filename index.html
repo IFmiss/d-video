@@ -110,24 +110,20 @@
 			showVolumeUnFull: true,
 			width: '520px',
 			height: '292px',
+			src: 'http://www.daiwei.org/index/video/EnV%20-%20PneumaticTokyo.mp4',
+			autoplay: true,
 			setVideoDefinition: function (type, e, current) {
 				if (type === '0') {
-					// setTimeout(function () {
-						// video.videoEle.src = ''
-					// }, 3000)
 					alert('你点击了标清')
+					// video.setVideoInfo('這是標清','这里填写视频的标清地址',current)
 				}
 				if (type === '1') {
-					// setTimeout(function () {
-						// video.videoEle.src = ''
-					// }, 3000)
-					alert('你点击了高清')
+					alert('你点击了标清')
+					// video.setVideoInfo('這是標清','这里填写视频的高清地址',current)
 				}
 				if (type === '2') {
-					// setTimeout(function () {
-						// video.videoEle.src = ''
-					// }, 3000)
-					alert('你点击了超清')
+					alert('你点击了标清')
+					// video.setVideoInfo('這是標清','这里填写视频的超清地址',current)
 				}
 				video.showLoading(false)
 
@@ -136,7 +132,7 @@
 				// 	video.videoPlay()
 				// 	video.showLoading(false)
 				// }, 3000)
-			}
+			},
 		})
 
 		// 全屏

@@ -89,10 +89,18 @@
 					}
 				]
 			},
+
 			// 可让用户自定义扩展   播放下一个视频的操作
 			nextVideoExtend: function () {alert(1)},
 			// 设置清晰度的操作
-			setVideoDefinition: function () {}
+			setVideoDefinition: function (type, ele, currentT) {},
+
+			// video事件
+			onTimeupdate: function (currentT) {},
+			onPlaying: function (currentT) {},
+			onPause: function () {},
+			onEnded: function () {},
+			onLoadedMetaData: function () {}
 		}
 
 		this.opt = this.extend(this.localValue, options, true)
@@ -102,27 +110,40 @@
 		//================初始化部分变量
 		// 设置全屏的状态
 		this.isFull = false
+
 		// 设置播放的状态
 		this.isPlaying = false
+
 		// 设置视频时长
 		this.durationT = 0
-		// 这是鼠标移入显示控制菜单的timeout
+
+		// 当前的播放时间
+		this.currentT = 0
+
+		// 这是鼠标移入显示控制菜单的timeout		
 		this.showCtrlT = ''
+
 		// 进度百分比
 		this.currentP = 0
+
 		// 进度条是否可拖动
 		this.isDrag = false
+
 		// 快进快退事件
 		this.onpress = false
+
 		// 进度条的宽度
 		this.maxProgressWidth = 0
+
 		// 进度条拖动的位置
 		this.dragProgressTo = 0
 		
 		// 音量大小
 		this.volume = 1
+
 		// 音量最大宽度
 		this.maxVolumeWidth = 0
+
 		// 音量拖动的位置
 		this.dragVolumeTo = 0
 
@@ -266,7 +287,6 @@
 				} else if (document.msExitFullscreen) {
 					document.msExitFullscreen();
 				}
-				this.exitFullScreenStyle()
 			}
 		},
 
@@ -458,10 +478,10 @@
 			if (bool) {
 				this.tipsInfo.innerText = text
 				this.tipsInfo.style.display = 'block'
-				console.log('加载中')
+				// console.log('加载中')
 			} else {
 				this.tipsInfo.style.display = 'none'
-				console.log('正常播放')
+				// console.log('正常播放')
 			}
 		},
 
@@ -492,12 +512,17 @@
 
 			// 键盘事件  (ie 没有ctrl键)
 			document.onkeydown = function (e) {
-				e.stopPropagation();
-				e.preventDefault();
 				var e = e || window.event
 				if ((e.keyCode || e.which || e.charCode) === 32) {   // 空格 暂停
 					// console.log(e.ctrlKey + '------' + (e.keyCode || e.which || e.charCode))
-					_this.videoPlayPause()
+					console.log(document.activeElement.nodeName)
+					if ((document.activeElement.nodeName === 'TEXTAREA' || document.activeElement.nodeName === 'INPUT')) {
+						return
+					} else {
+						e.stopPropagation();
+						e.preventDefault();
+						_this.videoPlayPause()
+					}
 				}
 				if ((e.keyCode || e.which || e.charCode) === 39) { 	// -->   快进
 					_this.videoForward(10)
@@ -519,6 +544,27 @@
 			
 			// 添加监听是否改变窗口大小事件
 			_this.screenChangeEvent()
+		},
+
+		// playIng事件
+		onPlaying: function () {
+			this.opt.onPlaying(this.currentT)
+		},
+
+		onPause: function () {
+			this.opt.onPause()
+		},
+
+		onLoadedMetaData: function () {
+			this.opt.onLoadedMetaData()
+		},
+
+		onTimeupdate: function () {
+			this.opt.onTimeupdate(this.currentT)
+		},
+
+		onEnded: function () {
+			this.opt.onEnded()
 		},
 
 		// 格式化时间
@@ -620,6 +666,20 @@
 			// this.videoEle.volume = this.volume
 			var persent = this.volume / 1
 			this.updateVolume(persent)
+		},
+
+		setVideoInfo: function(title, url, currentT) {
+			// 地址
+			this.videoEle.src = url || '',
+			// title
+			this.videoHeaderTitle.innerText = title || '这是一个title'
+			this.videoHeaderTitle.title = title || '这是一个title'
+			
+			// 是否有currentT
+			if (currentT) {
+				this.videoEle.currentTime = currentT
+			}
+			this.videoPlay();
 		},
 
 		// 创建PlaybackRateList
@@ -813,15 +873,17 @@
 			_this.videoEle.onplaying = function () {
 				_this.isPlaying = true
 				_this.videoPlayPauseI.className = 'Dvideo-ctrl-playPause icon-pause'
-				_this.videoPlayPauseI.title = '暂停 ctrl + space'
+				_this.videoPlayPauseI.title = '暂停 space'
 				var date = new Date ()
 				_this.reduceTBefore = Date.parse(date) - Math.floor(_this.videoEle.currentTime * 1000)
 				_this.showLoading(false)
+				_this.onPlaying()
 			},
 			_this.videoEle.onpause = function () {
 				_this.isPlaying = false
 				_this.videoPlayPauseI.className = 'Dvideo-ctrl-playPause icon-play'
-				_this.videoPlayPauseI.title = '播放 ctrl + space'
+				_this.videoPlayPauseI.title = '播放 space'
+				_this.onPause()
 			},
 
 			// 视频元数据 （时长 尺寸 以及文本轨道）
@@ -829,7 +891,12 @@
 				_this.durationT = _this.videoEle.duration
 				// 初始化视频时间
 				_this.textDurationT.innerText = _this.formartTime(_this.durationT)
+				_this.onLoadedMetaData()
 			},
+
+			// _this.videoEle.onCanPlay = function () {
+			// 	_this.onCanplay();
+			// }
 
 			// 绑定进度条
 			_this.videoEle.ontimeupdate = function () {
@@ -839,6 +906,8 @@
 					var date = new Date ()
 					_this.reduceTBefore = Date.parse(date) - Math.floor(_this.currentT * 1000)
 				}
+				// console.log(2)
+				_this.onTimeupdate()
 			},
 			_this.videoEle.onprogress = function () {
 				if(_this.videoEle.buffered.length > 0) {
@@ -868,6 +937,14 @@
 				} else {
 					return
 				}
+			}
+
+			_this.videoEle.onended = function () {
+				_this.onEnded();
+			}
+
+			_this.videoEle.onabort = function () {
+				showLoading(true, '视频加载中,请稍等...')
 			}
 		},
 
@@ -984,7 +1061,7 @@
 
 			// 播放按钮
 			var iconPlayPauseClass = this.isPlaying ? 'icon-pause' : 'icon-play'
-			var iconPlayPauseITitle = this.isPlaying ? '暂停 ctrl + space' : '播放 ctrl + space'
+			var iconPlayPauseITitle = this.isPlaying ? '暂停 space' : '播放 space'
 			this.videoPlayPauseI = document.createElement('i')
 			this.videoPlayPauseI.className = 'Dvideo-ctrl-playPause ' + iconPlayPauseClass
 			this.videoPlayPauseI.title = iconPlayPauseITitle
@@ -994,7 +1071,7 @@
 			var displayStyle = this.opt.showNext ? 'inline-block' : 'none'
 			this.videoNextI = document.createElement('i')
 			this.videoNextI.className = 'Dvideo-ctrl-next icon-nextdetail'
-			this.videoNextI.title = '下一集 ctrl + n'
+			this.videoNextI.title = '下一集 next'
 			this.videoNextI.style.display = displayStyle
 			this.videoCtrlStateC.appendChild(this.videoNextI)
 
