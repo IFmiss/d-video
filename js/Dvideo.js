@@ -1,20 +1,4 @@
 (function (window, document) {
-	// var screenChange = 'webkitfullscreenchange' || 'mozfullscreenchange' || 'fullscreenchange' || 'msfullscreenchange'
-	var screenError = 'webkitfullscreenerror' || 'fullscreenerror' || 'mozfullscreenerror' || 'msfullscreenerror'
-
-	// // 设置全屏的状态的
-	// var isFull = false
-
-	// var isPlaying = false
-
-	// // 视频时长
-	// var durationT = 0
-
-	// var showCtrlT  // 这是鼠标移入显示控制菜单的timeout
-
-	// //  判断当前是否处于全屏状态
-	// var fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.webkitFullscreenEnabled
-
 	var Dvideo = function (options) {
 		// 判断是否是new Dvideo 的  不是的话 帮他new一下
 		if (!(this instanceof Dvideo)) return new Dvideo(options)
@@ -478,10 +462,10 @@
 			if (bool) {
 				this.tipsInfo.innerText = text
 				this.tipsInfo.style.display = 'block'
-				// console.log('加载中')
+				console.log('加载中')
 			} else {
 				this.tipsInfo.style.display = 'none'
-				// console.log('正常播放')
+				console.log('正常播放')
 			}
 		},
 
@@ -512,17 +496,12 @@
 
 			// 键盘事件  (ie 没有ctrl键)
 			document.onkeydown = function (e) {
+				e.stopPropagation();
+				e.preventDefault();
 				var e = e || window.event
 				if ((e.keyCode || e.which || e.charCode) === 32) {   // 空格 暂停
 					// console.log(e.ctrlKey + '------' + (e.keyCode || e.which || e.charCode))
-					console.log(document.activeElement.nodeName)
-					if ((document.activeElement.nodeName === 'TEXTAREA' || document.activeElement.nodeName === 'INPUT')) {
-						return
-					} else {
-						e.stopPropagation();
-						e.preventDefault();
-						_this.videoPlayPause()
-					}
+					_this.videoPlayPause()
 				}
 				if ((e.keyCode || e.which || e.charCode) === 39) { 	// -->   快进
 					_this.videoForward(10)
@@ -668,22 +647,9 @@
 			this.updateVolume(persent)
 		},
 
-		setVideoInfo: function(title, url, currentT) {
-			// 地址
-			this.videoEle.src = url || '',
-			// title
-			this.videoHeaderTitle.innerText = title || '这是一个title'
-			this.videoHeaderTitle.title = title || '这是一个title'
-			
-			// 是否有currentT
-			if (currentT) {
-				this.videoEle.currentTime = currentT
-			}
-			this.videoPlay();
-		},
-
 		// 创建PlaybackRateList
 		createPlaybackRateList: function () {
+			var oFragment = document.createDocumentFragment();
 			// 语速数据
 			var playbackrateData = this.hasLStorage('D-playbackRate') ? JSON.parse(this.getLStorage('D-playbackRate')) : this.opt.playbackRate
 
@@ -723,8 +689,9 @@
 				playbackRateL.title = playbackrateData.rateList[i].toFixed(1) + 'x'
 				playbackRateL.innerText = playbackrateData.rateList[i].toFixed(1) + 'x'
 				playbackRateL.setAttribute('data-index', i)
-				this.playbackRateC.appendChild(playbackRateL)
+				oFragment.appendChild(playbackRateL)
 			}
+			this.playbackRateC.appendChild(oFragment)
 
 			var _this = this
 
@@ -746,6 +713,7 @@
 
 		// 创建currentduration
 		createCurrentDurationText: function () {
+			var oFragment = document.createDocumentFragment();
 			// 显示当前时间和总时长  区域
 			this.textVideoTimeC = document.createElement('div')
 			this.textVideoTimeC.className = 'Dvideo-time-content'
@@ -755,13 +723,14 @@
 			this.textCurrentT = document.createElement('span')
 			this.textCurrentT.className = 'Dvideo-text-current'
 			this.textCurrentT.innerText = '00:00 '
-			this.textVideoTimeC.appendChild(this.textCurrentT)
+			oFragment.appendChild(this.textCurrentT)
 
 			// 显示时长
 			this.textDurationT = document.createElement('span')
 			this.textDurationT.className = 'Dvideo-text-duration'
 			this.textDurationT.innerText = ' 00:00'
-			this.textVideoTimeC.appendChild(this.textDurationT)
+			oFragment.appendChild(this.textDurationT)
+			this.textVideoTimeC.appendChild(oFragment)
 		},
 
 		// pc 端进度条
@@ -894,10 +863,6 @@
 				_this.onLoadedMetaData()
 			},
 
-			// _this.videoEle.onCanPlay = function () {
-			// 	_this.onCanplay();
-			// }
-
 			// 绑定进度条
 			_this.videoEle.ontimeupdate = function () {
 				if (!_this.isDrag) {
@@ -929,6 +894,7 @@
 				// console.log(_this.reduceTAfter + '-------------------------' + _this.reduceTBefore)
 				if(!_this.videoEle.paused) {
 					_this.reduceTAfter = Date.parse(date) - Math.floor(_this.currentT * 1000)
+					console.log(_this.reduceTAfter)
 					if(_this.reduceTAfter - _this.reduceTBefore > 1000) {
 						_this.showLoading(true)
 					} else {
@@ -943,8 +909,8 @@
 				_this.onEnded();
 			}
 
-			_this.videoEle.onabort = function () {
-				showLoading(true, '视频加载中,请稍等...')
+			_this.videoEle.onwaiting = function () {
+				_this.showLoading(true, '视频加载中,请稍等')
 			}
 		},
 
@@ -1100,6 +1066,7 @@
 
 		// 创建切换视频清晰度效果
 		createVideoDefinition: function () {
+			var oFragment = document.createDocumentFragment();
 			// 获取的数据  本地存储或者初始化的清晰度
 			var videoDefinitionData = this.hasLStorage('D-videoDefinition') ? JSON.parse(this.getLStorage('D-videoDefinition')) : this.opt.videoDefinition
 			// active索引
@@ -1138,8 +1105,9 @@
 				videoDefinitionL.innerText = videoDefinitionData.definitionList[i].name
 				videoDefinitionL.setAttribute('data-index', i)
 				videoDefinitionL.setAttribute('data-type', videoDefinitionData.definitionList[i].type)
-				this.videoDefinitionC.appendChild(videoDefinitionL)
+				oFragment.appendChild(videoDefinitionL)
 			}
+			this.videoDefinitionC.appendChild(oFragment)
 
 			var _this = this
 
