@@ -596,6 +596,20 @@
 			this.opt.setVideoDefinition(type, e, this.currentT)
 		},
 
+		setVideoInfo: function(title, url, currentT) {		
+			// 地址		
+ 			this.videoEle.src = url || '',		
+ 			// title		
+ 			this.videoHeaderTitle.innerText = title || '这是一个title'		
+ 			this.videoHeaderTitle.title = title || '这是一个title'		
+ 					
+ 			// 是否有currentT		
+ 			if (currentT) {		
+ 				this.videoEle.currentTime = currentT		
+ 			}		
+ 			this.videoPlay();		
+ 		},
+
 		setPlayBackRate: function (index) {
 			this.playbackR = this.opt.playbackRate.rateList[index]
 			this.videoEle.playbackRate = this.playbackR
