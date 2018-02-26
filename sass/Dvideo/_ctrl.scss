@@ -387,6 +387,10 @@
 		    font-size: 12px;
 		    padding: 0 5px;
 		    @include box-sizing(border-box);
+		    display:block;
+		    &.hide{
+		    	display:none;
+		    }
 		}
 	}
 

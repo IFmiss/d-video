@@ -626,8 +626,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  display: block;
 }
-/* line 393, ../sass/Dvideo/_ctrl.scss */
+/* line 391, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-content .Dvideo-ctrl .Dvideo-tips-info.hide {
+  display: none;
+}
+/* line 397, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-header {
   position: absolute;
   top: 0;
@@ -645,13 +650,13 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   opacity: 0;
   visibility: hidden;
 }
-/* line 405, ../sass/Dvideo/_ctrl.scss */
+/* line 409, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-header.active {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
   visibility: visible;
 }
-/* line 410, ../sass/Dvideo/_ctrl.scss */
+/* line 414, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-header .Dvideo-header-title {
   width: 80%;
   height: 100%;
@@ -664,7 +669,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
-/* line 424, ../sass/Dvideo/_ctrl.scss */
+/* line 428, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.full .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-volume {
   display: inline-block;
   vertical-align: middle;
@@ -674,7 +679,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   font-size: 16px;
   margin-right: 50px;
 }
-/* line 428, ../sass/Dvideo/_ctrl.scss */
+/* line 432, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.full .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-volume.none {
   display: inline-block;
   vertical-align: middle;
@@ -682,7 +687,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *zoom: 1;
   *display: inline;
 }
-/* line 438, ../sass/Dvideo/_ctrl.scss */
+/* line 442, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl {
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjEuMCIgeDI9IjAuNSIgeTI9IjAuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzA2MTAxYSIgc3RvcC1vcGFjaXR5PSIwLjYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(6, 16, 26, 0.6)), color-stop(100%, rgba(0, 0, 0, 0)));
@@ -690,57 +695,57 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   background: -webkit-linear-gradient(bottom, rgba(6, 16, 26, 0.6), rgba(0, 0, 0, 0));
   background: linear-gradient(to top, rgba(6, 16, 26, 0.6), rgba(0, 0, 0, 0));
 }
-/* line 441, ../sass/Dvideo/_ctrl.scss */
+/* line 445, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-time-content {
   color: rgba(177, 187, 197, 0.6);
 }
-/* line 445, ../sass/Dvideo/_ctrl.scss */
+/* line 449, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content i {
   color: rgba(177, 187, 197, 0.6);
 }
-/* line 449, ../sass/Dvideo/_ctrl.scss */
+/* line 453, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-playbackRate {
   background: rgba(177, 187, 197, 0.6);
 }
-/* line 451, ../sass/Dvideo/_ctrl.scss */
+/* line 455, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-playbackRate .Dvideo-playbackRate-content {
   background: transparent;
 }
-/* line 453, ../sass/Dvideo/_ctrl.scss */
+/* line 457, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-playbackRate .Dvideo-playbackRate-content .Dvideo-playbackRate-list {
   color: rgba(177, 187, 197, 0.6);
   background: rgba(177, 187, 197, 0.6);
 }
-/* line 456, ../sass/Dvideo/_ctrl.scss */
+/* line 460, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-playbackRate .Dvideo-playbackRate-content .Dvideo-playbackRate-list:active {
   color: rgba(255, 0, 0, 0.3);
 }
-/* line 459, ../sass/Dvideo/_ctrl.scss */
+/* line 463, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-playbackRate .Dvideo-playbackRate-content .Dvideo-playbackRate-list:hover {
   background: rgba(31, 36, 41, 0.6);
 }
-/* line 465, ../sass/Dvideo/_ctrl.scss */
+/* line 469, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-definition {
   background: rgba(177, 187, 197, 0.6);
 }
-/* line 467, ../sass/Dvideo/_ctrl.scss */
+/* line 471, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-definition .Dvideo-definition-content {
   background: transparent;
 }
-/* line 469, ../sass/Dvideo/_ctrl.scss */
+/* line 473, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-definition .Dvideo-definition-content .Dvideo-definition-list {
   color: rgba(177, 187, 197, 0.6);
   background: rgba(177, 187, 197, 0.6);
 }
-/* line 472, ../sass/Dvideo/_ctrl.scss */
+/* line 476, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-definition .Dvideo-definition-content .Dvideo-definition-list.active {
   color: rgba(255, 0, 0, 0.3);
 }
-/* line 475, ../sass/Dvideo/_ctrl.scss */
+/* line 479, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-definition .Dvideo-definition-content .Dvideo-definition-list:hover {
   background: rgba(31, 36, 41, 0.6);
 }
-/* line 482, ../sass/Dvideo/_ctrl.scss */
+/* line 486, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-progress-content {
   width: calc(100% - 20px);
   left: 50%;
@@ -753,11 +758,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   transform: translate(-50%, 0);
   background: rgba(51, 51, 51, 0.3);
 }
-/* line 489, ../sass/Dvideo/_ctrl.scss */
+/* line 493, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-progress-content .Dvideo-progress-detail .Dvideo-progress-buffered {
   background: rgba(153, 153, 153, 0.3);
 }
-/* line 492, ../sass/Dvideo/_ctrl.scss */
+/* line 496, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-progress-content .Dvideo-progress-detail .Dvideo-progress-real {
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZjAwMDAiIHN0b3Atb3BhY2l0eT0iMC4xIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, rgba(255, 0, 0, 0.8)), color-stop(100%, rgba(255, 0, 0, 0.1)));
@@ -765,7 +770,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   background: -webkit-linear-gradient(left, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0.1));
   background: linear-gradient(to right, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0.1));
 }
-/* line 498, ../sass/Dvideo/_ctrl.scss */
+/* line 502, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-header {
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzA2MTAxYSIgc3RvcC1vcGFjaXR5PSIwLjYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(6, 16, 26, 0.6)), color-stop(100%, rgba(0, 0, 0, 0)));

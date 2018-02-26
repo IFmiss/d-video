@@ -461,11 +461,9 @@
 			var text = text || '视频加载中,请稍等  或者切换稍低的清晰度'
 			if (bool) {
 				this.tipsInfo.innerText = text
-				this.tipsInfo.style.display = 'block'
-				console.log('加载中')
+				this.tipsInfo.className = 'Dvideo-tips-info'
 			} else {
-				this.tipsInfo.style.display = 'none'
-				console.log('正常播放')
+				this.tipsInfo.className = 'Dvideo-tips-info hide'
 			}
 		},
 
