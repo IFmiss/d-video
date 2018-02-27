@@ -307,8 +307,8 @@
 			this.updateFullScreenState(false)
 			this.opt.ele.style.width = width + 'px'
 			this.opt.ele.style.height = height + 'px'
-			this.opt.width = width
-			this.opt.height = height
+			this.opt.width = width + 'px'
+			this.opt.height = height + 'px'
 		},
 
 		// 更新全屏状态  包括显示全屏图标样式    
