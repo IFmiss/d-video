@@ -116,24 +116,29 @@
 				.Dvideo-playbackRate{
 					color: $icon_color;
 					width: 35px;
-					height: 18px;
-				    line-height: 13px;
-					text-align: center;
-					vertical-align: middle;
+					height: 100%;
 					@include inline-block;
-					font-size: 12px;
 					margin: 0 10px;
-					padding: 2px 4px;
 					@include box-sizing(border-box);
-					@include border-radius(2px);
-					background: $icon_color;
 					cursor: pointer;
+					text-align: center;
+					font-size: 12px;
 					position:relative;
-					@include transition(background 0.3s);
+					color: $icon_color;
 					.Dvideo-playbackRateText{
-						width: 100%;
-						height: 100%;
 						color: $ctrl_bg;
+						width: 35px;
+						height: 14px;
+						margin: calc((100% - 14px) / 2) 0;
+						vertical-align: middle;
+						@include inline-block;
+						padding: 2px 0;
+						@include border-radius(2px);
+						background: $icon_color;
+						cursor: pointer;
+						position:relative;
+						@include transition(background 0.3s);
+
 					}
 					.Dvideo-playbackRate-content{
 						display: none;
@@ -164,30 +169,36 @@
 						}
 					}
 					&:hover{
-						background: $primary_color;
+						.Dvideo-playbackRateText{
+							background: $primary_color;
+						}
 					}
 				}
 				.Dvideo-definition{
 					color: $icon_color;
 					width: 35px;
-					height: 18px;
-				    line-height: 13px;
-					text-align: center;
-					vertical-align: middle;
+					height: 100%;
 					@include inline-block;
-					font-size: 12px;
 					margin: 0 10px;
-					padding: 2px 4px;
 					@include box-sizing(border-box);
-					@include border-radius(2px);
-					background: $icon_color;
 					cursor: pointer;
+					text-align: center;
+					font-size: 12px;
 					position:relative;
-					@include transition(background 0.3s);
+					color: $icon_color;
 					.Dvideo-definitionText{
-						width: 100%;
-						height: 100%;
 						color: $ctrl_bg;
+						width: 35px;
+						height: 14px;
+						margin: calc((100% - 14px) / 2) 0;
+						vertical-align: middle;
+						@include inline-block;
+						padding: 2px 0;
+						@include border-radius(2px);
+						background: $icon_color;
+						cursor: pointer;
+						position:relative;
+						@include transition(background 0.3s);
 					}
 					.Dvideo-definition-content{
 						display: none;
@@ -218,7 +229,9 @@
 						}
 					}
 					&:hover{
-						background: $primary_color;
+						.Dvideo-definitionText{
+							background: $primary_color;
+						}
 					}
 				}
 				.Dvideo-volume{
@@ -335,7 +348,8 @@
 				.Dvideo-progress-real{
 					width: 0%;
 					height: 100%;
-					background:$primary_color;
+					// background:$primary_color;
+					@include background(linear-gradient(to right, $primary_color, #fff));
 					position: relative;
 					@include transition(width 0.3s);
 				}

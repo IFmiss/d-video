@@ -146,6 +146,7 @@
         }
         this.isPlaying = this.opt.autoplay
         this.initDom()
+        this.showTopBottomCtrl(true)
 	}
 
 	Dvideo.prototype = {
@@ -304,8 +305,8 @@
 			}
 			console.log('改变video的宽高')
 			this.updateFullScreenState(false)
-			this.opt.ele.style.width = width
-			this.opt.ele.style.height = height
+			this.opt.ele.style.width = width + 'px'
+			this.opt.ele.style.height = height + 'px'
 			this.opt.width = width
 			this.opt.height = height
 		},
@@ -410,16 +411,32 @@
 			return browser + version
 		},
 
-		// 显示上下菜单
-		showTopBottomCtrl: function () {
+		// 显示上下菜单     disappearance 是否自动消失
+		showTopBottomCtrl: function (disappearance) {
+			clearTimeout(this.showCtrlT)
 			this.videoCtrl.className = 'Dvideo-ctrl active'
 			this.videoHeader.className = 'Dvideo-header active'
+			if (disappearance) {
+				this.hideTopBottomCtrl()
+			}
 		},
 
-		hideTopBottomCtrl: function () {
-			this.videoCtrl.className = 'Dvideo-ctrl'
-			this.videoHeader.className = 'Dvideo-header'
-			this.hideProgressRange()
+		// 关闭上下菜单    immediately 是否立刻关闭
+		hideTopBottomCtrl: function (immediately) {
+			clearTimeout(this.showCtrlT)
+			var _this = this
+			if (immediately) {
+				this.videoCtrl.className = 'Dvideo-ctrl'
+				this.videoHeader.className = 'Dvideo-header'
+				this.hideProgressRange()
+			} else {
+				// 隐藏控制栏
+				this.showCtrlT = setTimeout(function () {
+					_this.videoCtrl.className = 'Dvideo-ctrl'
+					_this.videoHeader.className = 'Dvideo-header'
+					_this.hideProgressRange()
+				}, _this.opt.ctrSpeedDuration)
+			}
 		},
 
 		// 显示隐藏进度条小球
@@ -734,13 +751,13 @@
 			// 显示当前秒数
 			this.textCurrentT = document.createElement('span')
 			this.textCurrentT.className = 'Dvideo-text-current'
-			this.textCurrentT.innerText = '00:00 '
+			this.textCurrentT.innerText = '--:-- '
 			oFragment.appendChild(this.textCurrentT)
 
 			// 显示时长
 			this.textDurationT = document.createElement('span')
 			this.textDurationT.className = 'Dvideo-text-duration'
-			this.textDurationT.innerText = ' 00:00'
+			this.textDurationT.innerText = ' --:--'
 			oFragment.appendChild(this.textDurationT)
 			this.textVideoTimeC.appendChild(oFragment)
 		},
@@ -829,11 +846,7 @@
 						return
 					}
 
-					// 隐藏控制栏
-					_this.showCtrlT = setTimeout(function () {
-						_this.hideTopBottomCtrl()
-					}, _this.opt.ctrSpeedDuration)
-					_this.hideProgressRange()
+					_this.hideTopBottomCtrl()
 				}
 			}
 		},
@@ -847,10 +860,17 @@
 			this.videoEle.autoplay = this.opt.autoplay
 			this.videoC.appendChild(this.videoEle)
 
-
 			var _this = this
 
-			// 音频事件
+			// 视频事件
+			_this.videoEle.onloadstart = function () {
+				_this.showLoading(true, '视频加载中，请稍等')
+			},
+
+			_this.videoEle.oncanplay = function () {
+				_this.showLoading(false)
+			},
+
 			_this.videoEle.onplaying = function () {
 				_this.isPlaying = true
 				_this.videoPlayPauseI.className = 'Dvideo-ctrl-playPause icon-pause'
@@ -935,11 +955,7 @@
 			var _this = this
 			// 鼠标事件  移动显示菜单
 			_this.videoC.onmousemove = function () {
-				clearTimeout(_this.showCtrlT)
-				_this.showTopBottomCtrl()
-				_this.showCtrlT = setTimeout(function () {
-					_this.hideTopBottomCtrl()
-				}, _this.opt.ctrSpeedDuration)
+				_this.showTopBottomCtrl(true)
 			}
 
 			// 界面点击播放暂停
@@ -979,7 +995,6 @@
 			var _this = this
 			// 移动显示粗的进度条
 			_this.videoCtrl.onmouseenter = function () {
-				clearTimeout(_this.showCtrlT)
 				_this.showProgressRange()
 			}
 			// 关闭两个菜单控制栏的冒泡事件

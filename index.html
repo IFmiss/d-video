@@ -91,6 +91,12 @@
 			<span class="btn" style="background: #B2662E" onclick="setBackRate(1)">正常的语速</span>
 			<span class="btn" style="background: #977074" onclick="setVideoRewind(10)">快退 ctrl + left</span>
 			<span class="btn" style="background: #4F1B60" onclick="setVideoForward(10)">快进 ctrl + right</span>
+			<span class="btn" style="background: #4F1B60" onclick="showLoading()">显示进度信息</span>
+			<span class="btn" style="background: #4F1B60" onclick="showTopBottomCtrlNotClose()">显示上下菜单且不自动关闭</span>
+			<span class="btn" style="background: #4F1B60" onclick="hideTopBottomCtrlLi()">立刻关闭上下菜单</span>
+			<span class="btn" style="background: #4F1B60" onclick="showTopBottomCtrl()">显示菜单自动关闭</span>
+			<span class="btn" style="background: #4F1B60" onclick="hideTopBottomCtrl()">固定时间后自动关闭</span>
+			<span class="btn" style="background: #4F1B60" onclick="setVideoSize()">设置宽720 高480</span>
 		</div>
 		<a class="github" href="https://github.com/IFmiss/Dvideo.js" target="_balck">github: https://github.com/IFmiss/Dvideo.js</a>
 	</div>
@@ -107,7 +113,7 @@
 				alert('您点击了下一页')
 			},
 			showNext: true,
-			width: '520px',
+			width: '580px',
 			height: '292px',
 			src: 'http://www.daiwei.org/index/video/EnV%20-%20PneumaticTokyo.mp4',
 			autoplay: true,
@@ -168,6 +174,30 @@
 
 		function setVideoRewind () {
 			video.videoRewind(10)
+		}
+
+		function showLoading () {
+			video.showLoading(true, '视频清晰度切换中，请稍等')
+		}
+
+		function showTopBottomCtrlNotClose () {
+			video.showTopBottomCtrl()
+		}
+
+		function hideTopBottomCtrlLi () {
+			video.hideTopBottomCtrl(true)
+		}
+
+		function showTopBottomCtrl () {
+			video.showTopBottomCtrl(true)
+		}
+
+		function hideTopBottomCtrl () {
+			video.hideTopBottomCtrl()
+		}
+
+		function setVideoSize () {
+			video.updateVideoSize(720,480)
 		}
 </script>
 </html>
