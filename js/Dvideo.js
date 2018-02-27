@@ -511,26 +511,34 @@
 
 			// 键盘事件  (ie 没有ctrl键)
 			document.onkeydown = function (e) {
-				e.stopPropagation();
-				e.preventDefault();
 				var e = e || window.event
 				if ((e.keyCode || e.which || e.charCode) === 32) {   // 空格 暂停
 					// console.log(e.ctrlKey + '------' + (e.keyCode || e.which || e.charCode))
+					e.stopPropagation();
+					e.preventDefault();
 					_this.videoPlayPause()
 				}
 				if ((e.keyCode || e.which || e.charCode) === 39) { 	// -->   快进
+					e.stopPropagation();
+					e.preventDefault();
 					_this.videoForward(10)
 				}
 				if ((e.keyCode || e.which || e.charCode) === 37) { 	// <--	 快退
+					e.stopPropagation();
+					e.preventDefault();
 					_this.videoRewind(10)
 				}
 
 				if ((e.keyCode || e.which || e.charCode) === 38) { 	// up  音量增加
+					e.stopPropagation();
+					e.preventDefault();
 					_this.volume = _this.volume * 1 + 0.02 > 1 ? 1 : _this.volume * 1 + 0.02
 					_this.setVolume()
 				}
 
 				if ((e.keyCode || e.which || e.charCode) === 40) { 	// down	 音量降低
+					e.stopPropagation();
+					e.preventDefault();
 					_this.volume = _this.volume * 1 - 0.02 < 0 ? 0 : _this.volume * 1 - 0.02
 					_this.setVolume()
 				}
