@@ -8,6 +8,9 @@
 
 			// 地址
 			src: 'http://www.daiwei.org/index/video/EnV%20-%20PneumaticTokyo.mp4',
+
+			// 视频封面  未加载完成的封面
+			poster: 'http://www.daiwei.org/vue/image/17-07-07/IMG_0330.jpg',
 			
 			// 显示的名称
 			title: '这是一个视频标题这是一个视频标题这是一个视频标题这是一个视频标题',
@@ -886,6 +889,7 @@
 			this.videoEle.src = this.opt.src
 			this.videoEle.loop = this.opt.loop
 			this.videoEle.autoplay = this.opt.autoplay
+			this.videoEle.poster = this.opt.poster
 			this.videoC.appendChild(this.videoEle)
 
 			var _this = this
