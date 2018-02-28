@@ -349,7 +349,7 @@
 					width: 0%;
 					height: 100%;
 					// background:$primary_color;
-					@include background(linear-gradient(to right, $primary_color, #fff));
+					@include background(linear-gradient(to right, $primary_color 70%, #fff));
 					position: relative;
 					@include transition(width 0.3s);
 				}
@@ -508,7 +508,7 @@
 						background:$progress_buffered_bg_opacity;
 					}
 					.Dvideo-progress-real{
-						@include background(linear-gradient(to right, $progress_real_bg_opacity_deep, $progress_real_bg_opacity));
+						@include background(linear-gradient(to right, $progress_real_bg_opacity_deep , $progress_real_bg_opacity));
 					}
 				}
 			}

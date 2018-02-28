@@ -75,7 +75,7 @@
 			},
 
 			// 可让用户自定义扩展   播放下一个视频的操作
-			nextVideoExtend: function () {alert(1)},
+			nextVideoExtend: function () {},
 			// 设置清晰度的操作
 			setVideoDefinition: function (type, ele, currentT) {},
 
@@ -526,17 +526,20 @@
 				if ((e.keyCode || e.which || e.charCode) === 39) { 	// -->   快进
 					e.stopPropagation();
 					e.preventDefault();
+					_this.showTopBottomCtrl()
 					_this.videoForward(10)
 				}
 				if ((e.keyCode || e.which || e.charCode) === 37) { 	// <--	 快退
 					e.stopPropagation();
 					e.preventDefault();
+					_this.showTopBottomCtrl()
 					_this.videoRewind(10)
 				}
 
 				if ((e.keyCode || e.which || e.charCode) === 38) { 	// up  音量增加
 					e.stopPropagation();
 					e.preventDefault();
+					_this.showTopBottomCtrl()
 					_this.volume = _this.volume * 1 + 0.02 > 1 ? 1 : _this.volume * 1 + 0.02
 					_this.setVolume()
 				}
@@ -544,6 +547,7 @@
 				if ((e.keyCode || e.which || e.charCode) === 40) { 	// down	 音量降低
 					e.stopPropagation();
 					e.preventDefault();
+					_this.showTopBottomCtrl()
 					_this.volume = _this.volume * 1 - 0.02 < 0 ? 0 : _this.volume * 1 - 0.02
 					_this.setVolume()
 				}
