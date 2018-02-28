@@ -95,6 +95,9 @@
 		// 设置全屏的状态
 		this.isFull = false
 
+		// 是否已经加载初始化元数据
+		this.isLoadMate = false
+
 		// 设置播放的状态
 		this.isPlaying = false
 
@@ -461,12 +464,14 @@
 			try{
 				this.videoEle.pause();
 				this.isPlaying = false
+				console.log(this.isPlaying + '222222')
 			} catch (e) {
 				console.log(e)
 			}
 		},
 
 		videoPlayPause: function () {
+			console.log(this.isPlaying + '--------------' )
 			if (this.isPlaying) {
 				this.videoPause();
 			} else {
@@ -619,18 +624,29 @@
 			this.opt.setVideoDefinition(type, e, this.currentT)
 		},
 
-		setVideoInfo: function(title, url, currentT) {		
+		setVideoInfo: function(title, url, currentT) {
+			var _this = this	
+			this.isLoadMate = false
+			this.isPlaying = false
 			// 地址		
  			this.videoEle.src = url || '',		
  			// title		
  			this.videoHeaderTitle.innerText = title || '这是一个title'		
  			this.videoHeaderTitle.title = title || '这是一个title'		
  					
+ 			var loadProPlay = function () {
+ 				if (_this.isLoadMate) {
+ 					clearInterval(loadTime)
+ 					_this.videoEle.currentTime = currentT || 0
+ 				}
+ 				_this.videoPlay();
+ 			}
+
  			// 是否有currentT		
- 			if (currentT) {		
- 				this.videoEle.currentTime = currentT		
- 			}		
- 			this.videoPlay();		
+ 			var loadTime = setInterval(function () {
+ 				loadProPlay(); 
+ 			}, 500)
+
  		},
 
 		setPlayBackRate: function (index) {
@@ -897,6 +913,7 @@
 
 			// 视频元数据 （时长 尺寸 以及文本轨道）
 			_this.videoEle.onloadedmetadata = function () {
+				_this.isLoadMate = true
 				_this.durationT = _this.videoEle.duration
 				// 初始化视频时间
 				_this.textDurationT.innerText = _this.formartTime(_this.durationT)
