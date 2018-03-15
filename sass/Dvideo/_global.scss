@@ -1,0 +1,61 @@
+// 主色调
+$primary_color:rgb(4,132,213);
+
+// 文字颜色
+$text_deep_color: rgba(255,255,255,0.8);
+
+// 动画时间
+$duration_time: 0.5s;
+
+// video的 容器栏
+$content_bg: #000;
+
+// == 头部菜单
+$header_height: 36px;
+
+// ==  控制条栏
+$ctrl_height: 40px;
+// 背景色
+// $ctrl_bg: #070C11;
+$ctrl_bg: rgba(7,12,17,0.8);
+$padding_leftright: 8px;
+
+// 进度条信息
+$progress_auto_bg: #333;
+$progress_real_bg:red;
+$progress_buffered_bg: #999;
+
+// 音乐信息
+$volume_auto_bg: #999;
+$volume_real_bg: #cacaca;
+
+// rateHoverColor
+$rate_hover_color: #1F2429;
+
+$icon_color: rgb(120, 125, 130);
+
+// =========================================  gradient的样式
+
+// 透明色调
+$primary_color_opacity:rgba(255,0,0,0.3);
+
+// 文字颜色
+$text_deep_color_opacity: rgba(255,255,255,0.8);
+
+// 背景色
+$ctrl_bg_opacity: rgba(6,16,26,0.6);
+
+// 透明进度条
+$progress_auto_bg_opacity: rgba(51,51,51,0.3);
+$progress_real_bg_opacity: rgba(255,0,0,0.1);
+$progress_real_bg_opacity_deep: rgba(255,0,0,0.8);
+$progress_buffered_bg_opacity: rgba(153,153,153,0.3);
+
+// 音乐信息
+$volume_auto_bg_opacity: rgba(153,153,153,0.3);
+$volume_real_bg_opacity: rgba(202,202,202,0.3);
+
+// rateHoverColor
+$rate_hover_color_opacity: rgba(31, 36, 41, 0.6);
+
+$icon_color_opacity: rgba(177, 187, 197, 0.6);
