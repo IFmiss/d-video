@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>webpack</title>
+</head>
+	<style>
+		body,html{
+			margin: 0;
+			padding: 0;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			width: 100%;
+			height: 100%;
+			background: -webkit-linear-gradient(90deg,#222626,#838383);
+			background: linear-gradient(90deg,#222626,#838383);
+		}
+
+		.title{
+			font: 24px/1.5 weight;
+			color: #fff;
+			text-align: center;
+			margin: 20px 0;
+		}
+
+		.centerInfo{
+			position: absolute;
+			top: 45%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
+		.getFullScreen{
+			position: absolute;
+			bottom:100px;
+			right: 100px;
+			z-index: 1111;
+		}
+		.ctrl-c{
+			width: 500px;
+			height: auto;
+			margin: 20px auto;
+		}
+
+		.btn{
+			padding: 6px 10px;
+			background: #5C96D8;
+			margin: 5px;
+			color: #fff;
+			cursor: pointer;
+			border-radius: 4px;
+			display: inline-block;
+		}
+		#testVideo{
+			width: 520px;
+			height: auto;
+			margin: 0 auto;
+			outline:2px solid #ccc;
+		}
+		body,html{
+			font-size: 16px;
+		}
+		.btn{
+			font-size: 1rem;
+			background: rgba(0,0,0,0.3)!important;
+		}
+
+		.github{
+			display: block;
+			width: 100%;
+			text-align: center;
+			color: #eee;
+		}
+	</style>
+</head>
+<body>
+	<div class="centerInfo">
+		<h3 class="title">基于原生js的Dvideo.js组件</h3>
+		<div id="video"></div>
+		<div class="ctrl-c" style="user-select:none">
+			<span class="btn">点击全屏</span>
+			<span class="btn">播放 space</span>
+			<span class="btn">暂停 space</span>
+			<span class="btn">播放暂停</span>
+			<span class="btn">100的音量大小 up</span>
+			<span class="btn">30的音量大小 down</span>
+			<span class="btn">2.0的语速</span>
+			<span class="btn">正常的语速</span>
+			<span class="btn">快退 left</span>
+			<span class="btn">快进 right</span>
+			<span class="btn">显示进度信息</span>
+			<span class="btn">关闭进度信息</span>
+			<span class="btn">显示上下菜单且不自动关闭</span>
+			<span class="btn">立刻关闭上下菜单</span>
+			<span class="btn">显示菜单自动关闭</span>
+			<span class="btn">固定时间后自动关闭</span>
+			<span class="btn">设置宽720 高480</span>
+		</div>
+		<a class="github" href="https://github.com/IFmiss/Dvideo.js" target="_balck">github: https://github.com/IFmiss/Dvideo.js</a>
+	</div>
+</body>
+</html>
