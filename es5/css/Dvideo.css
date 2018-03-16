@@ -291,6 +291,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   color: rgba(7, 12, 17, 0.8);
   width: 35px;
   height: 14px;
+  line-height: 14px;
   margin: calc((100% - 14px) / 2) 0;
   vertical-align: middle;
   display: inline-block;
@@ -310,7 +311,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-transition: background 0.3s;
   transition: background 0.3s;
 }
-/* line 143, ../sass/Dvideo/_ctrl.scss */
+/* line 144, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate .Dvideo-playbackRate-content {
   display: none;
   position: absolute;
@@ -326,11 +327,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
 }
-/* line 154, ../sass/Dvideo/_ctrl.scss */
+/* line 155, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate .Dvideo-playbackRate-content.active {
   display: block;
 }
-/* line 157, ../sass/Dvideo/_ctrl.scss */
+/* line 158, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate .Dvideo-playbackRate-content .Dvideo-playbackRate-list {
   display: block;
   width: 100%;
@@ -338,23 +339,23 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   line-height: 30px;
   color: #787d82;
 }
-/* line 163, ../sass/Dvideo/_ctrl.scss */
+/* line 164, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate .Dvideo-playbackRate-content .Dvideo-playbackRate-list.active {
   color: #0484d5;
 }
-/* line 166, ../sass/Dvideo/_ctrl.scss */
+/* line 167, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate .Dvideo-playbackRate-content .Dvideo-playbackRate-list:hover {
   background: #1F2429;
 }
 /* line 172, ../sass/Dvideo/_ctrl.scss */
-.Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate:hover .Dvideo-playbackRateText {
-  background: #0484d5;
-}
-/* line 176, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate.none {
   display: none;
 }
-/* line 180, ../sass/Dvideo/_ctrl.scss */
+/* line 176, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate:hover .Dvideo-playbackRateText {
+  background: #0484d5;
+}
+/* line 181, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-definition {
   color: #787d82;
   width: 35px;
@@ -374,11 +375,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   position: relative;
   color: #787d82;
 }
-/* line 192, ../sass/Dvideo/_ctrl.scss */
+/* line 193, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-definition .Dvideo-definitionText {
   color: rgba(7, 12, 17, 0.8);
   width: 35px;
   height: 14px;
+  line-height: 14px;
   margin: calc((100% - 14px) / 2) 0;
   vertical-align: middle;
   display: inline-block;
@@ -398,7 +400,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-transition: background 0.3s;
   transition: background 0.3s;
 }
-/* line 206, ../sass/Dvideo/_ctrl.scss */
+/* line 208, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-definition .Dvideo-definition-content {
   display: none;
   position: absolute;
@@ -414,11 +416,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
 }
-/* line 217, ../sass/Dvideo/_ctrl.scss */
+/* line 219, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-definition .Dvideo-definition-content.active {
   display: block;
 }
-/* line 220, ../sass/Dvideo/_ctrl.scss */
+/* line 222, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-definition .Dvideo-definition-content .Dvideo-definition-list {
   display: block;
   width: 100%;
@@ -426,23 +428,23 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   line-height: 30px;
   color: #787d82;
 }
-/* line 226, ../sass/Dvideo/_ctrl.scss */
+/* line 228, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-definition .Dvideo-definition-content .Dvideo-definition-list.active {
   color: #0484d5;
 }
-/* line 229, ../sass/Dvideo/_ctrl.scss */
+/* line 231, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-definition .Dvideo-definition-content .Dvideo-definition-list:hover {
   background: #1F2429;
 }
-/* line 235, ../sass/Dvideo/_ctrl.scss */
-.Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-definition:hover .Dvideo-definitionText {
-  background: #0484d5;
-}
-/* line 239, ../sass/Dvideo/_ctrl.scss */
+/* line 236, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-definition.none {
   display: none;
 }
-/* line 243, ../sass/Dvideo/_ctrl.scss */
+/* line 240, ../sass/Dvideo/_ctrl.scss */
+.Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-definition:hover .Dvideo-definitionText {
+  background: #0484d5;
+}
+/* line 245, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-volume {
   display: inline-block;
   font-size: 16px;
@@ -453,7 +455,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   margin-right: 15px;
   cursor: pointer;
 }
-/* line 252, ../sass/Dvideo/_ctrl.scss */
+/* line 254, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-volume:before {
   content: '';
   position: absolute;
@@ -463,7 +465,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   right: 0;
   z-index: 9;
 }
-/* line 261, ../sass/Dvideo/_ctrl.scss */
+/* line 263, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-volume:after {
   content: '';
   position: absolute;
@@ -473,11 +475,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   right: 0;
   z-index: 9;
 }
-/* line 271, ../sass/Dvideo/_ctrl.scss */
+/* line 273, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-volume.none {
   display: none;
 }
-/* line 275, ../sass/Dvideo/_ctrl.scss */
+/* line 277, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-volume .Dvideo-volume-P {
   width: 100%;
   height: 2px;
@@ -486,7 +488,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   border-radius: 1px;
   background: #999;
 }
-/* line 280, ../sass/Dvideo/_ctrl.scss */
+/* line 282, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-volume .Dvideo-volume-P .Dvideo-volume-R {
   width: 80%;
   height: 2px;
@@ -495,7 +497,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   border-radius: 1px;
   background: #cacaca;
 }
-/* line 287, ../sass/Dvideo/_ctrl.scss */
+/* line 289, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-volume .Dvideo-volume-range {
   width: 12px;
   height: 12px;
@@ -511,7 +513,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   z-index: 10;
   cursor: pointer;
 }
-/* line 301, ../sass/Dvideo/_ctrl.scss */
+/* line 303, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-volume .Dvideo-volume-range:hover:before {
   content: attr(data-volume);
   position: absolute;
@@ -532,7 +534,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
-/* line 316, ../sass/Dvideo/_ctrl.scss */
+/* line 318, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-volume .Dvideo-volume-range:hover:after {
   content: '';
   position: absolute;
@@ -549,7 +551,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   border-right: 6px solid transparent;
   border-bottom: 6px solid transparent;
 }
-/* line 334, ../sass/Dvideo/_ctrl.scss */
+/* line 336, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-progress-content {
   height: 2px;
   width: 100%;
@@ -559,12 +561,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   background: #333;
   z-index: 2;
 }
-/* line 342, ../sass/Dvideo/_ctrl.scss */
+/* line 344, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-progress-content .Dvideo-progress-detail {
   height: 100%;
   width: 100%;
 }
-/* line 345, ../sass/Dvideo/_ctrl.scss */
+/* line 347, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-progress-content .Dvideo-progress-detail .Dvideo-progress-buffered {
   width: 0;
   height: 100%;
@@ -577,7 +579,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-transition: width 0.3s;
   transition: width 0.3s;
 }
-/* line 354, ../sass/Dvideo/_ctrl.scss */
+/* line 356, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-progress-content .Dvideo-progress-detail .Dvideo-progress-real {
   width: 0%;
   height: 100%;
@@ -592,7 +594,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-transition: width 0.3s;
   transition: width 0.3s;
 }
-/* line 363, ../sass/Dvideo/_ctrl.scss */
+/* line 365, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-progress-content .Dvideo-circle-range {
   display: none;
   position: absolute;
@@ -606,7 +608,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
-/* line 373, ../sass/Dvideo/_ctrl.scss */
+/* line 375, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-progress-content .Dvideo-circle-range:after {
   content: '';
   position: absolute;
@@ -623,22 +625,22 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 385, ../sass/Dvideo/_ctrl.scss */
+/* line 387, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-progress-content.active {
   height: 4px;
 }
-/* line 388, ../sass/Dvideo/_ctrl.scss */
+/* line 390, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-progress-content.active .Dvideo-progress-detail .Dvideo-progress-real {
   -moz-transition: none;
   -o-transition: none;
   -webkit-transition: none;
   transition: none;
 }
-/* line 392, ../sass/Dvideo/_ctrl.scss */
+/* line 394, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-progress-content.active .Dvideo-circle-range {
   display: block;
 }
-/* line 397, ../sass/Dvideo/_ctrl.scss */
+/* line 399, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-tips-info {
   position: absolute;
   left: 0;
@@ -656,11 +658,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   box-sizing: border-box;
   display: block;
 }
-/* line 411, ../sass/Dvideo/_ctrl.scss */
+/* line 413, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-ctrl .Dvideo-tips-info.hide {
   display: none;
 }
-/* line 417, ../sass/Dvideo/_ctrl.scss */
+/* line 419, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-header {
   position: absolute;
   top: 0;
@@ -678,36 +680,25 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   opacity: 0;
   visibility: hidden;
 }
-/* line 429, ../sass/Dvideo/_ctrl.scss */
+/* line 431, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-header.active {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
   visibility: visible;
 }
-/* line 434, ../sass/Dvideo/_ctrl.scss */
+/* line 436, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content .Dvideo-header .Dvideo-header-title {
   width: 80%;
   height: 100%;
   padding: 0 8px;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.8);
+  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  -ms-text-overflow: ellipsis;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
+  margin: 0;
 }
-/* line 448, ../sass/Dvideo/_ctrl.scss */
-.Dvideo-content.full .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-volume {
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: auto;
-  *zoom: 1;
-  *display: inline;
-  font-size: 16px;
-  margin-right: 50px;
-}
-/* line 452, ../sass/Dvideo/_ctrl.scss */
+/* line 454, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.full .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-volume.none {
   display: inline-block;
   vertical-align: middle;
@@ -715,7 +706,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *zoom: 1;
   *display: inline;
 }
-/* line 457, ../sass/Dvideo/_ctrl.scss */
+/* line 459, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.full .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-definition.none {
   display: inline-block;
   vertical-align: middle;
@@ -723,7 +714,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *zoom: 1;
   *display: inline;
 }
-/* line 462, ../sass/Dvideo/_ctrl.scss */
+/* line 464, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.full .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content .Dvideo-playbackRate.none {
   display: inline-block;
   vertical-align: middle;
@@ -731,7 +722,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   *zoom: 1;
   *display: inline;
 }
-/* line 472, ../sass/Dvideo/_ctrl.scss */
+/* line 474, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl {
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjEuMCIgeDI9IjAuNSIgeTI9IjAuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzA2MTAxYSIgc3RvcC1vcGFjaXR5PSIwLjYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(6, 16, 26, 0.6)), color-stop(100%, rgba(0, 0, 0, 0)));
@@ -739,57 +730,57 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   background: -webkit-linear-gradient(bottom, rgba(6, 16, 26, 0.6), rgba(0, 0, 0, 0));
   background: linear-gradient(to top, rgba(6, 16, 26, 0.6), rgba(0, 0, 0, 0));
 }
-/* line 475, ../sass/Dvideo/_ctrl.scss */
+/* line 477, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-time-content {
   color: rgba(177, 187, 197, 0.6);
 }
-/* line 479, ../sass/Dvideo/_ctrl.scss */
+/* line 481, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-menu-right-content i {
   color: rgba(177, 187, 197, 0.6);
 }
-/* line 483, ../sass/Dvideo/_ctrl.scss */
+/* line 485, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-playbackRate {
   background: rgba(177, 187, 197, 0.6);
 }
-/* line 485, ../sass/Dvideo/_ctrl.scss */
+/* line 487, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-playbackRate .Dvideo-playbackRate-content {
   background: transparent;
 }
-/* line 487, ../sass/Dvideo/_ctrl.scss */
+/* line 489, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-playbackRate .Dvideo-playbackRate-content .Dvideo-playbackRate-list {
   color: rgba(177, 187, 197, 0.6);
   background: rgba(177, 187, 197, 0.6);
 }
-/* line 490, ../sass/Dvideo/_ctrl.scss */
+/* line 492, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-playbackRate .Dvideo-playbackRate-content .Dvideo-playbackRate-list:active {
   color: rgba(255, 0, 0, 0.3);
 }
-/* line 493, ../sass/Dvideo/_ctrl.scss */
+/* line 495, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-playbackRate .Dvideo-playbackRate-content .Dvideo-playbackRate-list:hover {
   background: rgba(31, 36, 41, 0.6);
 }
-/* line 499, ../sass/Dvideo/_ctrl.scss */
+/* line 501, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-definition {
   background: rgba(177, 187, 197, 0.6);
 }
-/* line 501, ../sass/Dvideo/_ctrl.scss */
+/* line 503, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-definition .Dvideo-definition-content {
   background: transparent;
 }
-/* line 503, ../sass/Dvideo/_ctrl.scss */
+/* line 505, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-definition .Dvideo-definition-content .Dvideo-definition-list {
   color: rgba(177, 187, 197, 0.6);
   background: rgba(177, 187, 197, 0.6);
 }
-/* line 506, ../sass/Dvideo/_ctrl.scss */
+/* line 508, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-definition .Dvideo-definition-content .Dvideo-definition-list.active {
   color: rgba(255, 0, 0, 0.3);
 }
-/* line 509, ../sass/Dvideo/_ctrl.scss */
+/* line 511, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-detail .Dvideo-definition .Dvideo-definition-content .Dvideo-definition-list:hover {
   background: rgba(31, 36, 41, 0.6);
 }
-/* line 516, ../sass/Dvideo/_ctrl.scss */
+/* line 518, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-progress-content {
   width: calc(100% - 20px);
   left: 50%;
@@ -802,11 +793,11 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   transform: translate(-50%, 0);
   background: rgba(51, 51, 51, 0.3);
 }
-/* line 523, ../sass/Dvideo/_ctrl.scss */
+/* line 525, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-progress-content .Dvideo-progress-detail .Dvideo-progress-buffered {
   background: rgba(153, 153, 153, 0.3);
 }
-/* line 526, ../sass/Dvideo/_ctrl.scss */
+/* line 528, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-ctrl .Dvideo-progress-content .Dvideo-progress-detail .Dvideo-progress-real {
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuNSIgeDI9IjEuMCIgeTI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZjAwMDAiIHN0b3Atb3BhY2l0eT0iMC4xIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background: -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, rgba(255, 0, 0, 0.8)), color-stop(100%, rgba(255, 0, 0, 0.1)));
@@ -814,7 +805,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   background: -webkit-linear-gradient(left, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0.1));
   background: linear-gradient(to right, rgba(255, 0, 0, 0.8), rgba(255, 0, 0, 0.1));
 }
-/* line 532, ../sass/Dvideo/_ctrl.scss */
+/* line 534, ../sass/Dvideo/_ctrl.scss */
 .Dvideo-content.gradient .Dvideo-header {
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzA2MTAxYSIgc3RvcC1vcGFjaXR5PSIwLjYiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMDAwMDAiIHN0b3Atb3BhY2l0eT0iMC4wIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(6, 16, 26, 0.6)), color-stop(100%, rgba(0, 0, 0, 0)));

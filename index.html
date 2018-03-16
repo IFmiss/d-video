@@ -2,11 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Document</title>
-	<meta http-equiv=”X-UA-Compatible” content=”IE=edge,chrome=1″ />
-	<link rel="shortcut icon" href="http://www.daiwei.org/index/images/logo/favicon.ico">
-	<link rel="stylesheet" href="css/Dvideo.css">
-	<link rel="stylesheet" href="font-icon/style.css">
+	<title>webpack</title>
+</head>
 	<style>
 		body,html{
 			margin: 0;
@@ -78,126 +75,27 @@
 </head>
 <body>
 	<div class="centerInfo">
-		<h3 class="title">基于原生js的Dvideo.js组件</h3>
-		<div id="testVideo"></div>
+		<div id="video"></div>
 		<div class="ctrl-c" style="user-select:none">
-			<span class="btn" style="background: #B42828" onclick="setFullScreen()">点击全屏</span>
-			<span class="btn" style="background: #95487B" onclick="play()">播放 space</span>
-			<span class="btn" style="background: #4D5DA6" onclick="pause()">暂停 space</span>
-			<span class="btn" style="background: #488BAD" onclick="playpause()">播放暂停</span>
-			<span class="btn" style="background: #359961" onclick="setVolume(1)">100的音量大小 up</span>
-			<span class="btn" style="background: #547046" onclick="setVolume(0.3)">30的音量大小 down</span>
-			<span class="btn" style="background: #767030" onclick="setBackRate(3)">2.0的语速</span>
-			<span class="btn" style="background: #B2662E" onclick="setBackRate(1)">正常的语速</span>
-			<span class="btn" style="background: #977074" onclick="setVideoRewind(10)">快退 left</span>
-			<span class="btn" style="background: #4F1B60" onclick="setVideoForward(10)">快进 right</span>
-			<span class="btn" style="background: #4F1B60" onclick="showLoading()">显示进度信息</span>
-			<span class="btn" style="background: #4F1B60" onclick="showTopBottomCtrlNotClose()">显示上下菜单且不自动关闭</span>
-			<span class="btn" style="background: #4F1B60" onclick="hideTopBottomCtrlLi()">立刻关闭上下菜单</span>
-			<span class="btn" style="background: #4F1B60" onclick="showTopBottomCtrl()">显示菜单自动关闭</span>
-			<span class="btn" style="background: #4F1B60" onclick="hideTopBottomCtrl()">固定时间后自动关闭</span>
-			<span class="btn" style="background: #4F1B60" onclick="setVideoSize()">设置宽720 高480</span>
+			<span class="btn">点击全屏</span>
+			<span class="btn">播放 space</span>
+			<span class="btn">暂停 space</span>
+			<span class="btn">播放暂停</span>
+			<span class="btn">100的音量大小 up</span>
+			<span class="btn">30的音量大小 down</span>
+			<span class="btn">2.0的语速</span>
+			<span class="btn">正常的语速</span>
+			<span class="btn">快退 left</span>
+			<span class="btn">快进 right</span>
+			<span class="btn">显示进度信息</span>
+			<span class="btn">关闭进度信息</span>
+			<span class="btn">显示上下菜单且不自动关闭</span>
+			<span class="btn">立刻关闭上下菜单</span>
+			<span class="btn">显示菜单自动关闭</span>
+			<span class="btn">固定时间后自动关闭</span>
+			<span class="btn">设置宽720 高480</span>
 		</div>
 		<a class="github" href="https://github.com/IFmiss/Dvideo.js" target="_balck">github: https://github.com/IFmiss/Dvideo.js</a>
 	</div>
 </body>
-<script src="js/Dvideo.js"></script>
-<script>
-	// window.onload = function () {
-		var videoWrap = document.getElementById('testVideo')
-		var fullScreen = document.getElementById('getFullScreen')
-		var video = new Dvideo ({
-			ele: '#testVideo',
-			title: 'Pneumatic Tokyo - EnV',
-			nextVideoExtend: function () {
-				alert('您点击了下一页')
-			},
-			showNext: true,
-			width: '580px',
-			height: '292px',
-			src: 'http://www.daiwei.org/index/video/EnV%20-%20PneumaticTokyo.mp4',
-			autoplay: true,
-			setVideoDefinition: function (type, e, current) {
-				if (type === '0') {
-					alert('你点击了标清')
-					// video.setVideoInfo('這是標清','这里填写视频的标清地址',current)
-				}
-				if (type === '1') {
-					alert('你点击了标清')
-					// video.setVideoInfo('這是標清','这里填写视频的高清地址',current)
-				}
-				if (type === '2') {
-					alert('你点击了标清')
-					// video.setVideoInfo('這是標清','这里填写视频的超清地址',current)
-				}
-				video.showLoading(false)
-
-				// setTimeout(function () {
-				// 	video.videoEle.currentTime = current
-				// 	video.videoPlay()
-				// 	video.showLoading(false)
-				// }, 3000)
-			},
-		})
-
-		// 全屏
-		function setFullScreen () {
-			video.launchFullScreen(videoWrap)
-		}
-
-		// 播放
-		function play () {
-			video.videoPlay()
-		}
-
-		// 暂停
-		function pause () {
-			video.videoPause()
-		}
-
-		// 播放暂停
-		function playpause () {
-			video.videoPlayPause()
-		}
-
-		function setVolume (v) {
-			video.updateVolume(v)
-		}
-
-		function setBackRate (index) {
-			video.setPlayBackRate(index)
-		}
-
-		function setVideoForward () {
-			video.videoForward(10)
-		}
-
-		function setVideoRewind () {
-			video.videoRewind(10)
-		}
-
-		function showLoading () {
-			video.showLoading(true, '视频清晰度切换中，请稍等')
-		}
-
-		function showTopBottomCtrlNotClose () {
-			video.showTopBottomCtrl()
-		}
-
-		function hideTopBottomCtrlLi () {
-			video.hideTopBottomCtrl(true)
-		}
-
-		function showTopBottomCtrl () {
-			video.showTopBottomCtrl(true)
-		}
-
-		function hideTopBottomCtrl () {
-			video.hideTopBottomCtrl()
-		}
-
-		function setVideoSize () {
-			video.updateVideoSize(720,480)
-		}
-</script>
 </html>

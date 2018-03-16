@@ -129,6 +129,7 @@
 						color: $ctrl_bg;
 						width: 35px;
 						height: 14px;
+						line-height: 14px;
 						margin: calc((100% - 14px) / 2) 0;
 						vertical-align: middle;
 						@include inline-block;
@@ -168,13 +169,13 @@
 							}
 						}
 					}
+					&.none{
+						display: none;
+					}
 					&:hover{
 						.Dvideo-playbackRateText{
 							background: $primary_color;
 						}
-					}
-					&.none{
-						display:none;
 					}
 				}
 				.Dvideo-definition{
@@ -193,6 +194,7 @@
 						color: $ctrl_bg;
 						width: 35px;
 						height: 14px;
+						line-height: 14px;
 						margin: calc((100% - 14px) / 2) 0;
 						vertical-align: middle;
 						@include inline-block;
@@ -231,13 +233,13 @@
 							}
 						}
 					}
+					&.none{
+						display: none;
+					}
 					&:hover{
 						.Dvideo-definitionText{
 							background: $primary_color;
 						}
-					}
-					&.none{
-						display:none;
 					}
 				}
 				.Dvideo-volume{
@@ -437,7 +439,10 @@
 			padding: 0 $padding_leftright;
 			font-size: 14px;
 			color: $text_deep_color;
-			@include ellipsis();
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			margin:0;
 		}
 	}
 
@@ -446,9 +451,6 @@
 			.Dvideo-detail{
 				.Dvideo-menu-right-content{
 					.Dvideo-volume{
-						@include inline-block;
-						font-size: 16px;
-						margin-right: 50px;
 						&.none{
 							@include inline-block;
 						}
