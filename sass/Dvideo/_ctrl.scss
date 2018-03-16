@@ -173,6 +173,9 @@
 							background: $primary_color;
 						}
 					}
+					&.none{
+						display:none;
+					}
 				}
 				.Dvideo-definition{
 					color: $icon_color;
@@ -232,6 +235,9 @@
 						.Dvideo-definitionText{
 							background: $primary_color;
 						}
+					}
+					&.none{
+						display:none;
 					}
 				}
 				.Dvideo-volume{
@@ -443,6 +449,16 @@
 						@include inline-block;
 						font-size: 16px;
 						margin-right: 50px;
+						&.none{
+							@include inline-block;
+						}
+					}
+					.Dvideo-definition{
+						&.none{
+							@include inline-block;
+						}
+					}
+					.Dvideo-playbackRate{
 						&.none{
 							@include inline-block;
 						}

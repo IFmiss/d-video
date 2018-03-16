@@ -39,7 +39,7 @@
 			showVolume: true,
 
 			// 在非全屏下是否显示控制
-			showVolumeUnFull: true,
+			showVolumeUnFull: false,
 
 			// 提示信息的元素dom
 			tipsInfo: null,
@@ -52,6 +52,8 @@
 				// 选项
 				rateList: [0.8,1,1.5,2]
 			},
+			// 是否在未全屏的情况下 显示语速
+			showPlayBackRateUnFull: true,
 
 			// 是否显示清晰度的设置
 			showVideoDefinition: true,
@@ -76,6 +78,8 @@
 					}
 				]
 			},
+			// 是否在未全屏幕的情况下 显示清晰度
+			showVideoDefinitionUnFull: true,
 
 			// 可让用户自定义扩展   播放下一个视频的操作
 			nextVideoExtend: function () {},
@@ -709,6 +713,7 @@
 
 		// 创建PlaybackRateList
 		createPlaybackRateList: function () {
+			var showVClassName = this.opt.showPlayBackRateUnFull ? '' : 'none'
 			var oFragment = document.createDocumentFragment();
 			// 语速数据
 			var playbackrateData = this.hasLStorage('D-playbackRate') ? JSON.parse(this.getLStorage('D-playbackRate')) : this.opt.playbackRate
@@ -722,7 +727,7 @@
 
 			// 设置语速区域
 			this.playbackRate = document.createElement('span')
-			this.playbackRate.className = 'Dvideo-playbackRate'
+			this.playbackRate.className = 'Dvideo-playbackRate ' + showVClassName
 			this.menuRightC.appendChild(this.playbackRate)
 
 			// 显示语速文本
@@ -1126,6 +1131,7 @@
 
 		// 创建切换视频清晰度效果
 		createVideoDefinition: function () {
+			var showVClassName = this.opt.showVideoDefinitionUnFull ? '' : 'none'
 			var oFragment = document.createDocumentFragment();
 			// 获取的数据  本地存储或者初始化的清晰度
 			var videoDefinitionData = this.hasLStorage('D-videoDefinition') ? JSON.parse(this.getLStorage('D-videoDefinition')) : this.opt.videoDefinition
@@ -1138,7 +1144,7 @@
 
 			// 设置清晰度区域
 			this.videoDefinition = document.createElement('span')
-			this.videoDefinition.className = 'Dvideo-definition'
+			this.videoDefinition.className = 'Dvideo-definition ' + showVClassName
 			this.menuRightC.appendChild(this.videoDefinition)
 
 			// 显示清晰度文本
