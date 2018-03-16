@@ -105,9 +105,6 @@
 		// 是否已经加载初始化元数据
 		this.isLoadMate = false
 
-		// 设置播放的状态
-		this.isPlaying = false
-
 		// 设置视频时长
 		this.durationT = 0
 
