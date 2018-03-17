@@ -1,8 +1,8 @@
 {
-  "name": "Dvideo",
+  "name": "d-video",
   "version": "1.0.0",
-  "description": "Dvideo",
-  "main": "webpack.config.js",
+  "description": "a html5 video player",
+  "main": "/src/script/Dvideo.js",
   "dependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,8 +10,13 @@
     "dev": "webpack-dev-server --mode development --progress --colors",
     "watch": "webpack --progress --colors --watch"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/ifmiss/Dvideo.js"
+  },
   "keywords": [
-    "webpack"
+    "video",
+    "plugin"
   ],
   "author": "daiwei",
   "license": "ISC",

@@ -1,3 +1,5 @@
+import './../scss/Dvideo.scss'
+import './../../static/font-icon/style.css'
 class Dvideos {
 	constructor (template) {
 		let defaultOptions = {
@@ -184,6 +186,9 @@ class Dvideos {
 		// 创建控制菜单
 		this.createCtrlC()
 
+		// 显示提示信息
+		this.createVideoTips()
+
 		// 音乐播放暂停  下一集
 		this.createvideoPlayState()
 
@@ -217,9 +222,6 @@ class Dvideos {
 
 		// 全屏按钮
 		this.createSelectVideoFull()
-
-		// 显示提示信息
-		this.createVideoTips()
 
 		// 初始化事件
 		this.initEvent()

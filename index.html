@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>webpack</title>
+	<title>Dvideo</title>
 </head>
 	<style>
 		body,html{
@@ -15,6 +15,7 @@
 			height: 100%;
 			background: -webkit-linear-gradient(90deg,#222626,#838383);
 			background: linear-gradient(90deg,#222626,#838383);
+			font-size: 16px;
 		}
 
 		.title{
@@ -37,7 +38,7 @@
 			z-index: 1111;
 		}
 		.ctrl-c{
-			width: 500px;
+			width: 100%;
 			height: auto;
 			margin: 20px auto;
 		}
@@ -51,18 +52,13 @@
 			border-radius: 4px;
 			display: inline-block;
 		}
-		#testVideo{
-			width: 520px;
-			height: auto;
-			margin: 0 auto;
-			outline:2px solid #ccc;
-		}
-		body,html{
-			font-size: 16px;
-		}
 		.btn{
 			font-size: 1rem;
-			background: rgba(0,0,0,0.3)!important;
+			background: rgba(0,0,0,0.3);
+		}
+
+		.btn:hover{
+			background: rgba(0,0,0,0.8);
 		}
 
 		.github{
@@ -70,6 +66,10 @@
 			width: 100%;
 			text-align: center;
 			color: #eee;
+		}
+		#video{
+			margin: 0 auto;
+			border:3px solid rgba(255,255,255,0.9);
 		}
 	</style>
 </head>
@@ -95,7 +95,10 @@
 			<span class="btn">固定时间后自动关闭</span>
 			<span class="btn">设置宽720 高480</span>
 		</div>
+		<!-- <p style="text-align: center;"><iframe src="https://ghbtns.com/github-btn.html?user=ifmiss&repo=Dvideo.js&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+		<iframe src="https://ghbtns.com/github-btn.html?user=ifmiss&repo=Dvideo.js&type=fork&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe></p> -->
 		<a class="github" href="https://github.com/IFmiss/Dvideo.js" target="_balck">github: https://github.com/IFmiss/Dvideo.js</a>
+
 	</div>
 </body>
 </html>

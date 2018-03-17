@@ -1,7 +1,7 @@
-import 'scss/Dvideo.scss'
-import 'static/font-icon/style.css'
 import Dvideo from 'script/Dvideo.js'
 var video = new Dvideo({
+	width: '680px',
+	height: '360px',
 	nextVideoExtend: function () {
 		alert('你点击了下一个视频');
 	},
