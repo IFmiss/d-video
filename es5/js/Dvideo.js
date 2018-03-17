@@ -174,6 +174,9 @@
 			// 创建控制菜单
 			this.createCtrlC()
 
+			// 显示提示信息
+			this.createVideoTips()
+
 			// 音乐播放暂停  下一集
 			this.createvideoPlayState()
 
@@ -207,9 +210,6 @@
 
 			// 全屏按钮
 			this.createSelectVideoFull()
-
-			// 显示提示信息
-			this.createVideoTips()
 
 			// 初始化事件
 			this.initEvent()
