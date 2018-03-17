@@ -1,8 +1,6 @@
 
-# Dvideo.js
+# .js
 基于原生js的 video 插件  Dvideo
-
-![](https://img.shields.io/badge/javascript-4EDD96.svg)
 
 
 支持音量  语速  清晰度 ie全屏等一系列操作  兼容IE 9 + 
@@ -63,5 +61,7 @@ var video = new Dvideo ({
 	},
 })
 </pre>
+
+### 在苹果本地跑dvideo会提示操作localStorage不安全的错误，放在服务端就不存在这个问题了
 
 ### DEMO  http://www.daiwei.org/components/Dvideo
