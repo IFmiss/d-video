@@ -4,6 +4,7 @@
 
 ![](https://img.shields.io/badge/javascript-4EDD96.svg)
 
+QQ交流群： 424418160
 
 支持音量  语速  清晰度 ie全屏等一系列操作  兼容IE 9 + 
 
