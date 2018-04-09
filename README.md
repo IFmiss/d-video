@@ -69,4 +69,6 @@ npm run dev
    })
 </pre>
 
-### DEMO  http://www.daiwei.org/components/Dvideo
+### DEMO1  http://www.daiwei.org/components/Dvideo
+### DEMO2  https://ifmiss.github.io/Dvideo.js/demo/
+
