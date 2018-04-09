@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta http-equiv=”X-UA-Compatible” content=”IE=edge,chrome=1″ />
+	<link rel="shortcut icon" href="http://www.daiwei.org/index/images/logo/favicon.ico">
+	<link rel="stylesheet" href="css/Dvideo.css">
+	<link rel="stylesheet" href="./../static/font-icon/style.css">
+	<style>
+		body,html{
+			margin: 0;
+			padding: 0;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			width: 100%;
+			height: 100%;
+			background: -webkit-linear-gradient(90deg,#222626,#838383);
+			background: linear-gradient(90deg,#222626,#838383);
+		}
+
+		.title{
+			font: 24px/1.5 weight;
+			color: #fff;
+			text-align: center;
+			margin: 20px 0;
+		}
+
+		.centerInfo{
+			position: absolute;
+			top: 45%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+		}
+		.getFullScreen{
+			position: absolute;
+			bottom:100px;
+			right: 100px;
+			z-index: 1111;
+		}
+		.ctrl-c{
+			width: 500px;
+			height: auto;
+			margin: 20px auto;
+		}
+
+		.btn{
+			padding: 6px 10px;
+			background: #5C96D8;
+			margin: 5px;
+			color: #fff;
+			cursor: pointer;
+			border-radius: 4px;
+			display: inline-block;
+		}
+		#testVideo{
+			width: 520px;
+			height: auto;
+			margin: 0 auto;
+			outline:2px solid #ccc;
+		}
+		body,html{
+			font-size: 16px;
+		}
+		.btn{
+			font-size: 1rem;
+			background: rgba(0,0,0,0.3)!important;
+		}
+
+		.github{
+			display: block;
+			width: 100%;
+			text-align: center;
+			color: #eee;
+		}
+	</style>
+</head>
+<body>
+	<div class="centerInfo">
+		<h3 class="title">基于原生js的Dvideo.js组件</h3>
+		<div id="testVideo"></div>
+		<div class="ctrl-c" style="user-select:none">
+			<span class="btn" style="background: #B42828" onclick="setFullScreen()">点击全屏</span>
+			<span class="btn" style="background: #95487B" onclick="play()">播放 ctrl + space</span>
+			<span class="btn" style="background: #4D5DA6" onclick="pause()">暂停 ctrl + space</span>
+			<span class="btn" style="background: #488BAD" onclick="playpause()">播放暂停</span>
+			<span class="btn" style="background: #359961" onclick="setVolume(1)">100的音量大小 ctrl + up</span>
+			<span class="btn" style="background: #547046" onclick="setVolume(0.3)">30的音量大小 ctrl + down</span>
+			<span class="btn" style="background: #767030" onclick="setBackRate(3)">2.0的语速</span>
+			<span class="btn" style="background: #B2662E" onclick="setBackRate(1)">正常的语速</span>
+			<span class="btn" style="background: #977074" onclick="setVideoRewind(10)">快退 ctrl + left</span>
+			<span class="btn" style="background: #4F1B60" onclick="setVideoForward(10)">快进 ctrl + right</span>
+			<span class="btn" style="background: #4F1B60" onclick="showLoading()">显示进度信息</span>
+			<span class="btn" style="background: #4F1B60" onclick="showTopBottomCtrlNotClose()">显示上下菜单且不自动关闭</span>
+			<span class="btn" style="background: #4F1B60" onclick="hideTopBottomCtrlLi()">立刻关闭上下菜单</span>
+			<span class="btn" style="background: #4F1B60" onclick="showTopBottomCtrl()">显示菜单自动关闭</span>
+			<span class="btn" style="background: #4F1B60" onclick="hideTopBottomCtrl()">固定时间后自动关闭</span>
+			<span class="btn" style="background: #4F1B60" onclick="setVideoSize()">设置宽720 高480</span>
+		</div>
+		<a class="github" href="https://github.com/IFmiss/Dvideo.js" target="_balck">github: https://github.com/IFmiss/Dvideo.js</a>
+	</div>
+</body>
+<script src="js/Dvideo.js"></script>
+<script>
+	// window.onload = function () {
+		var videoWrap = document.getElementById('testVideo')
+		var fullScreen = document.getElementById('getFullScreen')
+		var video = new Dvideo ({
+			ele: '#testVideo',
+			title: 'Pneumatic Tokyo - EnV',
+			nextVideoExtend: function () {
+				alert('您点击了下一页')
+			},
+			showNext: true,
+			width: '580px',
+			height: '292px',
+			src: 'http://www.daiwei.org/index/video/EnV%20-%20PneumaticTokyo.mp4',
+			autoplay: true,
+			setVideoDefinition: function (type, e, current) {
+				if (type === '0') {
+					alert('你点击了标清')
+					// video.setVideoInfo('這是標清','这里填写视频的标清地址',current)
+				}
+				if (type === '1') {
+					alert('你点击了标清')
+					// video.setVideoInfo('這是標清','这里填写视频的高清地址',current)
+				}
+				if (type === '2') {
+					alert('你点击了标清')
+					// video.setVideoInfo('這是標清','这里填写视频的超清地址',current)
+				}
+				video.showLoading(false)
+
+				// setTimeout(function () {
+				// 	video.videoEle.currentTime = current
+				// 	video.videoPlay()
+				// 	video.showLoading(false)
+				// }, 3000)
+			},
+		})
+
+		// 全屏
+		function setFullScreen () {
+			video.launchFullScreen(videoWrap)
+		}
+
+		// 播放
+		function play () {
+			video.videoPlay()
+		}
+
+		// 暂停
+		function pause () {
+			video.videoPause()
+		}
+
+		// 播放暂停
+		function playpause () {
+			video.videoPlayPause()
+		}
+
+		function setVolume (v) {
+			video.updateVolume(v)
+		}
+
+		function setBackRate (index) {
+			video.setPlayBackRate(index)
+		}
+
+		function setVideoForward () {
+			video.videoForward(10)
+		}
+
+		function setVideoRewind () {
+			video.videoRewind(10)
+		}
+
+		function showLoading () {
+			video.showLoading(true, '视频清晰度切换中，请稍等')
+		}
+
+		function showTopBottomCtrlNotClose () {
+			video.showTopBottomCtrl()
+		}
+
+		function hideTopBottomCtrlLi () {
+			video.hideTopBottomCtrl(true)
+		}
+
+		function showTopBottomCtrl () {
+			video.showTopBottomCtrl(true)
+		}
+
+		function hideTopBottomCtrl () {
+			video.hideTopBottomCtrl()
+		}
+
+		function setVideoSize () {
+			video.updateVideoSize(720,480)
+		}
+</script>
+</html>
