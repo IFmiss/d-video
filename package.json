@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "a html5 video player",
   "main": "/src/script/Dvideo.js",
-  "dependencies": {},
+  "dependencies": {
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "compass-mixins": "^0.12.10"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
