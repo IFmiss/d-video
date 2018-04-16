@@ -16,7 +16,7 @@ QQ交流群： 424418160
   npm install
 </pre>
 
-⚠️ 注意： 由于webpack使用的是4.0以上的版本，extract-text-webpack-plugin在安装时需要单独执行
+⚠️ 注意： 由于webpack使用的是4.0以上的版本，extract-text-webpack-plugin在安装时需要单独执行，Vue下需要配置scss的sass-loader  安装sass-loader和node-sass
 <pre>
   npm install extract-text-webpack-plugin@next
 </pre>
