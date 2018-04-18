@@ -2,32 +2,46 @@
 # .js
 基于原生js的 video 插件  Dvideo
 
+<<<<<<< HEAD
+=======
+![](https://img.shields.io/badge/javascript-4EDD96.svg)
+
+QQ交流群： 424418160
+>>>>>>> 33a7d5976297e9082c7b9cc94581bfb57153110a
 
 支持音量  语速  清晰度 ie全屏等一系列操作  兼容IE 9 + 
 
 #### 项目运行
 ✅ clone 项目之后在项目根目录执行 
 安装依赖：
+
 <pre>
-npm install
+  npm install
+</pre>
+
+⚠️ 注意： 由于webpack使用的是4.0以上的版本，extract-text-webpack-plugin在安装时需要单独执行，Vue下需要配置scss的sass-loader  安装sass-loader和node-sass
 <pre>
-⚠️ 注意： 由于webpack使用的是4.0以上的版本，extract-text-webpack-plugin在安装时需要单独执行  npm install extract-text-webpack-plugin @next  来安装
+  npm install extract-text-webpack-plugin@next
+</pre>
+来安装
 否则项目安装之后执行 npm run dev 会报错
 开启服务：
+
 <pre>
 npm run dev
 </pre>
 
 编译版本
+
 <pre>
-npm run build
+  npm run build
 </pre>
 
 原先的es5版本也会同时更新  后续会放在这个项目单独的文件下
 
 #### 初始化
 <pre>
-var video = new Dvideo ({
+   var video = new Dvideo ({
 	ele: '#testVideo',
 	title: 'Pneumatic Tokyo - EnV',
 	nextVideoExtend: function () {
@@ -59,9 +73,15 @@ var video = new Dvideo ({
 		// 	video.showLoading(false)
 		// }, 3000)
 	},
-})
+   })
 </pre>
 
+<<<<<<< HEAD
 ### 在苹果本地跑dvideo会提示操作localStorage不安全的错误，放在服务端就不存在这个问题了
 
 ### DEMO  http://www.daiwei.org/components/Dvideo
+=======
+### DEMO1  http://www.daiwei.org/components/Dvideo
+### DEMO2  https://ifmiss.github.io/Dvideo.js/demo/
+
+>>>>>>> 33a7d5976297e9082c7b9cc94581bfb57153110a

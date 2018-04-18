@@ -1,6 +1,6 @@
 import './../scss/Dvideo.scss'
 import './../../static/font-icon/style.css'
-class Dvideos {
+class Dvideo {
 	constructor (template) {
 		let defaultOptions = {
 			// video元素
@@ -1339,4 +1339,4 @@ class Dvideos {
 	}
 }
 
-export default Dvideos
+export default Dvideo

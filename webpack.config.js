@@ -5,7 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 const extractSass = new ExtractTextPlugin({
-    filename: "css/[name]-[contenthash].css",
+    // filename: "css/[name]-[contenthash].css",
+    filename: "d-video.css",
     disable: process.env.NODE_ENV === "development"
 });
 
@@ -15,11 +16,23 @@ const resolve = function (dir) {
 
 
 module.exports = {
-	entry: './src/index.js',
+	// 正常run的 配置
+	// entry: './src/index.js',
+	// path: path.resolve(__dirname, 'dist'),
+	// 	publicPath: '',
+	// 	filename: '[name]-[hash].js'
+	// },
+
+	// 打包发布npm的配置
+	entry: './src/script/Dvideo.js',
 	output: {
-	path: path.resolve(__dirname, 'dist'),
+	path: path.resolve(__dirname, 'lib'),
 		publicPath: '',
-		filename: '[name]-[hash].js'
+		filename: 'd-video.js',
+		// filename: '[name]-[hash].js',
+		library: 'd-video', // library指定的就是你使用require时的模块名，这里便是require("VueMessage")
+		libraryTarget: 'umd', //libraryTarget会生成不同umd的代码，例如可以只是commonjs标准的，也可以是指amd标准的，也可以只是通过script标签引入的。
+		umdNamedDefine: true // 会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define。
 	},
 	module: {
 		rules: [
@@ -29,6 +42,11 @@ module.exports = {
 					fallback:"style-loader",
 					use:["css-loader"]
 				})
+			},
+			{
+				test: /\.js$/,
+				use: 'babel-loader',
+				exclude: /node_modules/
 			},
 			{
 				test: /\.scss$/,
