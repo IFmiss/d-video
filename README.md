@@ -1,5 +1,5 @@
 
-# .js
+# Dviedo.js
 基于原生js的 video 插件  Dvideo
 
 ![](https://img.shields.io/badge/javascript-4EDD96.svg)
