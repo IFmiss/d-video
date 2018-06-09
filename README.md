@@ -1,13 +1,10 @@
 
-# .js
+# Dviedo.js
 基于原生js的 video 插件  Dvideo
 
-<<<<<<< HEAD
-=======
 ![](https://img.shields.io/badge/javascript-4EDD96.svg)
 
 QQ交流群： 424418160
->>>>>>> 33a7d5976297e9082c7b9cc94581bfb57153110a
 
 支持音量  语速  清晰度 ie全屏等一系列操作  兼容IE 9 + 
 
@@ -76,12 +73,10 @@ npm run dev
    })
 </pre>
 
-<<<<<<< HEAD
+
 ### 在苹果本地跑dvideo会提示操作localStorage不安全的错误，放在服务端就不存在这个问题了
 
-### DEMO  http://www.daiwei.org/components/Dvideo
-=======
+
 ### DEMO1  http://www.daiwei.org/components/Dvideo
 ### DEMO2  https://ifmiss.github.io/Dvideo.js/demo/
 
->>>>>>> 33a7d5976297e9082c7b9cc94581bfb57153110a
