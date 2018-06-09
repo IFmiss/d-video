@@ -4,10 +4,11 @@
   "description": "a html5 video player",
   "main": "/lib/d-video.js",
   "dependencies": {
+    "compass-mixins": "^0.12.10",
+    "hoek": "^5.0.3",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.7",
-    "style-loader": "^0.20.3",
-    "compass-mixins": "^0.12.10"
+    "style-loader": "^0.20.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
