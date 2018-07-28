@@ -1,5 +1,5 @@
 
-# Dviedo.js
+# d-viedo
 基于原生js的 video 插件  Dvideo
 
 ![](https://img.shields.io/badge/javascript-4EDD96.svg)
@@ -38,7 +38,7 @@ npm run dev
 
 #### 初始化
 <pre>
-   var video = new Dvideo ({
+var video = new Dvideo ({
 	ele: '#testVideo',
 	title: 'Pneumatic Tokyo - EnV',
 	nextVideoExtend: function () {
@@ -70,7 +70,7 @@ npm run dev
 		// 	video.showLoading(false)
 		// }, 3000)
 	},
-   })
+})
 </pre>
 
 

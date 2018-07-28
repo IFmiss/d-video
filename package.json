@@ -1,7 +1,7 @@
 {
   "name": "d-video",
-  "version": "1.1.0",
-  "description": "a html5 video player",
+  "version": "1.1.1",
+  "description": "html5 video player just pc",
   "main": "/lib/d-video.js",
   "dependencies": {
     "compass-mixins": "^0.12.10",

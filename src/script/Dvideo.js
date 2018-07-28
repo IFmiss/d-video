@@ -939,7 +939,7 @@ class Dvideo {
 			// console.log(_this.reduceTAfter + '-------------------------' + _this.reduceTBefore)
 			if(!_this.videoEle.paused) {
 				_this.reduceTAfter = Date.parse(date) - Math.floor(_this.currentT * 1000)
-				console.log(_this.reduceTAfter)
+				// console.log(_this.reduceTAfter)
 				if(_this.reduceTAfter - _this.reduceTBefore > 1000) {
 					_this.showLoading(true)
 				} else {
