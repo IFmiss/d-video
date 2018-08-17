@@ -1,6 +1,6 @@
 
-# d-viedo
-基于原生js的 video 插件  Dvideo
+# d-video
+基于原生js的 video 插件  d-video
 
 ![](https://img.shields.io/badge/javascript-4EDD96.svg)
 
@@ -78,5 +78,5 @@ var video = new Dvideo ({
 
 
 ### DEMO1  http://www.daiwei.org/components/Dvideo
-### DEMO2  https://ifmiss.github.io/Dvideo.js/demo/
+### DEMO2  https://ifmiss.github.io/d-video/
 
