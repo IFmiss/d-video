@@ -4,11 +4,8 @@
   "description": "html5 video player just pc",
   "main": "/lib/d-video.js",
   "dependencies": {
-    "compass-mixins": "^0.12.10",
     "hoek": "^5.0.3",
-    "node-sass": "^4.7.2",
-    "sass-loader": "^6.0.7",
-    "style-loader": "^0.20.3"
+    "node-sass": "^4.9.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -34,7 +31,6 @@
     "css-loader": "^0.28.10",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-webpack-plugin": "^3.0.6",
-    "node-sass": "^4.7.2",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
     "stylus": "^0.54.5",
@@ -42,6 +38,9 @@
     "url-loader": "^1.0.1",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-dev-server": "^3.1.1",
+    "randomatic": ">=3.0.0",
+    "deep-extend": ">=0.5.1",
+    "atob": ">=2.1.0"
   }
 }
