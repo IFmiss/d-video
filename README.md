@@ -78,5 +78,4 @@ var video = new Dvideo ({
 
 
 ### DEMO1  http://www.daiwei.org/components/Dvideo
-### DEMO2  https://ifmiss.github.io/d-video/
 
