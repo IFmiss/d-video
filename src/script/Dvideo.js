@@ -480,17 +480,17 @@ class Dvideo {
 	}
 
 	// 快退   参数 退多少秒
-	videoForward(seconds) {
+	videoForward(seconds = 10) {
 		if (this.videoEle.currentTime) {
-			this.currentT = this.currentT + 10 > this.durationT ? this.durationT : this.currentT + 10
+			this.currentT = this.currentT + seconds > this.durationT ? this.durationT : this.currentT + seconds
 			this.videoEle.currentTime = this.currentT
 			this.updatePorgress()
 		}
 	}
 
-	videoRewind (seconds) {
+	videoRewind (seconds = 10) {
 		if (this.videoEle.currentTime) {
-			this.currentT = this.currentT - 10 < 0 ? 0 : this.currentT - 10
+			this.currentT = this.currentT - seconds < 0 ? 0 : this.currentT - seconds
 			this.videoEle.currentTime = this.currentT
 			this.updatePorgress()
 		}

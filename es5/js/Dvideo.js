@@ -495,16 +495,18 @@
 
 		// 快退   参数 退多少秒
 		videoForward: function(seconds) {
+			var sec = seconds || 10
 			if (this.videoEle.currentTime) {
-				this.currentT = this.currentT + 10 > this.durationT ? this.durationT : this.currentT + 10
+				this.currentT = this.currentT + sec > this.durationT ? this.durationT : this.currentT + sec
 				this.videoEle.currentTime = this.currentT
 				this.updatePorgress()
 			}
 		},
 
 		videoRewind: function (seconds) {
+			var sec = seconds || 10
 			if (this.videoEle.currentTime) {
-				this.currentT = this.currentT - 10 < 0 ? 0 : this.currentT - 10
+				this.currentT = this.currentT - sec < 0 ? 0 : this.currentT - sec
 				this.videoEle.currentTime = this.currentT
 				this.updatePorgress()
 			}
