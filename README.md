@@ -82,7 +82,7 @@ var video = new Dvideo ({
 	var video = new Dvideo({...})
 ```
 
-##### 属性
+#### 属性
 - ele: dom 元素， 元素id需要带 # ， 比如 #video  或者 .video
 - src: 视频地址 string
 - isShowPoster: 是否显示封面，默认为true   bool
@@ -117,22 +117,55 @@ var video = new Dvideo ({
 - onEnded: 视频播放结束事件
 - onLoadedMetaData: 元数据加载成功事件
 
-##### 方法
-更新视频宽度
-updateVideoSize
-参数 (width, height)  number
+#### 方法
+- 更新视频宽度
+```js
+video.updateVideoSize()
+@param { number }  width   宽度
+@param { number }  height   高度
+```
 
-显示上下菜单     disappearance 是否自动消失 bool
-showTopBottomCtrl
-参数 (disappearance)
+- 显示上下菜单
+```js
+video.showTopBottomCtrl()
+@param { bool }  disappearance   是否自动消失
+```
 
-关闭上下菜单    immediately 是否立刻关闭 bool
-hideTopBottomCtrl
-参数 (immediately)
+- 关闭上下菜单
+```js
+video.hideTopBottomCtrl()
+@param { bool }  immediately   是否立刻关闭
+```
 
-更新音量
-updateVolume
-参数 (vol)   number   0 - 1 之间
+- 更新音量
+```js
+video.updateVolume()
+@param { number }  vol   音量大小  0 - 1 之间
+```
+
+- 更新音量
+```js
+video.updateVolume()
+@param { number }  vol   音量大小  0 - 1 之间
+```
+
+- 快进
+```js
+video.videoForward()
+@param { number } seconds  快进时长
+```
+
+- 快退
+```js
+video.videoRewind()
+@param { number } seconds  快退时长
+```
+
+- 跳转到具体位置
+```js
+video.videoSeek()
+@param { number } seconds  跳转的位置
+```
 
 
 
