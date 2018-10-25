@@ -493,6 +493,17 @@
 			}
 		},
 
+		/**
+		 * 跳转到某一个位置
+		 */
+		videoSeek (seconds) {
+			if (seconds > this.durationT) return
+			if (this.videoEle.currentTime) {
+				this.videoEle.currentTime = seconds
+				this.updatePorgress()
+			}
+		},
+
 		// 快退   参数 退多少秒
 		videoForward: function(seconds) {
 			var sec = seconds || 10
