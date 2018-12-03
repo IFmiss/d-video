@@ -167,6 +167,14 @@ video.videoSeek()
 @param { number } seconds  跳转的位置
 ```
 
+- 切换视频地址
+```js
+video.setVideoInfo()
+@param { sting } title  视频的名称
+@param { string } url  视频的地址
+@param { number } currentT  视频开始播放的时间，默认为0
+```
+
 
 
 ### DEMO1  http://www.daiwei.org/components/Dvideo
