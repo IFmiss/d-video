@@ -1,6 +1,6 @@
 
 # d-video
-基于原生js的 video 插件  Dvideo
+基于原生js的 video 插件  d-video
 
 支持音量  语速  清晰度 ie全屏等一系列操作  兼容IE 9 + 
 
@@ -72,7 +72,106 @@ var video = new Dvideo ({
 
 ### 在苹果本地跑dvideo会提示操作localStorage不安全的错误，放在服务端就不存在这个问题了
 
+## 实例化
+实例化Dvideo对象
+```js
+	var video = new Dvideo({...})
+```
+
+#### 属性
+- ele: dom 元素， 元素id需要带 # ， 比如 #video  或者 .video
+- src: 视频地址 string
+- isShowPoster: 是否显示封面，默认为true   bool
+- poster: 封面的地址  string
+- title: 视频的名称   string
+- width: 视频显示宽度  string   '300px'
+- height: 视频显示高度   string    '160px'
+- showNext: 是否显示下一集按钮   bool   默认true
+- autoplay: 是否自动播放   bool   默认true
+- ctrSpeedDuration:  控制条 关闭的时间  number (ms)
+- loop: 视频是否循环播放   bool  默认false
+- showVolume: 是否显示音量设置  bool  默认true
+- volume: 音量大小  number  0.8
+- showVolumeUnFull: 在非全屏幕下是否显示音量调整条   bool  默认false
+- showPlayBackRate: 是否显示设置语速菜单列表   bool   默认true
+- showPlayBackRateUnFull: 是否在未全屏的情况下 显示语速   bool  默认true
+- playbackRate: 语速的设置  object
+	- activeIndex: 索引  number
+	- rateList: 语速  array   [0.8, 1, 1.2, 2]
+- showVideoDefinition: 是否显示清晰度  bool  默认true
+- showVideoDefinitionUnFull: 非全屏的状态下是否显示   bool   默认true
+- videoDefinition: 清晰度的设置  object
+	- activeIndex: 索引  number
+	- definitionList: 清晰度选项  array
+		- type: 类型
+		- name: 名称
+- nextVideoExtend: function    可让用户自定义扩展   点击下一个视频的操作
+- setVideoDefinition: function   设置清晰度的回调  参数  (type, event, currentT)
+- onTimeupdate: 进度更新事件  参数（currentT)
+- onPlaying: 视频播放事件  参数（currentT)
+- onPause: 视频暂停事件
+- onEnded: 视频播放结束事件
+- onLoadedMetaData: 元数据加载成功事件
+
+#### 方法
+- 更新视频宽度
+```js
+video.updateVideoSize()
+@param { number }  width   宽度
+@param { number }  height   高度
+```
+
+- 显示上下菜单
+```js
+video.showTopBottomCtrl()
+@param { bool }  disappearance   是否自动消失
+```
+
+- 关闭上下菜单
+```js
+video.hideTopBottomCtrl()
+@param { bool }  immediately   是否立刻关闭
+```
+
+- 更新音量
+```js
+video.updateVolume()
+@param { number }  vol   音量大小  0 - 1 之间
+```
+
+- 更新音量
+```js
+video.updateVolume()
+@param { number }  vol   音量大小  0 - 1 之间
+```
+
+- 快进
+```js
+video.videoForward()
+@param { number } seconds  快进时长
+```
+
+- 快退
+```js
+video.videoRewind()
+@param { number } seconds  快退时长
+```
+
+- 跳转到具体位置
+```js
+video.videoSeek()
+@param { number } seconds  跳转的位置
+```
+
+- 切换视频地址
+```js
+video.setVideoInfo()
+@param { sting } title  视频的名称
+@param { string } url  视频的地址
+@param { number } currentT  视频开始播放的时间，默认为0
+```
+
+
 
 ### DEMO1  http://www.daiwei.org/components/Dvideo
-### DEMO2  https://ifmiss.github.io/Dvideo.js/demo/
 

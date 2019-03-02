@@ -479,30 +479,46 @@ class Dvideo {
 		}
 	}
 
-	// 快退   参数 退多少秒
-	videoForward(seconds) {
+	/**
+	 * 快进
+	 * @param { number } seconds 
+	 */
+	videoForward(seconds = 10) {
 		if (this.videoEle.currentTime) {
-			this.currentT = this.currentT + 10 > this.durationT ? this.durationT : this.currentT + 10
+			this.currentT = this.currentT + seconds > this.durationT ? this.durationT : this.currentT + seconds
 			this.videoEle.currentTime = this.currentT
 			this.updatePorgress()
 		}
 	}
 
-	videoRewind (seconds) {
+	/**
+	 * 快退
+	 * @param { number } seconds 
+	 */
+	videoRewind (seconds = 10) {
 		if (this.videoEle.currentTime) {
-			this.currentT = this.currentT - 10 < 0 ? 0 : this.currentT - 10
+			this.currentT = this.currentT - seconds < 0 ? 0 : this.currentT - seconds
 			this.videoEle.currentTime = this.currentT
 			this.updatePorgress()
 		}
 	}
 
+	/**
+	 * 跳转到某一个位置
+	 */
+	videoSeek (seconds) {
+		if (seconds > this.durationT) return
+		if (this.videoEle.currentTime) {
+			this.videoEle.currentTime = seconds
+			this.updatePorgress()
+		}
+	}
 
-	// 音乐初始化事件
+	/**
+	 * 音乐初始化事件
+	 */
 	initEvent () {
 		let _this = this
-
-		// if (_this.browserV.indexOf('IE') >= 0) {}
-
 		// 键盘事件  (ie 没有ctrl键)
 		document.onkeydown = function (event) {
 			let e = event || window.event
@@ -551,18 +567,22 @@ class Dvideo {
 		this.opt.onPlaying(this.currentT)
 	}
 
+	// 暂停事件
 	onPause () {
 		this.opt.onPause()
 	}
 
+	// 元数据加载事件
 	onLoadedMetaData () {
 		this.opt.onLoadedMetaData()
 	}
 
+	// 进度更新事件
 	onTimeupdate () {
 		this.opt.onTimeupdate(this.currentT)
 	}
 
+	// 播放结束事件
 	onEnded () {
 		this.opt.onEnded()
 	}
